@@ -58,9 +58,9 @@
                 <div class="navbar-nav w-100">
                     <a href="{{ Route('admin.dashboard') }}" class="nav-item nav-link {{ request()->routeIs('admin.dashboard*') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <a href="{{ Route('admin.artikel') }}" class="nav-item nav-link {{ request()->routeIs('admin.artikel*') ? 'active' : '' }}"><i class="bi bi-book-fill me-2"></i>Berita</a>
-                    <a href="" class="nav-item nav-link"><i class="bi bi-bookmark-fill me-2"></i>Kategori</a>
-                    <a href="" class="nav-item nav-link"><i class="bi bi-tag-fill me-2"></i>Tag</a>
-                    <a href="" class="nav-item nav-link"><i class="bi bi-chat-left-dots-fill me-2"></i>Komentar</a>
+                    <a href="{{ Route('admin.kategori') }}" class="nav-item nav-link {{ request()->routeIs('admin.kategori*') ? 'active' : '' }}"><i class="bi bi-bookmark-fill me-2"></i>Kategori</a>
+                    <a href="{{ Route('admin.tag') }}" class="nav-item nav-link {{ request()->routeIs('admin.tag*') ? 'active' : '' }}"><i class="bi bi-tag-fill me-2"></i>Tag</a>
+                    <a href="{{ Route('admin.komentar') }}" class="nav-item nav-link {{ request()->routeIs('admin.komentar*') ? 'active' : '' }}"><i class="bi bi-chat-left-dots-fill me-2"></i>Komentar</a>
                     <a href="" class="nav-item nav-link"><i class="bi bi-person-fill me-2"></i>Pengguna</a>
                     <a href="" class="nav-item nav-link"><i class="bi bi-bell-fill me-2"></i>Notifikasi</a>
                     <a href="" class="nav-item nav-link"><i class="bi bi-gear-fill me-2"></i>Pengaturan</a>

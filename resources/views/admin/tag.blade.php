@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', 'Kategori')
+@section('title', 'Tag')
 @section('content')
 
 <style>
@@ -59,7 +59,7 @@
 
             <a href="" class="btn btn-sm btn-primary d-flex align-items-center gap-2">
                 <i class="fas fa-plus"></i> 
-                Tambah Kategori
+                Tambah Tag
             </a>
         </div>
 
