@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>JUHAR - @yield('title')</title>
+    <title>KilatNews - @yield('title')</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -61,9 +61,9 @@
                     <a href="{{ Route('admin.kategori') }}" class="nav-item nav-link {{ request()->routeIs('admin.kategori*') ? 'active' : '' }}"><i class="bi bi-bookmark-fill me-2"></i>Kategori</a>
                     <a href="{{ Route('admin.tag') }}" class="nav-item nav-link {{ request()->routeIs('admin.tag*') ? 'active' : '' }}"><i class="bi bi-tag-fill me-2"></i>Tag</a>
                     <a href="{{ Route('admin.komentar') }}" class="nav-item nav-link {{ request()->routeIs('admin.komentar*') ? 'active' : '' }}"><i class="bi bi-chat-left-dots-fill me-2"></i>Komentar</a>
-                    <a href="" class="nav-item nav-link"><i class="bi bi-person-fill me-2"></i>Pengguna</a>
-                    <a href="" class="nav-item nav-link"><i class="bi bi-bell-fill me-2"></i>Notifikasi</a>
-                    <a href="" class="nav-item nav-link"><i class="bi bi-gear-fill me-2"></i>Pengaturan</a>
+                    <a href="{{ Route('admin.pengguna') }}" class="nav-item nav-link {{ request()->routeIs('admin.pengguna*') ? 'active' : '' }}"><i class="bi bi-person-fill me-2"></i>Pengguna</a>
+                    <a href="{{ Route('admin.notifikasi') }}" class="nav-item nav-link {{ request()->routeIs('admin.notifikasi*') ? 'active' : '' }}"><i class="bi bi-bell-fill me-2"></i>Notifikasi</a>
+                    <a href="{{ Route('admin.pengaturan') }}" class="nav-item nav-link {{ request()->routeIs('admin.pengaturan*') ? 'active' : '' }}"><i class="bi bi-gear-fill me-2"></i>Pengaturan</a>
                 </div>
         </div>
         </nav>
