@@ -54,12 +54,12 @@
             
             <div class="d-flex align-items-center gap-2">
                 <i class="text-primary"></i> 
-                <h3 class="mb-0 text-dark">HALAMAN BERITA</h3>
+                <h3 class="mb-0 text-dark">Artikel</h3>
             </div>
 
             <a href="" class="btn btn-sm btn-primary d-flex align-items-center gap-2">
                 <i class="fas fa-plus"></i> 
-                Tambah Berita
+                Tambah Artikel
             </a>
         </div>
 

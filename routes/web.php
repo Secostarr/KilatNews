@@ -29,6 +29,6 @@ Route::get('/admin/pengguna', [PenggunaController::class, 'pengguna'])->name('ad
 Route::get('/admin/notifikasi', [NotifikasiController::class, 'notifikasi'])->name('admin.notifikasi');
 Route::get('/admin/pengaturan', [PengaturanController::class, 'pengaturan'])->name('admin.pengaturan');
 
-
-Route::get('/admin/pengaturan', [PengaturanController::class, 'pengaturan'])->name('admin.pengaturan');
+Route::get('/admin/notifikasi/pendaftar', [NotifikasiController::class, 'pendaftar'])->name('admin.notifikasi.pendaftar');
+Route::get('/admin/notifikasi/penyetor', [NotifikasiController::class, 'penyetor'])->name('admin.notifikasi.penyetor');
 });

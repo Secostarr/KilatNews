@@ -51,14 +51,14 @@
 <div class="container-fluid pt-2 px-1">
     <div class="row bg-light rounded align-items-center mx-0 p-4">
         <div class="d-flex justify-content-between align-items-center w-100">
-            
+
             <div class="d-flex align-items-center gap-2">
-                <i class="text-primary"></i> 
-                <h3 class="mb-0 text-dark">HALAMAN KATEGORI</h3>
+                <i class="text-primary"></i>
+                <h3 class="mb-0 text-dark">KATEGORI</h3>
             </div>
 
             <a href="" class="btn btn-sm btn-primary d-flex align-items-center gap-2">
-                <i class="fas fa-plus"></i> 
+                <i class="fas fa-plus"></i>
                 Tambah Kategori
             </a>
         </div>
@@ -70,7 +70,25 @@
             </div>
         </div>
 
-        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama Kategori</th>
+                    <th>Deskripsi</th>
+                    <th>Slug</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+            </tbody>
+        </table>
+
     </div>
 </div>
 
