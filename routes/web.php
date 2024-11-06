@@ -28,4 +28,7 @@ Route::get('/admin/komentar', [KomentarController::class, 'komentar'])->name('ad
 Route::get('/admin/pengguna', [PenggunaController::class, 'pengguna'])->name('admin.pengguna');
 Route::get('/admin/notifikasi', [NotifikasiController::class, 'notifikasi'])->name('admin.notifikasi');
 Route::get('/admin/pengaturan', [PengaturanController::class, 'pengaturan'])->name('admin.pengaturan');
+
+
+Route::get('/admin/pengaturan', [PengaturanController::class, 'pengaturan'])->name('admin.pengaturan');
 });
