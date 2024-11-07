@@ -9,7 +9,7 @@
             
             <div class="d-flex align-items-center gap-2">
                 <i class="text-primary"></i> 
-                <h3 class="mb-0 text-dark">HALAMAN PENGGATURAN</h3>
+                <h3 class="mb-0 text-dark">PENGGATURAN</h3>
             </div>
         </div>
     </div>

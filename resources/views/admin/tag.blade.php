@@ -54,7 +54,7 @@
             
             <div class="d-flex align-items-center gap-2">
                 <i class="text-primary"></i> 
-                <h3 class="mb-0 text-dark">HALAMAN TAG</h3>
+                <h3 class="mb-0 text-dark">TAG</h3>
             </div>
 
             <a href="" class="btn btn-sm btn-primary d-flex align-items-center gap-2">
@@ -70,7 +70,25 @@
             </div>
         </div>
 
-        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama Tag</th>
+                    <th>Deskripsi</th>
+                    <th>Slug</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+            </tbody>
+        </table>
+
     </div>
 </div>
 
