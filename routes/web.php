@@ -21,12 +21,12 @@ Route::post('/admin/login', [AdminLoginController::class, 'auth'])->name('admin.
 Route::middleware(['admin'])->group(function () {
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
-Route::get('/admin/artikel', [ArtikelController::class, 'artikel'])->name('admin.artikel');
-Route::get('/admin/kategori', [KategoriController::class, 'kategori'])->name('admin.kategori');
-Route::get('/admin/tag', [TagController::class, 'tag'])->name('admin.tag');
-Route::get('/admin/komentar', [KomentarController::class, 'komentar'])->name('admin.komentar');
-Route::get('/admin/pengguna', [PenggunaController::class, 'pengguna'])->name('admin.pengguna');
-Route::get('/admin/notifikasi', [NotifikasiController::class, 'notifikasi'])->name('admin.notifikasi');
+Route::get('/admin/artikel', [ArtikelController::class, 'artikel'])->name('admin.artikel.berita');
+Route::get('/admin/kategori', [KategoriController::class, 'kategori'])->name('admin.artikel.kategori');
+Route::get('/admin/tag', [TagController::class, 'tag'])->name('admin.artikel.tag');
+Route::get('/admin/komentar', [KomentarController::class, 'komentar'])->name('admin.pengguna.komentar');
+Route::get('/admin/pengguna', [PenggunaController::class, 'pengguna'])->name('admin.pengguna.user');
+Route::get('/admin/notifikasi', [NotifikasiController::class, 'notifikasi'])->name('admin.pengguna.notifikasi');
 Route::get('/admin/pengaturan', [PengaturanController::class, 'pengaturan'])->name('admin.pengaturan');
 
 Route::get('/admin/notifikasi/pendaftar', [NotifikasiController::class, 'pendaftar'])->name('admin.notifikasi.pendaftar');

@@ -34,7 +34,7 @@
                 <h3 class="mb-0 text-dark">Halaman Notifikasi</h3>
             </div>
 
-            <a href="{{ Route('admin.notifikasi') }}" class="btn btn-sm btn-danger d-flex align-items-center gap-2">
+            <a href="{{ Route('admin.pengguna.notifikasi') }}" class="btn btn-sm btn-danger d-flex align-items-center gap-2">
                 <i class="bi bi-arrow-left-circle-fill"></i> 
                 Kembali
             </a>
