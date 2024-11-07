@@ -18,16 +18,19 @@ return new class extends Migration
                   ->on('artikel')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
-
+        
             $table->integer('id_tag');
             $table->foreign('id_tag')
                   ->references('id_tag')
                   ->on('tag')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
-
+        
             $table->timestamps();
+        
+            $table->primary(['id_artikel', 'id_tag']);
         });
+        
     }
 
     /**

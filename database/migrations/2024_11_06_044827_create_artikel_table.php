@@ -14,31 +14,33 @@ return new class extends Migration
         Schema::create('artikel', function (Blueprint $table) {
             $table->integer('id_artikel')->primary()->autoIncrement();
             $table->string('judul', 150);
-            $table->text('kontent');
-            $table->string('slug', 150);
-            $table->dateTime('tanggal publikasi');
-            $table->integer('id_users');
-            $table->foreign('id_users')
-                  ->references('id_users')
+            $table->text('konten');
+            $table->string('slug', 150)->unique();
+            $table->dateTime('tanggal_publikasi');
+        
+            $table->integer('id_user')->unsigned();
+            $table->foreign('id_user')
+                  ->references('id_user')
                   ->on('users')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
-
-            $table->integer('id_kategori');
+        
+            $table->integer('id_kategori')->unsigned();
             $table->foreign('id_kategori')
                   ->references('id_kategori')
-                  ->on('kategori')
+                  ->on('kategori_berita')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
                   
-            $table->string('media_utama', 225);
-            $table->enum('role', ['status_publikasi']);
-            $table->boolean('highlight');
-            $table->string('lokasi', 100);
-            $table->integer('viewer_count');
-            $table->boolean('trending');
+            $table->string('media_utama', 255);
+            $table->enum('status_publikasi', ['published', 'draft', 'archived']);
+            $table->boolean('highlight')->default(false);
+            $table->string('lokasi', 100)->nullable();
+            $table->integer('viewer_count')->default(0);
+            $table->boolean('trending')->default(false);
             $table->timestamps();
         });
+        
     }
 
     /**

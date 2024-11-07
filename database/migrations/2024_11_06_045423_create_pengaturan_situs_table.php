@@ -15,12 +15,12 @@ return new class extends Migration
         Schema::create('pengaturan_situs', function (Blueprint $table) {
             $table->integer('id_pengaturan')->primary()->autoIncrement();
             $table->string('nama_situs', 100);
-            $table->string('logo', 225);
+            $table->string('logo', 255); // Perpanjang ke 255 karakter jika URL panjang
             $table->text('deskripsi_singkat');
-            $table->string('kontak_email',150);
-            $table->json('role', ['link']);
+            $table->string('kontak_email', 150);
+            $table->json('social_media_links'); // Ubah dari 'role' ke 'social_media_links'
             $table->timestamps();
-        });
+        });        
     }
 
     /**

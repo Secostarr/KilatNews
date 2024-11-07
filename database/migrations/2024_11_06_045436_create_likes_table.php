@@ -19,17 +19,17 @@ return new class extends Migration
                   ->on('artikel')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
-
+        
             $table->integer('id_users');
             $table->foreign('id_users')
                   ->references('id_users')
                   ->on('users')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
-                  
-            $table->integer('role', ['user']);
+            
+            $table->enum('role', ['user']); // Misalnya jika ingin menandakan peran dari pengguna yang memberi like
             $table->timestamps();
-        });
+        });        
     }
 
     /**

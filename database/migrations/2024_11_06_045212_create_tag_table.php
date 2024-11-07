@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('tag', function (Blueprint $table) {
             $table->integer('id_tag')->primary()->autoIncrement();
             $table->string('nama_tag', 50);
-            $table->string('slug', 50);
+            $table->string('slug', 50)->unique();
             $table->timestamps();
-        });
+        });        
     }
 
     /**

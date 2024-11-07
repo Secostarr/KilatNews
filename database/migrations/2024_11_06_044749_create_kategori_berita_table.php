@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kategori_berita', function (Blueprint $table) {
-            $table->integer('id_berita')->primary()->autoIncrement();
+            $table->integer('id_kategori')->primary()->autoIncrement();
             $table->string('nama_kategori', 100);
             $table->text('deskripsi');
-            $table->string('slug', 100);
+            $table->string('slug', 100)->unique();
             $table->integer('urutan');
             $table->timestamps();
-        });
+        });        
     }
 
     /**
