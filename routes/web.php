@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\Auth\AdminLoginController;
+use App\Http\Controllers\Auth\UserLoginController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KomentarController;
 use App\Http\Controllers\NotifikasiController;
@@ -11,14 +13,11 @@ use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'home'])->name('home');
 
-Route::get('/admin/login', [AdminLoginController::class, 'login'])->name('admin.login');
-Route::post('/admin/login', [AdminLoginController::class, 'auth'])->name('admin.auth');
+Route::get('/admin/login', [UserLoginController::class, 'login'])->name('admin.login');
+Route::post('/admin/login', [UserLoginController::class, 'auth'])->name('admin.auth');
 
-Route::middleware(['admin'])->group(function () {
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
 Route::get('/admin/artikel', [ArtikelController::class, 'artikel'])->name('admin.artikel.berita');
@@ -31,4 +30,3 @@ Route::get('/admin/pengaturan', [PengaturanController::class, 'pengaturan'])->na
 
 Route::get('/admin/notifikasi/pendaftar', [NotifikasiController::class, 'pendaftar'])->name('admin.pengguna.notifikasi.pendaftar');
 Route::get('/admin/notifikasi/penyetor', [NotifikasiController::class, 'penyetor'])->name('admin.pengguna.notifikasi.penyetor');
-});

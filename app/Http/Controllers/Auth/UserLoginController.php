@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AdminLoginController extends Controller
+class UserLoginController extends Controller
 {
     public function login()
     {
@@ -20,8 +20,15 @@ class AdminLoginController extends Controller
             'password' => 'required',
         ]);
 
-        if (Auth::guard('admin')->attempt($credentials)) {
-            return redirect()->route('admin.dashboard');
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            if ($user->role == 'admin') {
+                return redirect()->route('admin.dashboard');
+            } elseif ($user->role == 'user') {
+                return redirect()->route('home');
+            } elseif ($user->role == 'contributor') {
+                return redirect()->route('home');
+            }
         }
 
         return back()->withErrors(['login_error' => 'Username atau password salah'])->onlyInput('username');

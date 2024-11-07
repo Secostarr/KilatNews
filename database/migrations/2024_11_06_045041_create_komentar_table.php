@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('komentar', function (Blueprint $table) {
             $table->integer('id_komentar')->primary()->autoIncrement();
             
-            $table->integer('id_artikel')->unsigned();
+            $table->integer('id_artikel');
             $table->foreign('id_artikel')
                   ->references('id_artikel')
                   ->on('artikel')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
         
-            $table->integer('id_user')->unsigned();
+            $table->integer('id_user');
             $table->foreign('id_user')
                   ->references('id_user')
                   ->on('users')
@@ -31,7 +31,7 @@ return new class extends Migration
             $table->text('isi_komentar');
             $table->dateTime('tanggal_komentar');
             
-            $table->integer('reply_to')->nullable()->unsigned();
+            $table->integer('reply_to')->nullable();
             $table->foreign('reply_to')
                   ->references('id_komentar')
                   ->on('komentar')
