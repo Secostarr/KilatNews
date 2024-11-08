@@ -24,7 +24,7 @@ class UserLoginController extends Controller
            
             $user = Auth::user();
             if ($user->role == 'admin') {
-                return redirect()->route('admin.dashboard');
+                return redirect()->route('admin.dashboard')->with('success', 'Login Berhasil');
             } elseif ($user->role == 'user') {
                 return redirect()->route('home');
             } elseif ($user->role == 'contributor') {
