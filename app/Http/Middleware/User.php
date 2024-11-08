@@ -21,7 +21,7 @@ class User
         }
 
         // Arahkan ke halaman lain jika tidak sesuai role
-        return redirect()->route('admin.login')
+        return redirect()->route($role.'.login')
             ->with('error', 'Anda tidak memiliki akses ke halaman ini.');
     }
 }

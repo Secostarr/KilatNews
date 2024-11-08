@@ -21,6 +21,7 @@ class UserLoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
+           
             $user = Auth::user();
             if ($user->role == 'admin') {
                 return redirect()->route('admin.dashboard');
@@ -30,7 +31,7 @@ class UserLoginController extends Controller
                 return redirect()->route('home');
             }
         }
-
+        
         return back()->withErrors(['login_error' => 'Username atau password salah'])->onlyInput('username');
     }
 }
