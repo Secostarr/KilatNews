@@ -18,14 +18,14 @@ return new class extends Migration
             $table->string('slug', 150)->unique();
             $table->dateTime('tanggal_publikasi');
         
-            $table->integer('id_user')->unsigned();
+            $table->integer('id_user');
             $table->foreign('id_user')
                   ->references('id_user')
                   ->on('users')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
         
-            $table->integer('id_kategori')->unsigned();
+            $table->integer('id_kategori');
             $table->foreign('id_kategori')
                   ->references('id_kategori')
                   ->on('kategori_berita')
