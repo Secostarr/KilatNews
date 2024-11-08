@@ -10,7 +10,7 @@ class AdminController extends Controller
     public function dashboard()
 {
     $user = Auth::user();
-    return redirect()->route('admin.dashboard', compact('user'));
+    return view('admin.dashboard', compact('user'));
 }
 
     public function logout(Request $request)
@@ -18,6 +18,6 @@ class AdminController extends Controller
         Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('admin.login');
+        return redirect()->route('admin.login')->with('success', 'Logout Berhasil');
     }
 }
