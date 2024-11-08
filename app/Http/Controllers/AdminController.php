@@ -8,10 +8,17 @@ use Illuminate\Support\Facades\Auth;
 class AdminController extends Controller
 {
     public function dashboard()
-    {
-        $admin = Auth::guard('admin')->user();
-        return view('admin.dashboard', compact('admin'));
+{
+    $user = Auth::user();
+    
+    // Pastikan user sedang login
+    if ($user) {
+        return view('admin.dashboard', compact('user'));
+    } else {
+        // Redirect ke halaman login jika user tidak ditemukan
+        return redirect()->route('admin.login')->withErrors('Silakan login terlebih dahulu.');
     }
+}
 
     public function logout(Request $request)
     {

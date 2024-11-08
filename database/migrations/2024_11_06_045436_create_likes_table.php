@@ -20,9 +20,9 @@ return new class extends Migration
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
         
-            $table->integer('id_users');
-            $table->foreign('id_users')
-                  ->references('id_users')
+            $table->integer('id_user');
+            $table->foreign('id_user')
+                  ->references('id_user')
                   ->on('users')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
