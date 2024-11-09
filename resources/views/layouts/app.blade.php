@@ -71,7 +71,7 @@
                             <!-- Logo -->
                             <div class="col-xl-3 col-lg-3 col-md-3 pt-0 pb-0">
                                 <div class="logo">
-                                    <a href="index.html"><img src="{{ asset('img/Logo-KilatNews3.png') }}" alt=""></a>
+                                    <a href="index.html"><img src="{{ asset('img/Logo-KilatNews3.png') }}" width="300" alt=""></a>
                                 </div>
                             </div>
                             <div class="col-xl-9 col-lg-9 col-md-9">
