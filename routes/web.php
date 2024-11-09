@@ -37,3 +37,5 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/admin/notifikasi/pendaftar', [NotifikasiController::class, 'pendaftar'])->name('admin.pengguna.notifikasi.pendaftar');
     Route::get('/admin/notifikasi/penyetor', [NotifikasiController::class, 'penyetor'])->name('admin.pengguna.notifikasi.penyetor');
 });
+
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
