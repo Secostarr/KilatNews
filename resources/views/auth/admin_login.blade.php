@@ -1,110 +1,151 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - Jurnal PKL</title>
-
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome & Bootstrap Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-
-    <!-- Custom Stylesheet -->
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <style>
         body {
-            font-family: 'Heebo', sans-serif;
-            background-color: #f8f9fa;
+            background-image: url('../images/bg_berita.jpg');
+            /* Ganti dengan path gambar Anda */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
-        .login-container {
-            max-width: 400px;
-            margin: auto;
+
+        .login {
+            margin-top: 100px;
+        }
+
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.7);
+            /* Transparan dengan opacity 0.7 */
+        }
+
+        .card-body {
             padding: 2rem;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
         }
-        .login-header {
-            text-align: center;
-            margin-bottom: 1.5rem;
+
+        .form-label {
+            font-weight: bold;
         }
-        .login-header h3 {
-            color: #007bff;
-        }
-        .form-floating label {
-            color: #6c757d;
-        }
+
         .btn-primary {
             background-color: #007bff;
             border: none;
         }
+
         .btn-primary:hover {
             background-color: #0056b3;
         }
-        .alert {
-            font-size: 0.9rem;
+
+        .btn-link {
+            color: #007bff;
+        }
+
+        .btn-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        .img-animated {
+            margin-top: 1rem;
+            animation: rotate 5s infinite linear;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotateY(-30deg);
+            }
+
+            to {
+                transform: rotateY(30deg);
+            }
+        }
+
+        .password-options {
+            margin-top: 0.5rem;
+            /* Reduce top margin */
+            margin-bottom: 0;
+            /* Remove bottom margin */
+            display: flex;
+            align-items: center;
+        }
+
+        .form-check-label {
+            margin-bottom: 0;
+            /* Remove bottom margin from label */
         }
     </style>
 </head>
 
 <body>
-    <div class="d-flex align-items-center justify-content-center vh-100">
-        <div class="login-container">
-            <!-- Spinner -->
-            <div id="spinner" class="position-fixed w-100 vh-100 d-none align-items-center justify-content-center" style="background: rgba(255, 255, 255, 0.8); z-index: 999;">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
+
+    <div class="login">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <h3 class="text-center text-light mb-3"><b>Admin Website <b class="text-warning">KilatNews</b></b></h3>
+                <p class="text-center text-light mb-4">Silahkan masukkan username dan password anda</p>
+
+                <div class="card">
+
+                    <div class="card-body">
+                        @if ($errors->has('login_error'))
+                        <div class="alert alert-danger">
+                            {{ $errors->first('login_error') }}
+                        </div>
+                        @endif
+
+                        @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
+
+                        <form action="{{ Route('admin.login') }}" method="post">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username:</label>
+                                <input type="text" name="username" id="username" class="form-control" placeholder="Masukkan username anda" value="{{ old('username') }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password:</label>
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Masukkan password anda" required>
+                            </div>
+                            <div class="mb-3 password-options">
+                                <input type="checkbox" id="showPassword" class="form-check-input me-2">
+                                <label for="showPassword" class="form-check-label"><b>Show Password</b></label>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Sign In</button>
+                            <div class="text-center">
+                                <div class="row justify-content-center">
+                                    <h5 class="img-animated" alt="Animated 3D Image">KilatNews</h5>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-            
-            <!-- Login Form -->
-            <div class="login-header">
-                <h3><i class="me-2"></i>Login Admin KilatNews</h3>
-                <p class="text-muted">Sign In - Admins</p>
-            </div>
-
-            @if ($errors->has('login_error'))
-                <div class="alert alert-danger">
-                    {{ $errors->first('login_error') }}
-                </div>
-            @endif
-
-            <form action="{{ Route('admin.auth') }}" method="post">
-                @csrf
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="username" id="floatingInput" placeholder="Username" value="{{ old('username') }}">
-                    <label for="floatingInput">Username</label>
-                    @error('username')
-                        <div class="text-danger small">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="form-floating mb-4">
-                    <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Password</label>
-                    @error('password')
-                        <div class="text-danger small">{{ $message }}</div>
-                    @enderror
-                </div>
-                <button type="submit" class="btn btn-primary w-100 py-2">Sign In</button>
-            </form>
         </div>
     </div>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('showPassword').addEventListener('change', function() {
+            var passwordField = document.getElementById('password');
+            if (this.checked) {
+                passwordField.type = 'text';
+            } else {
+                passwordField.type = 'password';
+            }
+        });
+    </script>
 </body>
 
 </html>
