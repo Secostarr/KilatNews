@@ -90,7 +90,7 @@
     <div class="login">
         <div class="row justify-content-center">
             <div class="col-md-4">
-                <h3 class="text-center text-light mb-3"><b>Admin Website <b class="text-warning">KilatNews</b></b></h3>
+                <h3 class="text-center text-light mb-3"><b>Admin Login <b class="text-warning">KilatNews</b></b></h3>
                 <p class="text-center text-light mb-4">Silahkan masukkan username dan password anda</p>
 
                 <div class="card">

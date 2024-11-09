@@ -19,44 +19,124 @@
 
 <!-- Blank Start -->
 <div class="container-fluid pt-4 px-4">
-        @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-        @endif
+    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
     <div class="row bg-light rounded mx-0 shadow-sm">
         <div class="col-12 d-flex justify-content-center align-items-center p-4">
             <p class="fw-bold fs-5 mb-0 text-center">Hi {{ $user->nama }}, Selamat Datang Di Dashboard KilatNews</p>
         </div>
     </div>
 
-    <!-- Card for Views, Likes, and Comments -->
-    <div class="row mt-4">
-        <!-- Total Views -->
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-            <div class="card text-white text-center p-4 shadow border-0 bg-info card-hover">
-                <h5><i class="fas fa-eye me-2"></i>Total Views</h5>
-                <h2 class="mt-2">0</h2>
-            </div>
-        </div>
-
-        <!-- Total Likes -->
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-            <div class="card text-white text-center p-4 shadow border-0 bg-success card-hover">
-                <h5><i class="fas fa-thumbs-up me-2"></i>Total Likes</h5>
-                <h2 class="mt-2">0</h2>
-            </div>
-        </div>
-
-        <!-- Total Comments -->
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-            <div class="card text-white text-center p-4 shadow border-0 bg-warning card-hover">
-                <h5><i class="fas fa-comments me-2"></i>Total Comments</h5>
-                <h2 class="mt-2">0</h2>
+    <div class="col-12 col-6 mt-4">
+        <div class="bg-light rounded h-100 p-4">
+            <h6 class="mb-4">Statistik KilatNews</h6>
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                        aria-selected="true"><i class="bi bi-like"></i>Views</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-profile" type="button" role="tab"
+                        aria-controls="pills-profile" aria-selected="false">Likes</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-contact" type="button" role="tab"
+                        aria-controls="pills-contact" aria-selected="false">Comments</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Country</th>
+                                    <th scope="col">ZIP</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>John</td>
+                                    <td>Doe</td>
+                                    <td>jhon@email.com</td>
+                                    <td>USA</td>
+                                    <td>123</td>
+                                    <td>Member</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Country</th>
+                                    <th scope="col">ZIP</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>John</td>
+                                    <td>Doe</td>
+                                    <td>jhon@email.com</td>
+                                    <td>USA</td>
+                                    <td>123</td>
+                                    <td>Member</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Country</th>
+                                    <th scope="col">ZIP</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>John</td>
+                                    <td>Doe</td>
+                                    <td>jhon@email.com</td>
+                                    <td>USA</td>
+                                    <td>123</td>
+                                    <td>Member</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Blank End -->
 
-@endsection
+    @endsection
