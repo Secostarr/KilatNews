@@ -20,7 +20,6 @@
                                     <li class="news-item">Headline 3</li>
                                 </ul>
                             </div>
-
                         </div>
                     </div>
                 </div>

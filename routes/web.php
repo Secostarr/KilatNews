@@ -13,16 +13,21 @@ use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('/user/profile', [UserLoginController::class, 'profile'])->name('user.profile');
 
-
-Route::middleware(['guest:admin','guest:user','guest:contributor'])->group(function () {
+Route::middleware(['guest:admin', 'guest:user', 'guest:contributor'])->group(function () {
     Route::get('/admin/login', [UserLoginController::class, 'login'])->name('admin.login');
     Route::post('/admin/login', [UserLoginController::class, 'auth'])->name('admin.auth');
 
     Route::get('/user/login', [UserLoginController::class, 'loginUser'])->name('user.login');
-    Route::get('/user/login', [UserLoginController::class, 'loginContributor'])->name('contributor.login');
+    Route::post('/user/login', [UserLoginController::class, 'auth'])->name('user.auth');
+
+    Route::get('/contributor/login', [UserLoginController::class, 'loginContributor'])->name('contributor.login');
+
+    Route::get('/user/register', [UserLoginController::class, 'register'])->name('user.register');
 });
 
 
