@@ -71,7 +71,7 @@
                             <!-- Logo -->
                             <div class="col-xl-3 col-lg-3 col-md-3 pt-0 pb-0">
                                 <div class="logo">
-                                    <a href="index.html"><img src="{{ asset('img/Logo-KilatNews3.png') }}" width="300" alt=""></a>
+                                    <a href="index.html"><img src="{{ asset('img/Logo-KilatNews3.png') }}" width="200" alt=""></a>
                                 </div>
                             </div>
                             <div class="col-xl-9 col-lg-9 col-md-9">
@@ -88,7 +88,7 @@
                             <div class="col-xl-10 col-lg-10 col-md-12 header-flex">
                                 <!-- sticky -->
                                 <div class="sticky-logo">
-                                    <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
+                                    <a href="index.html"><img src="{{ asset('img/Logo-KilatNews3.png') }}" width="100" alt=""></a>
                                 </div>
                                 <!-- Main-menu -->
                                 <div class="main-menu d-none d-md-block">
@@ -146,7 +146,7 @@
                             <div class="single-footer-caption">
                                 <!-- logo -->
                                 <div class="footer-logo">
-                                    <a href="index.html"><img src="{{ asset('img/Logo-KilatNews3.png') }}" width="300px" alt=""></a>
+                                    <a href="index.html"><img src="{{ asset('img/Logo-KilatNews3.png') }}" width="200px" alt=""></a>
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">
