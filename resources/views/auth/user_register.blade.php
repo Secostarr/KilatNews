@@ -86,12 +86,11 @@
 </head>
 
 <body>
-
     <div class="login">
         <div class="row justify-content-center">
             <div class="col-md-4">
-                <h3 class="text-center text-light mb-3"><b>Admin Login <b class="text-warning">KilatNews</b></b></h3>
-                <p class="text-center text-light mb-4">Silahkan masukkan username dan password anda</p>
+                <h3 class="text-center text-light mb-3"><b>User Register <b class="text-warning">KilatNews</b></b></h3>
+                <p class="text-center text-light mb-4">Silahkan Masukkan Data Anda</p>
 
                 <div class="card">
 
@@ -108,11 +107,19 @@
                         </div>
                         @endif
 
-                        <form action="{{ Route('admin.auth') }}" method="post">
+                        <form action="" method="post">
                             @csrf
+                            <div class="mb-3">
+                                <label for="nama" class="form-label">Nama:</label>
+                                <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukkan nama anda" value="{{ old('username') }}" required>
+                            </div>
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username:</label>
                                 <input type="text" name="username" id="username" class="form-control" placeholder="Masukkan username anda" value="{{ old('username') }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email:</label>
+                                <input type="text" name="email" id="email" class="form-control" placeholder="Masukkan email anda" value="{{ old('username') }}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password:</label>
@@ -123,13 +130,14 @@
                                 <label for="showPassword" class="form-check-label"><b>Show Password</b></label>
                             </div>
                             <button type="submit" class="btn btn-primary w-100">Sign In</button>
+                            <p class="mt-1">Sudah Memiliki Akun ? <a href="{{ Route('user.login') }}">Login</a></p>
                             <div class="text-center">
                                 <div class="row justify-content-center">
                                     <h5 class="img-animated" alt="Animated 3D Image">KilatNews</h5>
                                 </div>
                             </div>
                         </form>
-                    </div>
+                    </div>  
                 </div>
             </div>
         </div>

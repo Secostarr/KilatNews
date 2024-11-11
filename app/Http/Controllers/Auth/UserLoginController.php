@@ -13,6 +13,21 @@ class UserLoginController extends Controller
         return view('auth.admin_login');
     }
 
+    public function loginUser()
+    {
+        return view('auth.user_login');
+    }
+
+    public function register()
+    {
+        return view('auth.user_register');
+    }
+
+    public function profile()
+    {
+        return view('profile');
+    }
+
     public function auth(Request $request)
     {
         $credentials = $request->validate([

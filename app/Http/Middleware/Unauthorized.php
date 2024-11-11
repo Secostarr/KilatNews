@@ -20,9 +20,13 @@ class Unauthorized
             return $next($request);
         }
 
-         $url = $role.'.dashboard';
-        // Arahkan ke halaman lain jika tidak sesuai role
-         return redirect()->route($url)
-             ->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        if (Auth::user()->role === 'admin') {
+            // Arahkan ke halaman lain jika tidak sesuai role
+            return redirect()->route('admin.dashboard')
+                ->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        } elseif (Auth::user()->role === 'user' || 'contributor') {
+            return redirect()->route('home')
+                ->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
 }

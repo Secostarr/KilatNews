@@ -32,22 +32,22 @@
 
     <div class="col-12 col-6 mt-4">
         <div class="bg-light rounded h-100 p-4">
-            <h6 class="mb-4">Statistik KilatNews</h6>
+            <h6 class="mb-4"><i class="bi bi-graph-up me-2 btn btn-primary btn-sm"></i>Statistik KilatNews</h6>
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
                         data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                        aria-selected="true"><i class="bi bi-like"></i>Views</button>
+                        aria-selected="true"><i class="bi bi-eye-fill me-2"></i>Views</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
                         data-bs-target="#pills-profile" type="button" role="tab"
-                        aria-controls="pills-profile" aria-selected="false">Likes</button>
+                        aria-controls="pills-profile" aria-selected="false"><i class="bi bi-hand-thumbs-up-fill me-2"></i>Likes</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
                         data-bs-target="#pills-contact" type="button" role="tab"
-                        aria-controls="pills-contact" aria-selected="false">Comments</button>
+                        aria-controls="pills-contact" aria-selected="false"><i class="bi bi-chat-square-text-fill me-2"></i>Comments</button>
                 </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
@@ -56,7 +56,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
+                                    <th scope="col">No</th>
                                     <th scope="col">First Name</th>
                                     <th scope="col">Last Name</th>
                                     <th scope="col">Email</th>
@@ -84,7 +84,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
+                                    <th scope="col">No</th>
                                     <th scope="col">First Name</th>
                                     <th scope="col">Last Name</th>
                                     <th scope="col">Email</th>
@@ -112,7 +112,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
+                                    <th scope="col">No</th>
                                     <th scope="col">First Name</th>
                                     <th scope="col">Last Name</th>
                                     <th scope="col">Email</th>

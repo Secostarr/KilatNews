@@ -58,7 +58,25 @@
                                 <div class="header-info-right">
                                     <ul class="header-social">
                                         <li><a href="#"><i class="fab fa-github"></i></a></li>
-                                        <li><a href="#"><i class="fas fa-user"></i></a></li>
+                                        @if (Auth::user())
+                                        <li>
+                                            <a href="{{ Route('user.profile') }}"><i class="fas fa-user ms-0"></i>
+                                            @if (Auth::user())
+                                                {{ Auth::user()->nama }}
+                                            @endif
+                                            </a>
+                                        </li>
+                                        @else
+                                        <li>
+                                            <a href="{{ Route('user.login') }}"><i class="fas fa-user"></i>
+                                            @if (Auth::user())
+                                                {{ Auth::user()->nama }}
+                                            @else 
+                                                Login
+                                            @endif
+                                            </a>
+                                        </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </div>
@@ -163,7 +181,7 @@
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-4  col-sm-6">
                         <div class="single-footer-caption mt-60">
-                            
+
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
