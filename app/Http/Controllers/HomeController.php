@@ -17,4 +17,19 @@ class HomeController extends Controller
     {
         return view('contact');    
     }
+
+    public function categori()
+    {
+        return view('categori');    
+    }
+
+    public function about()
+    {
+        return view('about');    
+    }
+
+    public function latest_news()
+    {
+        return view('latest_news');    
+    }
 }

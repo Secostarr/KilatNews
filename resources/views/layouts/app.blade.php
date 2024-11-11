@@ -29,16 +29,16 @@
 <body>
 
     <!-- Preloader Start -->
-    <!-- <div id="preloader-active">
+    <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/logo.png" alt="">
+                    <img src="{{ asset('img/logokilat.jpg') }}  " alt="">
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
     <!-- Preloader Start -->
 
     <header>
@@ -89,7 +89,7 @@
                             <!-- Logo -->
                             <div class="col-xl-3 col-lg-3 col-md-3 pt-0 pb-0">
                                 <div class="logo">
-                                    <a href="index.html"><img src="{{ asset('img/Logo-KilatNews3.png') }}" width="200" alt=""></a>
+                                    <a href="index.html"><img src="{{ asset('img/logokilat.jpg') }}" width="200" alt=""></a>
                                 </div>
                             </div>
                             <div class="col-xl-9 col-lg-9 col-md-9">
@@ -106,23 +106,23 @@
                             <div class="col-xl-10 col-lg-10 col-md-12 header-flex">
                                 <!-- sticky -->
                                 <div class="sticky-logo">
-                                    <a href="index.html"><img src="{{ asset('img/Logo-KilatNews3.png') }}" width="100" alt=""></a>
+                                    <a href="index.html"><img src="{{ asset('img/logokilat.jpg') }}" width="100" alt=""></a>
                                 </div>
                                 <!-- Main-menu -->
                                 <div class="main-menu d-none d-md-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="{{ Route('home') }}">Home</a></li>
-                                            <li><a href="categori.html">Category</a></li>
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a href="latest_news.html">Latest News</a></li>
+                                            <li><a href="{{ route('home') }}">Home</a></li>
+                                            <li><a href="{{ route('categori') }}">Category</a></li>
+                                            <li><a href="{{ route('about') }}">About</a></li>
+                                            <li><a href="{{ route('latest_news') }}">Latest News</a></li>
                                             <li><a href="{{ route('contact') }}">Contact</a></li>
-                                            <li><a href="#">Pages</a>
+                                            <li><a href="#">Daerah</a>
                                                 <ul class="submenu">
-                                                    <li><a href="elements.html">Element</a></li>
-                                                    <li><a href="blog.html">Blog</a></li>
-                                                    <li><a href="single-blog.html">Blog Details</a></li>
-                                                    <li><a href="details.html">Categori Details</a></li>
+                                                    <li><a href="elements.html">Lampung Timur</a></li>
+                                                    <li><a href="blog.html">Lampung Selatan</a></li>
+                                                    <li><a href="single-blog.html">Metro</a></li>
+                                                    <li><a href="details.html">Lampung Tengah</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -164,7 +164,7 @@
                             <div class="single-footer-caption">
                                 <!-- logo -->
                                 <div class="footer-logo">
-                                    <a href="index.html"><img src="{{ asset('img/Logo-KilatNews3.png') }}" width="200px" alt=""></a>
+                                    <a href="index.html"><img src="{{ asset('img/Logo-KilatNews3.png') }}" width="300px" alt=""></a>
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">

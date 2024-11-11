@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('/categori', [HomeController::class, 'categori'])->name('categori');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/latest_news', [HomeController::class, 'latest_news'])->name('latest_news');
 Route::get('/user/profile', [UserLoginController::class, 'profile'])->name('user.profile');
 
 Route::middleware(['guest:admin', 'guest:user', 'guest:contributor'])->group(function () {
@@ -44,3 +47,6 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/admin/notifikasi/pendaftar', [NotifikasiController::class, 'pendaftar'])->name('admin.pengguna.notifikasi.pendaftar');
     Route::get('/admin/notifikasi/penyetor', [NotifikasiController::class, 'penyetor'])->name('admin.pengguna.notifikasi.penyetor');
 });
+
+Route::get('/pengguna/logout', [PenggunaController::class, 'logout'])->name('pengguna.logout');
+
