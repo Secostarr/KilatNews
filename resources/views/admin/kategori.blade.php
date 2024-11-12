@@ -65,12 +65,12 @@
 
         <div class="container my-4 d-flex justify-content-end">
             <div class="search-container" onclick="activateSearch()">
-                <input type="text" class="form-control search-input" placeholder="Cari...">
+                <input type="text" id="search-input" class="form-control search-input" placeholder="Cari...">
                 <i class="fas fa-search search-icon"></i>
             </div>
         </div>
 
-        <table class="table table-striped">
+        <table class="table table-striped" id="kategori">
             <thead>
                 <tr>
                     <th>No</th>
@@ -81,11 +81,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr></tr>
-                <tr></tr>
-                <tr></tr>
-                <tr></tr>
-                <tr></tr>
+                <tr>
+                    <td>1</td>
+                    <td>miyu</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>hiyu</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
             </tbody>
         </table>
 
@@ -105,6 +114,16 @@
             input.blur();
         }
     }
+
+    $(document).ready(function() {
+    $('#kategori').DataTable({
+        dom:'lrtip' 
+    });
+
+    $('#search-input').on('keyup', function(){
+        $('#kategori').DataTable().search(this.value).draw();
+        });
+    });
 </script>
 
 @endsection
