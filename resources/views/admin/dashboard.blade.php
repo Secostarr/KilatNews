@@ -3,6 +3,51 @@
 @section('content')
 
 <style>
+    
+    /* Styling the search container */
+    .search-container {
+        display: flex;
+        align-items: center;
+        position: relative;
+        width: 40px;
+        transition: width 0.4s;
+    }
+
+    /* Search input field */
+    .search-input {
+        opacity: 0;
+        width: 0;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        border: 1px solid #ced4da;
+        outline: none;
+        transition: width 0.4s, opacity 0.4s;
+        position: absolute;
+        left: 0;
+    }
+
+    /* Search icon */
+    .search-icon {
+        cursor: pointer;
+        font-size: 20px;
+        color: #333;
+        transition: transform 0.4s;
+    }
+
+    /* Active state of input field */
+    .search-container.active {
+        width: 200px;
+    }
+
+    .search-container.active .search-input {
+        width: 100%;
+        opacity: 1;
+    }
+
+    .search-container.active .search-icon {
+        transform: translateX(-32px);
+    }
+
     .card-hover {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
@@ -15,6 +60,8 @@
     .shadow-sm {
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     }
+
+    
 </style>
 
 <!-- Blank Start -->
@@ -50,10 +97,19 @@
                         aria-controls="pills-contact" aria-selected="false"><i class="bi bi-chat-square-text-fill me-2"></i>Comments</button>
                 </li>
             </ul>
+
+            <div class="container my-4 d-flex justify-content-end">
+                <div class="search-container" onclick="activateSearch()">
+                    <input type="text" id="search-input" class="form-control search-input" placeholder="Cari...">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+            </div>
+
+
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table" id="views">
                             <thead>
                                 <tr>
                                     <th scope="col">No</th>
@@ -81,7 +137,7 @@
                 </div>
                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table" id="likes">
                             <thead>
                                 <tr>
                                     <th scope="col">No</th>
@@ -109,7 +165,7 @@
                 </div>
                 <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table" id="comment">
                             <thead>
                                 <tr>
                                     <th scope="col">No</th>
@@ -138,5 +194,46 @@
             </div>
         </div>
     </div>
+
+    <script>
+    function activateSearch() {
+    const container = document.querySelector('.search-container');
+    container.classList.toggle('active');
+
+    // Set focus ke input field ketika search container aktif
+    const input = document.querySelector('.search-input');
+    if (container.classList.contains('active')) {
+        input.focus();
+    } else {
+        input.blur();
+    }
+}
+
+$(document).ready(function() {
+    // Inisialisasi DataTable untuk masing-masing tabel
+    var viewsTable = $('#views').DataTable({
+        dom: 'lrtip'
+    });
+
+    var likesTable = $('#likes').DataTable({
+        dom: 'lrtip'
+    });
+
+    var commentTable = $('#comment').DataTable({
+        dom: 'lrtip'
+    });
+
+    // Event listener untuk pencarian di input
+    $('#search-input').on('keyup', function() {
+        // Menerapkan pencarian pada masing-masing tabel
+        var searchTerm = this.value;
+        viewsTable.search(searchTerm).draw();
+        likesTable.search(searchTerm).draw();
+        commentTable.search(searchTerm).draw();
+    });
+});
+
+</script>
+
 
     @endsection
