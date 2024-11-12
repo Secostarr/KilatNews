@@ -163,8 +163,8 @@
                         <div class="single-footer-caption">
                             <div class="single-footer-caption">
                                 <!-- logo -->
-                                <div class="footer-logo">
-                                    <a href="index.html"><img src="{{ asset('img/Logo-KilatNews3.png') }}" width="300px" alt=""></a>
+                                <div class="footer-logo" style="margin: 0;">
+                                    <a href="index.html"><img src="{{ asset('img/logolagi.jpg') }}" width="200px" ></a>
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">
