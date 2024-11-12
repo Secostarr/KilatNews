@@ -17,4 +17,12 @@ class HomeController extends Controller
     {
         return view('contact');    
     }
+
+    public function logout(Request $request)
+    {
+        Auth::guard('user')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('home')->with('success', 'Logout Berhasil');
+    }
 }

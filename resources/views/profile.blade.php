@@ -112,7 +112,7 @@
                 <!-- Tombol Aksi -->
                 <div class="text-center mt-4">
                     <a href="" class="btn btn-primary">Edit Profil</a>
-                    <a href="" class="btn btn-link">Logout</a>
+                    <a href="{{ Route('user.logout') }}" class="btn btn-link">Logout</a>
                 </div>
             </form>
 

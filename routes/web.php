@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/user/profile', [UserLoginController::class, 'profile'])->name('user.profile');
+Route::get('/user/logout', [HomeController::class, 'logout'])->name('user.logout');
+
 
 Route::middleware(['guest:admin', 'guest:user', 'guest:contributor'])->group(function () {
     Route::get('/admin/login', [UserLoginController::class, 'login'])->name('admin.login');
