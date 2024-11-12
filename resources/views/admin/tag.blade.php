@@ -51,26 +51,26 @@
 <div class="container-fluid pt-2 px-1">
     <div class="row bg-light rounded align-items-center mx-0 p-4">
         <div class="d-flex justify-content-between align-items-center w-100">
-            
+
             <div class="d-flex align-items-center gap-2">
-                <i class="text-primary"></i> 
+                <i class="text-primary"></i>
                 <h3 class="mb-0 text-dark">TAG</h3>
             </div>
 
             <a href="" class="btn btn-sm btn-primary d-flex align-items-center gap-2">
-                <i class="fas fa-plus"></i> 
+                <i class="fas fa-plus"></i>
                 Tambah Tag
             </a>
         </div>
 
         <div class="container my-4 d-flex justify-content-end">
             <div class="search-container" onclick="activateSearch()">
-                <input type="text" class="form-control search-input" placeholder="Cari...">
+                <input type="text" id="search-input" class="form-control search-input" placeholder="Cari...">
                 <i class="fas fa-search search-icon"></i>
             </div>
         </div>
 
-        <table class="table table-striped">
+        <table class="table table-striped" id="tag">
             <thead>
                 <tr>
                     <th>No</th>
@@ -81,11 +81,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr></tr>
-                <tr></tr>
-                <tr></tr>
-                <tr></tr>
-                <tr></tr>
+                <tr>
+                    <td>1</td>
+                    <td>kulo</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>sampean</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
             </tbody>
         </table>
 
@@ -105,6 +114,18 @@
             input.blur();
         }
     }
+
+    $(document).ready(function() {
+    $('#tag').DataTable({
+        dom: 'lrtip'  // Menghilangkan search box bawaan DataTables
+    });
+
+    // Add search functionality to the custom input field
+    $('#search-input').on('keyup', function() {
+        $('#tag').DataTable().search(this.value).draw();
+    });
+});
+
 </script>
 
 @endsection

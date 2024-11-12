@@ -164,7 +164,7 @@
                             <div class="single-footer-caption">
                                 <!-- logo -->
                                 <div class="footer-logo" style="margin: 0;">
-                                    <a href="index.html"><img src="{{ asset('img/logolagi.jpg') }}" width="200px" ></a>
+                                    <a href="index.html"><img src="{{ asset('img/logolagi.jpg') }}" width="200px"></a>
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">
