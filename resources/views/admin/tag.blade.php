@@ -70,7 +70,7 @@
             </div>
         </div>
 
-        <table class="table table-striped">
+        <table class="table table-striped" id="tag">
             <thead>
                 <tr>
                     <th>No</th>
@@ -105,6 +105,16 @@
             input.blur();
         }
     }
+
+    $(document).ready(function() {
+    $('#tag').DataTable({
+        dom:'lrtip' 
+    });
+
+    $('#search-input').on('keyup', function(){
+        $('#tag').DataTable().search(this.value).draw();
+        });
+    });
 </script>
 
 @endsection

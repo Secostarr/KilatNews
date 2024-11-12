@@ -106,7 +106,7 @@
                             <div class="col-xl-10 col-lg-10 col-md-12 header-flex">
                                 <!-- sticky -->
                                 <div class="sticky-logo">
-                                    <a href="index.html"><img src="{{ asset('img/logokilat.jpg') }}" width="100" alt=""></a>
+                                    <a href="index.html"><img src="{{ asset('img/logokilat.jpg') }}" width="200" alt=""></a>
                                 </div>
                                 <!-- Main-menu -->
                                 <div class="main-menu d-none d-md-block">
@@ -163,8 +163,8 @@
                         <div class="single-footer-caption">
                             <div class="single-footer-caption">
                                 <!-- logo -->
-                                <div class="footer-logo" style="margin: 0;">
-                                    <a href="index.html"><img src="{{ asset('img/logolagi.jpg') }}" width="200px" ></a>
+                                <div class="footer-logo mb-5" style="margin: 0;">
+                                    <a href="index.html"><img src="{{ asset('img/logolagi.jpg') }}" width="250px" ></a>
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">
