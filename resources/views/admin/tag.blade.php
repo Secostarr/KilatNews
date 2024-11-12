@@ -117,7 +117,6 @@
 
     $(document).ready(function() {
     $('#tag').DataTable({
-<<<<<<< HEAD
         dom:'lrtip' 
     });
 
@@ -125,17 +124,6 @@
         $('#tag').DataTable().search(this.value).draw();
         });
     });
-=======
-        dom: 'lrtip'  // Menghilangkan search box bawaan DataTables
-    });
-
-    // Add search functionality to the custom input field
-    $('#search-input').on('keyup', function() {
-        $('#tag').DataTable().search(this.value).draw();
-    });
-});
-
->>>>>>> 1de09fa048be78459b87f400cbd58f672bdaa064
 </script>
 
 @endsection
