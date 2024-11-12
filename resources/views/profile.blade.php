@@ -65,9 +65,9 @@
             <div class="text-center mb-4">
                 <!-- Foto Profil -->
                 @if (Auth::user()->foto)
-                    <img src="{{ asset('storage/' . Auth::user()->foto) }}" alt="Foto Profil" class="profile-picture mb-3">
+                <img src="{{ asset('storage/' . Auth::user()->foto) }}" alt="Foto Profil" class="profile-picture mb-3">
                 @else
-                    <img src="https://via.placeholder.com/150" alt="Default Foto Profil" class="profile-picture mb-3">
+                <img src="https://via.placeholder.com/150" alt="Default Foto Profil" class="profile-picture mb-3">
                 @endif
             </div>
 
@@ -104,32 +104,35 @@
                 <div class="mb-3 row">
                     <label for="bio" class="col-sm-3 col-form-label"><b>Bio:</b></label>
                     <div class="col-sm-9">
-                        <textarea id="bio" class="form-control" rows="4" readonly>{{ Auth::user()->bio }}</textarea>
+                        <textarea id="bio" class="form-control" rows="4" readonly>{{ Auth::user()->bio ?? 'bio anda masih kosong' }}</textarea>
                     </div>
                 </div>
 
                 <!-- Tombol Aksi -->
                 <div class="text-center mt-4">
-                    <a href="" class="btn btn-primary">Edit Profil</a>
-<<<<<<< HEAD
-                    <a href="{{ Route('user.logout') }}" class="btn btn-link">Logout</a>
-=======
-                    <a href="{{ route('pengguna.logout') }}" class="btn btn-danger">Logout</a>
->>>>>>> bb56ff64292226b5a5c5cf4ffc5017f07390e834
+                    <a href="" class="btn btn-primary me-2">Edit Profil</a>
+                    <a href="{{ route('pengguna.logout') }}" class="btn btn-danger me-2">Logout</a>
+                    <a href="{{ Route('home') }}" class="btn btn-warning">Kembali</a>
                 </div>
             </form>
 
             <!-- Ikon Media Sosial -->
             <div class="text-center mt-4 social-icons">
-                <a href="https://www.facebook.com/yourprofile" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.instagram.com/yourprofile" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.twitter.com/yourprofile" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.linkedin.com/in/yourprofile" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.facebook.com/yourprofile" target="_blank" title="Facebook" data-bs-toggle="tooltip"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/yourprofile" target="_blank" title="Instagram" data-bs-toggle="tooltip"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.instagram.com/yourprofile" target="_blank" title="Email" data-bs-toggle="tooltip"><i class="fab fa-google"></i></a>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-</body>
 
+    <script>
+        // Inisialisasi tooltip Bootstrap
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    </script>
+</body>
 </html>
