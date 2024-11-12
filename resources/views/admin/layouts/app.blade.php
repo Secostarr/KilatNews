@@ -58,9 +58,9 @@
                 <div class="navbar-nav w-100">
                     <a href="{{ Route('admin.dashboard') }}" class="nav-item nav-link {{ request()->routeIs('admin.dashboard*') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>artikel</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Konten</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="{{ Route('admin.artikel.berita') }}" class="dropdown-item {{ request()->routeIs('admin.artikel.berita*') ? 'active' : '' }}"><i class="bi bi-book-fill me-2"></i>Berita</a>
+                            <a href="{{ Route('admin.artikel.berita') }}" class="dropdown-item {{ request()->routeIs('admin.artikel.berita*') ? 'active' : '' }}"><i class="bi bi-book-fill me-2"></i>Artikel</a>
                             <a href="{{ Route('admin.artikel.kategori') }}" class="dropdown-item {{ request()->routeIs('admin.artikel.kategori*') ? 'active' : '' }}"><i class="bi bi-bookmark-fill me-2"></i>kategori</a>
                             <a href="{{ Route('admin.artikel.tag') }}" class="dropdown-item {{ request()->routeIs('admin.artikel.tag*') ? 'active' : '' }}"><i class="bi bi-tag-fill me-2"></i>Tag</a>
                         </div>

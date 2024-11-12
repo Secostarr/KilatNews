@@ -20,7 +20,7 @@ Route::get('/categori', [HomeController::class, 'categori'])->name('categori');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/latest_news', [HomeController::class, 'latest_news'])->name('latest_news');
 Route::get('/user/profile', [UserLoginController::class, 'profile'])->name('user.profile');
-Route::get('/user/logout', [HomeController::class, 'logout'])->name('user.logout');
+Route::get('/pengguna/logout', [PenggunaController::class, 'logout'])->name('pengguna.logout');
 
 
 Route::middleware(['guest:admin', 'guest:user', 'guest:contributor'])->group(function () {
@@ -39,7 +39,10 @@ Route::middleware(['guest:admin', 'guest:user', 'guest:contributor'])->group(fun
 Route::middleware(['role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
+
     Route::get('/admin/artikel', [ArtikelController::class, 'artikel'])->name('admin.artikel.berita');
+    Route::get('/admin/artikel/tambah', [ArtikelController::class, 'create'])->name('admin.artikel.create');
+
     Route::get('/admin/kategori', [KategoriController::class, 'kategori'])->name('admin.artikel.kategori');
     Route::get('/admin/tag', [TagController::class, 'tag'])->name('admin.artikel.tag');
     Route::get('/admin/komentar', [KomentarController::class, 'komentar'])->name('admin.pengguna.komentar');
@@ -49,6 +52,3 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/admin/notifikasi/pendaftar', [NotifikasiController::class, 'pendaftar'])->name('admin.pengguna.notifikasi.pendaftar');
     Route::get('/admin/notifikasi/penyetor', [NotifikasiController::class, 'penyetor'])->name('admin.pengguna.notifikasi.penyetor');
 });
-
-Route::get('/pengguna/logout', [PenggunaController::class, 'logout'])->name('pengguna.logout');
-
