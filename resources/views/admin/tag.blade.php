@@ -57,7 +57,7 @@
                 <h3 class="mb-0 text-dark">TAG</h3>
             </div>
 
-            <a href="" class="btn btn-sm btn-primary d-flex align-items-center gap-2">
+            <a href="{{ Route('admin.artikel.tag.create') }}" class="btn btn-sm btn-primary d-flex align-items-center gap-2">
                 <i class="fas fa-plus"></i>
                 Tambah Tag
             </a>
