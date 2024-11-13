@@ -19,8 +19,6 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/categori', [HomeController::class, 'categori'])->name('categori');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/latest_news', [HomeController::class, 'latest_news'])->name('latest_news');
-Route::get('/user/profile', [UserLoginController::class, 'profile'])->name('user.profile');
-Route::get('/pengguna/logout', [PenggunaController::class, 'logout'])->name('pengguna.logout');
 
 Route::middleware(['guest:admin', 'guest:user', 'guest:contributor'])->group(function () {
     Route::get('/admin/login', [UserLoginController::class, 'login'])->name('admin.login');
@@ -55,6 +53,10 @@ Route::middleware(['role:admin'])->group(function () {
     // Pengguna
     Route::get('/admin/pengguna', [PenggunaController::class, 'pengguna'])->name('admin.pengguna.user');
     Route::get('/admin/pengguna/tambah', [PenggunaController::class, 'create'])->name('admin.pengguna.user.create');
+    Route::get('admin/pengguna/edit/{id}', [PenggunaController::class, 'edit'])->name('admin.pengguna.user.edit');
+    Route::put('admin/pengguna/edit/{id}', [PenggunaController::class, 'update'])->name('admin.pengguna.user.update');
+
+
 
     Route::get('/admin/komentar', [KomentarController::class, 'komentar'])->name('admin.pengguna.komentar');
     Route::get('/admin/notifikasi', [NotifikasiController::class, 'notifikasi'])->name('admin.pengguna.notifikasi');
@@ -64,4 +66,11 @@ Route::middleware(['role:admin'])->group(function () {
 
     // Pengaturan
     Route::get('/admin/pengaturan', [PengaturanController::class, 'pengaturan'])->name('admin.pengaturan');
+});
+
+Route::middleware('role:user,contributor')->group(function () {
+    Route::get('/user/profile', [UserLoginController::class, 'profile'])->name('user.profile');
+    Route::get('/pengguna/logout', [PenggunaController::class, 'logout'])->name('pengguna.logout');
+    Route::get('/pengguna/profile/update', [PenggunaController::class, 'update'])->name('pengguna.profile.update');
+
 });

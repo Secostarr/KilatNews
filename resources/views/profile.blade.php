@@ -72,7 +72,7 @@
             </div>
 
             <!-- Informasi Profil -->
-            <form>
+            <form action="" method="post" enctype="multipart/form-data">
                 <div class="mb-3 row">
                     <label for="nama" class="col-sm-3 col-form-label"><b>Nama:</b></label>
                     <div class="col-sm-9">
@@ -112,7 +112,7 @@
                 <div class="text-center mt-4">
                     <a href="" class="btn btn-primary me-2">Edit Profil</a>
                     <a href="{{ route('pengguna.logout') }}" class="btn btn-danger me-2">Logout</a>
-                    <a href="{{ Route('home') }}" class="btn btn-warning">Kembali</a>
+                    <a href="{{ route('home') }}" class="btn btn-warning">Kembali</a>
                 </div>
             </form>
 
