@@ -107,23 +107,43 @@
                         </div>
                         @endif
 
-                        <form action="" method="post">
+                        <form action="{{ Route('register') }}" method="post">
                             @csrf
                             <div class="mb-3">
                                 <label for="nama" class="form-label">Nama:</label>
-                                <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukkan nama anda" value="{{ old('username') }}" required>
+                                <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukkan nama anda" value="{{ old('nama') }}" required>
+                                <div class="text-danger">
+                                    @error('nama')
+                                    {{ $message }}
+                                    @enderror
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username:</label>
                                 <input type="text" name="username" id="username" class="form-control" placeholder="Masukkan username anda" value="{{ old('username') }}" required>
+                                <div class="text-danger">
+                                    @error('username')
+                                    {{ $message }}
+                                    @enderror
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email:</label>
-                                <input type="text" name="email" id="email" class="form-control" placeholder="Masukkan email anda" value="{{ old('username') }}" required>
+                                <input type="text" name="email" id="email" class="form-control" placeholder="Masukkan email anda" value="{{ old('email') }}" required>
+                                <div class="text-danger">
+                                    @error('email')
+                                    {{ $message }}
+                                    @enderror
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password:</label>
                                 <input type="password" name="password" id="password" class="form-control" placeholder="Masukkan password anda" required>
+                                <div class="text-danger">
+                                    @error('password')
+                                    {{ $message }}
+                                    @enderror
+                                </div>
                             </div>
                             <div class="mb-3 password-options">
                                 <input type="checkbox" id="showPassword" class="form-check-input me-2">
@@ -137,7 +157,7 @@
                                 </div>
                             </div>
                         </form>
-                    </div>  
+                    </div>
                 </div>
             </div>
         </div>
