@@ -27,8 +27,6 @@ return new class extends Migration
                   ->onUpdate('cascade');
         
             $table->timestamps();
-        
-            $table->primary(['id_artikel', 'id_tag']);
         });
         
     }

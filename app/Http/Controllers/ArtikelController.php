@@ -15,4 +15,5 @@ class ArtikelController extends Controller
     {
         return view('admin.tambah.tambah_artikel');
     }
+
 }
