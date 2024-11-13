@@ -131,6 +131,15 @@
                                     <td>123</td>
                                     <td>Member</td>
                                 </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>John</td>
+                                    <td>Doe</td>
+                                    <td>jhon@email.com</td>
+                                    <td>USA</td>
+                                    <td>123</td>
+                                    <td>Member</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

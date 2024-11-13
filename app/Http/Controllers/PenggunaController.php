@@ -12,6 +12,11 @@ class PenggunaController extends Controller
         return view('admin.pengguna');     
     }
 
+    public function create()
+    {
+        return view('admin.tambah.tambah_pengguna');  
+    }
+
     public function logout(Request $request)
     {
         Auth::logout();

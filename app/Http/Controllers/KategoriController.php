@@ -11,4 +11,9 @@ class KategoriController extends Controller
     {
         return view('admin.kategori');
     }
+
+    public function create()
+    {
+        return view('admin.tambah.tambah_kategori');    
+    }
 }
