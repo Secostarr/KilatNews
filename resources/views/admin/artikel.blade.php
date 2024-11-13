@@ -77,7 +77,7 @@
             <div class="col-md-9 col-12">
                 <h5 class="fw-bold">Judul Artikel</h5>
                 <p class="text-muted">
-                    Ringkasan singkat tentang artikel yang menarik ini, yang dapat menarik minat pembaca untuk membaca lebih lanjut.
+                    Konten
                 </p>
                 <div class="d-flex flex-wrap gap-2">
                     <a href="" class="bi bi-clipboard btn btn-info btn-sm"> Detail</a>
