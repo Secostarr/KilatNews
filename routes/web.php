@@ -43,12 +43,8 @@ Route::middleware(['role:admin'])->group(function () {
 
     // Artikel
     Route::get('/admin/artikel', [ArtikelController::class, 'artikel'])->name('admin.artikel.berita');
-<<<<<<< HEAD
     Route::get('/admin/artikel/tambah', [ArtikelController::class, 'create'])->name('admin.artikel.create');
     Route::get('/admin/artikel/tambah', [ArtikelController::class, 'store'])->name('admin.artikel.store');
-=======
-    Route::get('/admin/artikel/tambah', [ArtikelController::class, 'create'])->name('admin.artikel.berita.create');
->>>>>>> 7cc2d4a2743ea081c83d021965bf3f1c7cfec7c8
 
     Route::get('/admin/kategori', [KategoriController::class, 'kategori'])->name('admin.artikel.kategori');
     Route::get('/admin/kategori/tambah', [KategoriController::class, 'create'])->name('admin.artikel.kategori.create');
