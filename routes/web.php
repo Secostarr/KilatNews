@@ -22,7 +22,6 @@ Route::get('/latest_news', [HomeController::class, 'latest_news'])->name('latest
 Route::get('/user/profile', [UserLoginController::class, 'profile'])->name('user.profile');
 Route::get('/pengguna/logout', [PenggunaController::class, 'logout'])->name('pengguna.logout');
 
-
 Route::middleware(['guest:admin', 'guest:user', 'guest:contributor'])->group(function () {
     Route::get('/admin/login', [UserLoginController::class, 'login'])->name('admin.login');
     Route::post('/admin/login', [UserLoginController::class, 'auth'])->name('admin.auth');
@@ -33,6 +32,7 @@ Route::middleware(['guest:admin', 'guest:user', 'guest:contributor'])->group(fun
     Route::get('/contributor/login', [UserLoginController::class, 'loginContributor'])->name('contributor.login');
 
     Route::get('/user/register', [UserLoginController::class, 'register'])->name('user.register');
+    Route::post('user/register', [PenggunaController::class, 'register'])->name('register');
 });
 
 
@@ -63,4 +63,4 @@ Route::middleware(['role:admin'])->group(function () {
 
     // Pengaturan
     Route::get('/admin/pengaturan', [PengaturanController::class, 'pengaturan'])->name('admin.pengaturan');
-    });
+});
