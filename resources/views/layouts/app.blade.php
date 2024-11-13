@@ -163,7 +163,7 @@
                         <div class="single-footer-caption">
                             <div class="single-footer-caption">
                                 <!-- logo -->
-                                <div class="footer-logo" style="margin: 0;">
+                                <div class="footer-logo" style="margin: 10;">
                                     <a href="index.html"><img src="{{ asset('img/logolagi.jpg') }}" width="200px"></a>
                                 </div>
                                 <div class="footer-tittle">
