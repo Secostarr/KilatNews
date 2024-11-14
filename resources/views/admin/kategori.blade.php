@@ -70,36 +70,52 @@
             </div>
         </div>
 
-        <table class="table table-striped" id="kategori">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama Kategori</th>
-                    <th>Deskripsi</th>
-                    <th>Slug</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>miyu</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>hiyu</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-
+        <div class="container my-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Daftar Kategori</h4>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover table-bordered table-striped" id="kategori">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Kategori</th>
+                                <th>Deskripsi</th>
+                                <th>Urutan</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($kategoris as $kategori)
+                            <tr>
+                                <th scope="row">{{ $loop->iteration }}</th>
+                                <td>{{ $kategori->nama_kategori }}</td>
+                                <td>{{ $kategori->deskripsi }}</td>
+                                <td>{{ $kategori->urutan }}</td>
+                                <td class="d-flex">
+                                    <a href="#" class="btn btn-outline-warning btn-sm me-1 shadow-sm">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    <a href="#" onclick="return confirm('Yakin Ingin Hapus Data Ini?')" class="btn btn-outline-danger btn-sm shadow-sm">
+                                        <i class="fas fa-trash"></i> Hapus
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
 
 <script>
     function activateSearch() {
@@ -116,13 +132,33 @@
     }
 
     $(document).ready(function() {
-    $('#kategori').DataTable({
-        dom:'lrtip' 
+        $('#kategori').DataTable({
+            dom: 'lrtip'
+        });
+
+        $('#search-input').on('keyup', function() {
+            $('#kategori').DataTable().search(this.value).draw();
+        });
     });
 
-    $('#search-input').on('keyup', function(){
-        $('#kategori').DataTable().search(this.value).draw();
-        });
+    $(document).ready(function() {
+        if (!$.fn.DataTable.isDataTable('#kategori')) {
+            $('#kategori').DataTable({
+                "language": {
+                    "search": "Cari:",
+                    "lengthMenu": "Tampilkan _MENU_ data per halaman",
+                    "zeroRecords": "Tidak ditemukan data yang cocok",
+                    "info": "Menampilkan halaman _PAGE_ dari _PAGES_",
+                    "infoEmpty": "Tidak ada data",
+                    "infoFiltered": "(difilter dari _MAX_ total data)"
+                },
+                "pagingType": "full_numbers",
+                "columnDefs": [{
+                    "orderable": false,
+                    "targets": 4
+                }]
+            });
+        }
     });
 </script>
 

@@ -88,13 +88,6 @@
                 </div>
 
                 <div class="mb-3 row">
-                    <label for="email" class="col-sm-3 col-form-label"><b>Email:</b></label>
-                    <div class="col-sm-9">
-                        <input type="email" id="email" class="form-control" value="{{ Auth::user()->email }}" readonly>
-                    </div>
-                </div>
-
-                <div class="mb-3 row">
                     <label for="role" class="col-sm-3 col-form-label"><b>Role:</b></label>
                     <div class="col-sm-9">
                         <input type="text" id="role" class="form-control" value="{{ Auth::user()->role }}" readonly>
@@ -120,7 +113,7 @@
             <div class="text-center mt-4 social-icons">
                 <a href="https://www.facebook.com/yourprofile" target="_blank" title="Facebook" data-bs-toggle="tooltip"><i class="fab fa-facebook"></i></a>
                 <a href="https://www.instagram.com/yourprofile" target="_blank" title="Instagram" data-bs-toggle="tooltip"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.instagram.com/yourprofile" target="_blank" title="Email" data-bs-toggle="tooltip"><i class="fab fa-google"></i></a>
+                <a href="https://www.instagram.com/yourprofile" target="_blank" title="{{ Auth::user()->email }}" data-bs-toggle="tooltip"><i class="fab fa-google"></i></a>
             </div>
         </div>
     </div>

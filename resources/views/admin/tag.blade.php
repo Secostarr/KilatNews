@@ -70,6 +70,7 @@
             </div>
         </div>
 
+        <span class="border border-3 p-3">
         <table class="table table-striped" id="tag">
             <thead>
                 <tr>
@@ -97,7 +98,7 @@
                 </tr>
             </tbody>
         </table>
-
+        </span>
     </div>
 </div>
 
