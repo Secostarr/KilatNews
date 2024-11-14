@@ -103,7 +103,7 @@
 
                 <!-- Tombol Aksi -->
                 <div class="text-center mt-4">
-                    <a href="" class="btn btn-primary me-2">Edit Profil</a>
+                    <a href="{{ route('pengguna.profile.edit') }}" class="btn btn-primary me-2">Edit Profil</a>
                     <a href="{{ route('pengguna.logout') }}" class="btn btn-danger me-2">Logout</a>
                     <a href="{{ route('home') }}" class="btn btn-warning">Kembali</a>
                 </div>

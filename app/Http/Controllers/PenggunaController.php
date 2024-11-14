@@ -27,27 +27,20 @@ class PenggunaController extends Controller
         return redirect()->route('home')->with('success', 'Logout Berhasil');
     }
 
-    public function update(Request $request )
+    public function edit()
     {
-        $id_pengguna = Auth::user()->id_pengguna;
-        $pengguna = User::find($id_pengguna);
+        $id = Auth::user()->id_user;
+        $pengguna = User::find($id);
 
-        $request->validate([
-            'nama' => 'required',
-            'username' => 'required|unique:pengguna,username,' . $id_pengguna. ',id_pengguna',
-            'password' => 'nullable|min:6',
-            'email' => 'required|email|unique:pengguna,email,' . $pengguna->id_pengguna .',id_pengguna',
-        ]);
+        if (!$pengguna) {
+            return back()->with('error', 'Pengguna tidak ditemukan.');
+        }
 
-        $pengguna->update([
-            'username' => $request->username,
-            'password' => $request->filled('password') ? Hash::make($request->password) : $pengguna->password,
-            'nama_pengguna' => $request->nama_admin,
-            // 'foto' => $foto,
-
-        ]);
-
-        return redirect()->back()->with('success', 'Data anda berhasil di update');
-    
+        return view('edit_pengguna', compact('pengguna'));
     }
+
+    
+
+
+
 }

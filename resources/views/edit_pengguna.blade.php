@@ -13,7 +13,7 @@
             </div>
             @endif
             <h6 class="mb-4">Edit Pengguna</h6>
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="{{ route('pengguna.update') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
@@ -44,7 +44,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password">
+                    <input type="password" class="form-control" id="password" name="password" value="{{ old('password', $pengguna->password) }}">
                     <div class="text-danger">
                         @error('password')
                         {{ $message }}
@@ -53,9 +53,18 @@
                 </div>
                 <div class="mb-3">
                     <label for="bio" class="form-label">Bio</label>
-                    <textarea name="" id="bio" cols="30" rows="10"></textarea>
+                    <textarea id="bio" class="form-control" rows="4" readonly>{{ Auth::user()->bio ?? 'bio anda masih kosong' }}</textarea>
                     <div class="text-danger">
                         @error('bio')
+                        {{ $message }}
+                        @enderror
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="foto" class="form-label">Foto</label>
+                    <input type="file" class="form-control" id="foto" name="foto">
+                    <div class="text-danger">
+                        @error('foto')
                         {{ $message }}
                         @enderror
                     </div>
