@@ -51,33 +51,34 @@
 <div class="container-fluid pt-2 px-1">
     <div class="row bg-light rounded align-items-center mx-0 p-4">
         <div class="d-flex justify-content-between align-items-center w-100">
-            
+
             <div class="d-flex align-items-center gap-2">
-                <i class="text-primary"></i> 
+                <i class="text-primary"></i>
                 <h3 class="mb-0 text-dark">Artikel</h3>
             </div>
 
             <a href="{{ Route('admin.artikel.berita') }}" class="btn btn-sm btn-primary d-flex align-items-center gap-2">
-                <i class="fas fa-plus"></i> 
+                <i class="fas fa-plus"></i>
                 Tambah Artikel
             </a>
         </div>
 
         <div class="container my-4 d-flex justify-content-end">
             <div class="search-container" onclick="activateSearch()">
-                <input type="text" class="form-control search-input" placeholder="Cari...">
+                <input type="text" id="search-input" class="form-control search-input" placeholder="Cari...">
                 <i class="fas fa-search search-icon"></i>
             </div>
         </div>
 
+        @foreach ($artikels as $artikel)
         <div class="row bg-white shadow-sm rounded p-4 mb-3">
             <div class="col-md-3 col-12 mb-3 mb-md-0 d-flex justify-content-center align-items-center">
-                <img src="" alt="ini foto" class="img-fluid rounded" style="max-height: 150px; width: auto;">
+                <img src="{{ $artikel->foto }}" alt="ini foto" class="img-fluid rounded" style="max-height: 150px; width: auto;">
             </div>
             <div class="col-md-9 col-12">
-                <h5 class="fw-bold">Judul Artikel</h5>
+                <h5 class="fw-bold">{{ $artikel->judul }}</h5>
                 <p class="text-muted">
-                    Konten
+                    {{ $artikel->konten }}
                 </p>
                 <div class="d-flex flex-wrap gap-2">
                     <a href="" class="bi bi-clipboard btn btn-info btn-sm"> Detail</a>
@@ -86,6 +87,7 @@
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
 </div>
 
@@ -102,6 +104,14 @@
             input.blur();
         }
     }
+
+    $(document).ready(function() {
+    $('#search-input').on('keyup', function(){
+        const table = $('#kategori').DataTable();
+        table.search(this.value).draw();
+    });
+});
+
 </script>
 
 @endsection

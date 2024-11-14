@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\artikel;
 use Illuminate\Http\Request;
 
 class ArtikelController extends Controller
 {
     public function artikel() 
     {
-        return view('admin.artikel');
+        $artikels = artikel::all();
+        return view('admin.artikel', compact('artikels'));
     }
 
     public function create()
