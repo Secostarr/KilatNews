@@ -70,6 +70,8 @@ Route::middleware(['role:admin'])->group(function () {
 Route::middleware('role:user,contributor')->group(function () {
     Route::get('/user/profile', [UserLoginController::class, 'profile'])->name('user.profile');
     Route::get('/pengguna/logout', [PenggunaController::class, 'logout'])->name('pengguna.logout');
-    Route::get('/pengguna/profile/update', [PenggunaController::class, 'update'])->name('pengguna.profile.update');
+    Route::get('/pengguna/profile/edit', [PenggunaController::class, 'edit'])->name('pengguna.profile.edit');
+    Route::put('/pengguna/profile', [PenggunaController::class, 'update'])->name('pengguna.update');
+
 
 });
