@@ -20,7 +20,7 @@ Route::get('/categori', [HomeController::class, 'categori'])->name('categori');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/latest_news', [HomeController::class, 'latest_news'])->name('latest_news');
 
-Route::middleware(['guest:admin', 'guest:user', 'guest:contributor'])->group(function () {
+Route::middleware(['guest'])->group(function () {
     Route::get('/admin/login', [UserLoginController::class, 'login'])->name('admin.login');
     Route::post('/admin/login', [UserLoginController::class, 'auth'])->name('admin.auth');
 
