@@ -34,7 +34,7 @@ class PenggunaController extends Controller
     // Halaman Edit Profil
     public function edit()
     {
-        $id = Auth::user()->id; // Gunakan default 'id' jika primary key di model User adalah 'id'
+        $id = Auth::user()->id_user; // Gunakan default 'id' jika primary key di model User adalah 'id'
         $pengguna = User::find($id);
 
         if (!$pengguna) {
@@ -45,14 +45,16 @@ class PenggunaController extends Controller
     }
 
     // Update Profil
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $id = Auth::user()->id_user; // Gunakan default 'id' jika primary key di model User adalah 'id'
+
         $pengguna = User::findOrFail($id);
 
         $request->validate([
             'nama' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users,username,' . $pengguna->id,
-            'email' => 'required|email|unique:users,email,' . $pengguna->id,
+            'username' => 'required|string|max:255|unique:users,username,' . $id . ',id_user',
+            'email' => 'required|email|unique:users,email,' . $id . ',id_user',
             'bio' => 'nullable|string',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
