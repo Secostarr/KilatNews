@@ -38,14 +38,14 @@ class UserLoginController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
 
-            // Cek apakah halaman login sesuai dengan role pengguna
-            if ($request->route()->named('user.auth') && $user->role !== 'user' || 'contributor') {
+            if ($request->route()->named('user.auth') && !in_array($user->role, ['user', 'contributor'])) {
                 Auth::logout();
                 return redirect()->route('user.login')->withErrors(['login_error' => 'Halaman tidak sesuai untuk role anda.']);
             } elseif ($request->route()->named('admin.auth') && $user->role !== 'admin') {
                 Auth::logout();
                 return redirect()->route('admin.login')->withErrors(['login_error' => 'Halaman tidak sesuai untuk role anda.']);
-            } 
+            }
+            
 
             // Arahkan ke halaman sesuai role
             if ($user->role === 'admin') {
