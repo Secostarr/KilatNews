@@ -57,9 +57,9 @@
                 <h3 class="mb-0 text-dark">TAG</h3>
             </div>
 
-            <a href="{{ Route('admin.artikel.tag.create') }}" class="btn btn-sm btn-primary d-flex align-items-center gap-2">
-                <i class="fas fa-plus"></i>
-                Tambah Tag
+            <a href="{{ Route('admin.artikel.kelola.tag') }}" class="btn btn-sm btn-primary d-flex align-items-center gap-2">
+                <i class="bi bi-card-list"></i>
+                Data Tag
             </a>
         </div>
 
@@ -71,33 +71,41 @@
         </div>
 
         <span class="border border-3 p-3">
-        <table class="table table-striped" id="tag">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama Tag</th>
-                    <th>Deskripsi</th>
-                    <th>Slug</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>kulo</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>sampean</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
+            <table class="table table-striped" id="tag">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Judul Artikel</th>
+                        <th>Konten</th>
+                        <th>Tag</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($artikels as $artikel)
+                    <tr>
+                        <th scope="row">{{ $loop->iteration }}</th>
+                        <td>{{ $artikel->judul }}</td>
+                        <td>{{ $artikel->konten }}</td>
+                        <td>
+                            <select name="id_tag" id="id_tag" class="form-select">
+                                @if($tags->isEmpty())
+                                <option value="" disabled selected>Tidak memiliki tag</option>
+                                @else
+                                <option value="" disabled selected>Pilih tag</option>
+                                @foreach($tags as $tag)
+                                <option value="{{ $tag->id_tag }}" {{ $artikel->ArtikelToTag?->id_tag == $tag->id_tag ? 'selected' : '' }}>{{ $tag->nama_tag }}</option>
+                                @endforeach
+                                @endif
+                            </select>
+                        </td>
+                        <td>
+                            <a href="" class="btn btn-success btn-sm"><i class="bi bi-check-square-fill me-2"></i>Simpan</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </span>
     </div>
 </div>
@@ -117,12 +125,12 @@
     }
 
     $(document).ready(function() {
-    $('#tag').DataTable({
-        dom:'lrtip' 
-    });
+        $('#tag').DataTable({
+            dom: 'lrtip'
+        });
 
-    $('#search-input').on('keyup', function(){
-        $('#tag').DataTable().search(this.value).draw();
+        $('#search-input').on('keyup', function() {
+            $('#tag').DataTable().search(this.value).draw();
         });
     });
 </script>

@@ -134,4 +134,52 @@
     <script src="{{ asset('js/main.js') }}"></script>
 </body>
 
+<script>
+    $(document).ready(function() {
+        $('#konten').summernote({
+            height: 300,
+            placeholder: 'Tuliskan konten artikel di sini...',
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+            ]
+        });
+    });
+
+    // Inisialisasi Leaflet Map
+    var map = L.map('map').setView([-6.200000, 106.816666], 10); // Jakarta sebagai default
+
+    // Tambahkan tile dari OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    var marker;
+
+    // Fungsi untuk mendapatkan nama lokasi dari koordinat
+    function getLocationName(lat, lng) {
+        $.getJSON(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`, function(data) {
+            $('#lokasi').val(data.display_name); // Menampilkan nama lokasi pada input "lokasi"
+        });
+    }
+
+    // Event listener saat peta diklik
+    map.on('click', function(e) {
+        var lat = e.latlng.lat;
+        var lng = e.latlng.lng;
+
+        if (marker) {
+            map.removeLayer(marker);
+        }
+
+        marker = L.marker([lat, lng]).addTo(map);
+        getLocationName(lat, lng); // Mengambil nama lokasi berdasarkan koordinat
+    });
+</script>
+
 </html>

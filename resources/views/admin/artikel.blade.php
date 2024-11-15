@@ -50,14 +50,21 @@
 
 <div class="container-fluid pt-2 px-1">
     <div class="row bg-light rounded align-items-center mx-0 p-4">
+
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+
         <div class="d-flex justify-content-between align-items-center w-100">
 
             <div class="d-flex align-items-center gap-2">
                 <i class="text-primary"></i>
-                <h3 class="mb-0 text-dark">Artikel</h3>
+                <h3 class="mb-0 text-dark">ARTIKEL</h3>
             </div>
 
-            <a href="{{ Route('admin.artikel.berita') }}" class="btn btn-sm btn-primary d-flex align-items-center gap-2">
+            <a href="{{ Route('admin.artikel.berita.create') }}" class="btn btn-sm btn-primary d-flex align-items-center gap-2">
                 <i class="fas fa-plus"></i>
                 Tambah Artikel
             </a>
@@ -106,12 +113,11 @@
     }
 
     $(document).ready(function() {
-    $('#search-input').on('keyup', function(){
-        const table = $('#kategori').DataTable();
-        table.search(this.value).draw();
+        $('#search-input').on('keyup', function() {
+            const table = $('#kategori').DataTable();
+            table.search(this.value).draw();
+        });
     });
-});
-
 </script>
 
 @endsection

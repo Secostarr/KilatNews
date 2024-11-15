@@ -22,4 +22,9 @@ class artikel extends Model
         'viewer_count',
         'trending',
     ];
+
+    public function ArtikelToTag()
+    {
+        return $this->hasOne(ArtikelTag::class, 'id_artikel', 'id_artikel');
+    }
 }
