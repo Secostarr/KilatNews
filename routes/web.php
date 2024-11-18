@@ -42,6 +42,7 @@ Route::middleware(['role:admin'])->group(function () {
     // Artikel
     Route::get('/admin/artikel', [ArtikelController::class, 'artikel'])->name('admin.artikel.berita');
     Route::get('/admin/artikel/tambah', [ArtikelController::class, 'create'])->name('admin.artikel.berita.create');
+    Route::post('/admin/artikel/tambah', [ArtikelController::class, 'store'])->name('admin.artikel.berita.store');
 
     Route::get('/admin/kategori', [KategoriController::class, 'kategori'])->name('admin.artikel.kategori');
     Route::get('/admin/kategori/tambah', [KategoriController::class, 'create'])->name('admin.artikel.kategori.create');
@@ -52,7 +53,7 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/admin/kelola/tag', [TagController::class, 'kelola'])->name('admin.artikel.kelola.tag');
     Route::get('/admin/tag/tambah', [TagController::class, 'create'])->name('admin.artikel.tag.create');
     Route::post('/admin/tag/tambah', [TagController::class, 'store'])->name('admin.artikel.tag.store');
-    Route::post('/admin/tag/tambah/artikel', [TagController::class, 'storeArtikel'])->name('admin.artikel.artikel_tag.store');
+    Route::post('/admin/tag/tambah/artikel', [TagController::class, 'storeArtikel'])->name('    admin.artikel.artikel_tag.store');
 
     // Pengguna
     Route::get('/admin/pengguna', [PenggunaController::class, 'pengguna'])->name('admin.pengguna.user');

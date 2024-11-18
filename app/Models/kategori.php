@@ -15,6 +15,11 @@ class kategori extends Model
         'slug',
         'urutan',
     ];
+
+    public function artikels()
+    {
+        return $this->hasMany(Artikel::class, 'id_kategori');
+    }
 }
 
 

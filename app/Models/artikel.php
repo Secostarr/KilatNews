@@ -13,6 +13,7 @@ class artikel extends Model
         'judul',
         'konten',
         'slug',
+        'tanggal_publikasi',
         'id_user',
         'id_kategori',
         'media_utama',
@@ -26,5 +27,10 @@ class artikel extends Model
     public function ArtikelToTag()
     {
         return $this->hasOne(ArtikelTag::class, 'id_artikel', 'id_artikel');
+    }
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'id_kategori');
     }
 }

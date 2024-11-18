@@ -80,11 +80,11 @@
         @foreach ($artikels as $artikel)
         <div class="row bg-white shadow-sm rounded p-4 mb-3">
             <div class="col-md-3 col-12 mb-3 mb-md-0 d-flex justify-content-center align-items-center">
-                <img src="{{ $artikel->foto }}" alt="ini foto" class="img-fluid rounded" style="max-height: 150px; width: auto;">
+                <img src="{{ asset('storage/' . $artikel->media_utama) }}" alt="ini foto" class="img-fluid rounded" style="max-height: 150px; width: auto;">
             </div>
             <div class="col-md-9 col-12">
-                <h5 class="fw-bold">{{ $artikel->judul }}</h5>
-                <p class="text-muted">
+                <h5 class="fw-bold text-truncate" style="max-width: 100%;">{{ $artikel->judul }}</h5>
+                <p class="text-muted text-truncate" style="max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                     {{ $artikel->konten }}
                 </p>
                 <div class="d-flex flex-wrap gap-2">
