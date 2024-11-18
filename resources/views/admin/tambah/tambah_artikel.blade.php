@@ -16,11 +16,11 @@
                         {{ session('success') }}
                     </div>
                     @endif
-                    <form action="" method="post" enctype="multipart/form-data">
+                    <form action="{{ Route('admin.artikel.berita.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group mb-3">
-                            <label for="judul_artikel" class="form-label">Judul Artikel</label>
-                            <input type="text" class="form-control" id="judul_artikel" name="judul">
+                            <label for="judul" class="form-label">Judul Artikel</label>
+                            <input type="text" class="form-control" id="judul" name="judul">
                             @error('judul')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -28,7 +28,7 @@
 
                         <div class="form-group mb-3">
                             <label for="konten" class="form-label">Konten</label>
-                            <textarea class="form-control" id="konten" name="konten"></textarea>
+                            <textarea class="form-control" id="konten" name="konten">{{ old('konten') }}</textarea>
                             @error('konten')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -36,7 +36,7 @@
 
                         <div class="form-group mb-3">
                             <label for="tanggal_publikasi" class="form-label">Tanggal Publikasi</label>
-                            <input type="datetime-local" class="form-control" id="tanggal_publikasi" name="tanggal_publikasi">
+                            <input type="date" class="form-control" id="tanggal_publikasi" name="tanggal_publikasi">
                             @error('tanggal_publikasi')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -65,29 +65,12 @@
                             <h5>Status Publikasi</h5>
 
                             <div class="d-flex gap-3">
-                                <div class="form-group form-check mb-3">
-                                    <input type="checkbox" class="form-check-input" id="published" name="published" value="published" onclick="onlyOne(this)">
-                                    <label class="form-check-label" for="published">Published</label>
-                                    @error('published')
-                                    <div class="text-danger">{{ $message }}</div>
-                                    @enderror
+                                @foreach(['published', 'draft', 'archived'] as $status)
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="{{ $status }}" name="status_publikasi" value="{{ $status }}" onclick="onlyOne(this)" {{ old('status_publikasi') === $status ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="{{ $status }}">{{ ucfirst($status) }}</label>
                                 </div>
-
-                                <div class="form-group form-check mb-3">
-                                    <input type="checkbox" class="form-check-input" id="draft" name="draft" value="draft" onclick="onlyOne(this)">
-                                    <label class="form-check-label" for="draft">Draft</label>
-                                    @error('draft')
-                                    <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group form-check mb-3">
-                                    <input type="checkbox" class="form-check-input" id="archived" name="archived" value="archived" onclick="onlyOne(this)">
-                                    <label class="form-check-label" for="archived">Archived</label>
-                                    @error('archived')
-                                    <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
+                                @endforeach
                             </div>
                         </div>
 
@@ -116,8 +99,9 @@
                         <div class="form-group mb-3">
                             <label for="kategori" class="form-label">Kategori</label>
                             <select class="form-select" id="kategori" name="id_kategori">
+                                <option value="" selected disabled>Pilih Kategori</option>
                                 @foreach($kategoris as $kategori)
-                                <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori }}</option>
+                                <option value="{{ $kategori->id_kategori }}">{{ $kategori->nama_kategori }}</option>
                                 @endforeach
                             </select>
                             @error('id_kategori')
@@ -202,7 +186,7 @@
     });
 
     function onlyOne(checkbox) {
-        const checkboxes = document.getElementsByName('highlight');
+        const checkboxes = document.querySelectorAll(`input[name="${checkbox.name}"]`);
         checkboxes.forEach((cb) => {
             if (cb !== checkbox) cb.checked = false;
         });

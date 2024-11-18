@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\artikel;
 use App\Models\kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+
 
 class ArtikelController extends Controller
 {
-    public function artikel() 
+    public function artikel()
     {
         $artikels = artikel::all();
         return view('admin.artikel', compact('artikels'));
@@ -22,44 +25,44 @@ class ArtikelController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi data
-        $validatedData = $request->validate([
+        // Validasi input
+        $request->validate([
             'judul' => 'required|string|max:255',
             'konten' => 'required|string',
             'tanggal_publikasi' => 'required|date',
-            'media_utama' => 'nullable|file|mimes:jpg,png,jpeg,gif|max:2048',
+            'media_utama' => 'required|file|mimes:jpg,jpeg,png|max:2048',
             'trending' => 'required|in:true,false',
-            'published' => 'nullable|in:published',
-            'draft' => 'nullable|in:draft',
-            'archived' => 'nullable|in:archived',
-            'highlight' => 'nullable|in:true,false',
-            'id_kategori' => 'required|exists:kategoris,id',
+            'status_publikasi' => 'required|in:published,draft,archived',
+            'highlight' => 'required|in:true,false',
+            'id_kategori' => 'required',
             'lokasi' => 'nullable|string|max:255',
         ]);
 
+        // Generate slug dari judul
+        $slug = Str::slug($request->judul);
+
         // Simpan file media utama
         if ($request->hasFile('media_utama')) {
-            $path = $request->file('media_utama')->store('media_utama', 'public');
-            $validatedData['media_utama'] = $path;
+            $uniqueFile = uniqid() . '_' . $request->file('media_utama')->getClientOriginalName();
+            $request->file('media_utama')->storeAs('media_utama', $uniqueFile, 'public');
+            $foto = 'media_utama/' . $uniqueFile;
         }
 
-        // Tentukan status publikasi
-        $validatedData['status_publikasi'] = $request->published ?? $request->draft ?? $request->archived;
-
-        // Buat artikel baru
+        // Simpan data artikel
         Artikel::create([
-            'judul' => $validatedData['judul'],
-            'konten' => $validatedData['konten'],
-            'tanggal_publikasi' => $validatedData['tanggal_publikasi'],
-            'media_utama' => $validatedData['media_utama'] ?? null,
-            'trending' => $validatedData['trending'] === 'true',
-            'highlight' => $validatedData['highlight'] === 'true',
-            'id_kategori' => $validatedData['id_kategori'],
-            'lokasi' => $validatedData['lokasi'],
-            'status_publikasi' => $validatedData['status_publikasi'],
+            'judul' => $request->judul,
+            'slug' => $slug, // Tambahkan slug
+            'konten' => $request->konten,
+            'tanggal_publikasi' => $request->tanggal_publikasi,
+            'id_user' => Auth::user()->id_user,
+            'media_utama' => $foto,
+            'trending' => $request->trending === 'true',
+            'status_publikasi' => $request->status_publikasi,
+            'highlight' => $request->highlight === 'true',
+            'id_kategori' => $request->id_kategori,
+            'lokasi' => $request->lokasi,
         ]);
 
-        return redirect()->back()->with('success', 'Artikel berhasil disimpan!');
+        return redirect()->route('admin.artikel.berita')->with('success', 'Artikel berhasil ditambahkan.');
     }
-
 }
