@@ -51,67 +51,92 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="status_publikasi" class="form-label">Status Publikasi</label>
-                            <select class="form-select" id="status_publikasi" name="status_publikasi">
-                                <option value="draft">Draft</option>
-                                <option value="published">Published</option>
+                            <label for="trending" class="form-label">Status Trending</label>
+                            <select class="form-select" id="trending" name="trending">
+                                <option value="true">Trending</option>
+                                <option value="false">Tidak Trending</option>
                             </select>
-                            @error('status_publikasi')
+                            @error('trending')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <div class="d-flex flex-column gap-2">
-                            <h5>Pilih Salah Satu</h5>
+                            <h5>Status Publikasi</h5>
 
                             <div class="d-flex gap-3">
-                                <div class="d-flex gap-3">
-                                    <div class="form-group form-check mb-3">
-                                        <input type="checkbox" class="form-check-input" id="highlight" name="highlight" value="1" onclick="onlyOne(this)">
-                                        <label class="form-check-label" for="highlight">Published</label>
-                                        @error('highlight')
-                                        <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
+                                <div class="form-group form-check mb-3">
+                                    <input type="checkbox" class="form-check-input" id="published" name="published" value="published" onclick="onlyOne(this)">
+                                    <label class="form-check-label" for="published">Published</label>
+                                    @error('published')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
 
-                                    <div class="form-group form-check mb-3">
-                                        <input type="checkbox" class="form-check-input" id="trending" name="trending" value="1" onclick="onlyOne(this)">
-                                        <label class="form-check-label" for="trending">Draft</label>
-                                        @error('trending')
-                                        <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
+                                <div class="form-group form-check mb-3">
+                                    <input type="checkbox" class="form-check-input" id="draft" name="draft" value="draft" onclick="onlyOne(this)">
+                                    <label class="form-check-label" for="draft">Draft</label>
+                                    @error('draft')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
 
-                                    <div class="form-group form-check mb-3">
-                                        <input type="checkbox" class="form-check-input" id="archived" name="archived" value="1" onclick="onlyOne(this)">
-                                        <label class="form-check-label" for="archived">Archived</label>
-                                        @error('archived')
-                                        <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
+                                <div class="form-group form-check mb-3">
+                                    <input type="checkbox" class="form-check-input" id="archived" name="archived" value="archived" onclick="onlyOne(this)">
+                                    <label class="form-check-label" for="archived">Archived</label>
+                                    @error('archived')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="form-group mb-3">
-                                <label for="kategori" class="form-label">Kategori</label>
-                                <select class="form-select" id="kategori" name="id_kategori">
-
-                                </select>
-
+                        <div class="d-flex flex-column mt-0">
+                            <h5>Highlight Berita</h5>
+                            <div class="d-flex gap-3">
+                                <!-- Opsi "Iya" -->
+                                <div class="form-group form-check mb-3">
+                                    <input type="checkbox" class="form-check-input" id="highlightTrue" name="highlight" value="true" onclick="onlyOne(this)">
+                                    <label class="form-check-label" for="highlightTrue">Iya</label>
+                                    @error('highlight')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!-- Opsi "Tidak" -->
+                                <div class="form-group form-check mb-3">
+                                    <input type="checkbox" class="form-check-input" id="highlightFalse" name="highlight" value="false" onclick="onlyOne(this)">
+                                    <label class="form-check-label" for="highlightFalse">Tidak</label>
+                                    @error('highlight')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
                             </div>
+                        </div>
 
-                            <div class="form-group mb-3">
-                                <label for="lokasi" class="form-label">Lokasi</label>
-                                <input type="text" class="form-control" id="lokasi" name="lokasi">
-                                <div id="map" style="height: 400px;"></div>
-                                @error('lokasi')
-                                <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
+                        <div class="form-group mb-3">
+                            <label for="kategori" class="form-label">Kategori</label>
+                            <select class="form-select" id="kategori" name="id_kategori">
+                                @foreach($kategoris as $kategori)
+                                <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori }}</option>
+                                @endforeach
+                            </select>
+                            @error('id_kategori')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-success">Simpan</button>
-                            </div>
+                        <div class="form-group mb-3">
+                            <label for="lokasi" class="form-label">Lokasi</label>
+                            <input type="text" class="form-control" id="lokasi" name="lokasi">
+                            <div id="map" style="height: 400px;"></div>
+                            @error('lokasi')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success">Simpan</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -177,7 +202,7 @@
     });
 
     function onlyOne(checkbox) {
-        const checkboxes = document.querySelectorAll('.form-check-input');
+        const checkboxes = document.getElementsByName('highlight');
         checkboxes.forEach((cb) => {
             if (cb !== checkbox) cb.checked = false;
         });
