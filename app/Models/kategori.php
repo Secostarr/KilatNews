@@ -21,3 +21,5 @@ class kategori extends Model
         return $this->hasMany(Artikel::class, 'id_kategori');
     }
 }
+
+
