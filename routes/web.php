@@ -45,6 +45,8 @@ Route::middleware(['role:admin'])->group(function () {
 
     Route::get('/admin/kategori', [KategoriController::class, 'kategori'])->name('admin.artikel.kategori');
     Route::get('/admin/kategori/tambah', [KategoriController::class, 'create'])->name('admin.artikel.kategori.create');
+    Route::post('/admin/kategori/store', [KategoriController::class, 'store'])->name('admin.artikel.kategori.store');
+
 
     Route::get('/admin/tag', [TagController::class, 'tag'])->name('admin.artikel.tag');
     Route::get('/admin/kelola/tag', [TagController::class, 'kelola'])->name('admin.artikel.kelola.tag');
