@@ -7,7 +7,7 @@
         <div class="col-xl-12">
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white text-center">
-                    <h4>Tambah Artikel</h4>
+                    <h4>Tambah Kategori</h4>
                 </div>
 
                 <div class="p-3">

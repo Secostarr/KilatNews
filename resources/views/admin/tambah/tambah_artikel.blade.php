@@ -61,44 +61,57 @@
                             @enderror
                         </div>
 
-                        <div class="d-flex gap-2">
-                            <div class="form-group form-check mb-3">
-                                <input type="checkbox" class="form-check-input" id="highlight" name="highlight" value="1">
-                                <label class="form-check-label" for="highlight">Highlight</label>
-                                @error('highlight')
+                        <div class="d-flex flex-column gap-2">
+                            <h5>Pilih Salah Satu</h5>
+
+                            <div class="d-flex gap-3">
+                                <div class="d-flex gap-3">
+                                    <div class="form-group form-check mb-3">
+                                        <input type="checkbox" class="form-check-input" id="highlight" name="highlight" value="1" onclick="onlyOne(this)">
+                                        <label class="form-check-label" for="highlight">Published</label>
+                                        @error('highlight')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group form-check mb-3">
+                                        <input type="checkbox" class="form-check-input" id="trending" name="trending" value="1" onclick="onlyOne(this)">
+                                        <label class="form-check-label" for="trending">Draft</label>
+                                        @error('trending')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group form-check mb-3">
+                                        <input type="checkbox" class="form-check-input" id="archived" name="archived" value="1" onclick="onlyOne(this)">
+                                        <label class="form-check-label" for="archived">Archived</label>
+                                        @error('archived')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="kategori" class="form-label">Kategori</label>
+                                <select class="form-select" id="kategori" name="id_kategori">
+
+                                </select>
+
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="lokasi" class="form-label">Lokasi</label>
+                                <input type="text" class="form-control" id="lokasi" name="lokasi">
+                                <div id="map" style="height: 400px;"></div>
+                                @error('lokasi')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
 
-                            <div class="form-group form-check mb-3">
-                                <input type="checkbox" class="form-check-input" id="trending" name="trending" value="1">
-                                <label class="form-check-label" for="trending">Trending</label>
-                                @error('trending')
-                                <div class="text-danger">{{ $message }}</div>
-                                @enderror
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-success">Simpan</button>
                             </div>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label for="kategori" class="form-label">Kategori</label>
-                            <select class="form-select" id="kategori" name="id_kategori">
-
-                            </select>
-
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label for="lokasi" class="form-label">Lokasi</label>
-                            <input type="text" class="form-control" id="lokasi" name="lokasi">
-                            <div id="map" style="height: 400px;"></div>
-                            @error('lokasi')
-                            <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-success">Simpan</button>
-                        </div>
                     </form>
                 </div>
             </div>
@@ -162,6 +175,13 @@
         marker = L.marker([lat, lng]).addTo(map);
         getLocationName(lat, lng); // Mengambil nama lokasi berdasarkan koordinat
     });
+
+    function onlyOne(checkbox) {
+        const checkboxes = document.querySelectorAll('.form-check-input');
+        checkboxes.forEach((cb) => {
+            if (cb !== checkbox) cb.checked = false;
+        });
+    }
 </script>
 
 @endsection
