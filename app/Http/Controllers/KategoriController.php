@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class KategoriController extends Controller
@@ -41,6 +42,25 @@ class KategoriController extends Controller
         ]);
 
         // Redirect ke halaman kategori dengan pesan sukses
-        return redirect()->route('admin.artikel.kategori.create')->with('success', 'Kategori berhasil ditambahkan!');
+        return redirect()->route('admin.artikel.kategori')->with('success', 'Kategori berhasil ditambahkan!');
+    }
+
+    public function delete($id_kategori)
+    {
+        $kategori = kategori::find($id_kategori);
+
+        $foto = $kategori->foto;
+
+        if ($kategori->foto) {
+            $foto = $kategori->foto;
+
+            if (Storage::disk('public')->exists($foto)) {
+                Storage::disk('public')->delete($foto);
+            }
+        }
+
+        $kategori->delete();
+
+        return redirect()->route('admin.artikel.kategori')->with('success', 'Data Kategori Berhasil Di Hapus');
     }
 }

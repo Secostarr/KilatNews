@@ -13,7 +13,8 @@ class PenggunaController extends Controller
     // Tampilkan daftar pengguna (jika diperlukan)
     public function pengguna()
     {
-        return view('admin.pengguna');     
+        $users = User::all();
+        return view('admin.pengguna', compact('users'));     
     }
 
     // Halaman Tambah Pengguna

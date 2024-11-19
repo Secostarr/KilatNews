@@ -6,6 +6,7 @@ use App\Models\artikel;
 use App\Models\kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 
@@ -64,5 +65,24 @@ class ArtikelController extends Controller
         ]);
 
         return redirect()->route('admin.artikel.berita')->with('success', 'Artikel berhasil ditambahkan.');
+    }
+
+    public function delete($id_artikel)
+    {
+        $artikel = artikel::find($id_artikel);
+
+        $foto = $artikel->foto;
+
+        if ($artikel->foto) {
+            $foto = $artikel->foto;
+
+            if (Storage::disk('public')->exists($foto)) {
+                Storage::disk('public')->delete($foto);
+            }
+        }
+
+        $artikel->delete();
+
+        return redirect()->route('admin.artikel.berita')->with('success', 'Data Artikel Berhasil Di Hapus');
     }
 }

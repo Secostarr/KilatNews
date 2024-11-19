@@ -101,7 +101,7 @@
                                     <a href="#" class="btn btn-outline-warning btn-sm me-1 shadow-sm">
                                         <i class="fas fa-edit"></i> Edit
                                     </a>
-                                    <a href="#" onclick="return confirm('Yakin Ingin Hapus Data Ini?')" class="btn btn-outline-danger btn-sm shadow-sm">
+                                    <a href="{{ Route('admin.artikel.tag.delete', $tag->id_tag) }}" onclick="return confirm('Yakin Ingin Hapus Data Ini?')" class="btn btn-outline-danger btn-sm shadow-sm">
                                         <i class="fas fa-trash"></i> Hapus
                                     </a>
                                 </td>

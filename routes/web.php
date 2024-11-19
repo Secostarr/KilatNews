@@ -43,17 +43,20 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/admin/artikel', [ArtikelController::class, 'artikel'])->name('admin.artikel.berita');
     Route::get('/admin/artikel/tambah', [ArtikelController::class, 'create'])->name('admin.artikel.berita.create');
     Route::post('/admin/artikel/tambah', [ArtikelController::class, 'store'])->name('admin.artikel.berita.store');
+    Route::get('/admin/artikel/hapus/{id_artikel}', [ArtikelController::class, 'delete'])->name('admin.artikel.berita.delete');
 
     Route::get('/admin/kategori', [KategoriController::class, 'kategori'])->name('admin.artikel.kategori');
     Route::get('/admin/kategori/tambah', [KategoriController::class, 'create'])->name('admin.artikel.kategori.create');
-    Route::post('/admin/kategori/store', [KategoriController::class, 'store'])->name('admin.artikel.kategori.store');
+    Route::post('/admin/kategori/tambah', [KategoriController::class, 'store'])->name('admin.artikel.kategori.store');
+    Route::get('/admin/kategori/hapus/{id_kategori}', [KategoriController::class, 'delete'])->name('admin.artikel.kategori.delete');
 
 
     Route::get('/admin/tag', [TagController::class, 'tag'])->name('admin.artikel.tag');
     Route::get('/admin/kelola/tag', [TagController::class, 'kelola'])->name('admin.artikel.kelola.tag');
     Route::get('/admin/tag/tambah', [TagController::class, 'create'])->name('admin.artikel.tag.create');
     Route::post('/admin/tag/tambah', [TagController::class, 'store'])->name('admin.artikel.tag.store');
-    Route::post('/admin/tag/tambah/artikel', [TagController::class, 'storeArtikel'])->name('    admin.artikel.artikel_tag.store');
+    Route::post('/admin/tag/hapus/{$id_tag}', [TagController::class, 'delete'])->name('admin.artikel.tag.delete');
+    Route::post('/admin/tag/tambah/artikel', [TagController::class, 'storeArtikel'])->name('admin.artikel.artikel_tag.store');
 
     // Pengguna
     Route::get('/admin/pengguna', [PenggunaController::class, 'pengguna'])->name('admin.pengguna.user');

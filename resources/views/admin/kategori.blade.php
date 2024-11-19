@@ -50,6 +50,13 @@
 
 <div class="container-fluid pt-2 px-1">
     <div class="row bg-light rounded align-items-center mx-0 p-4">
+
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+
         <div class="d-flex justify-content-between align-items-center w-100">
 
             <div class="d-flex align-items-center gap-2">
@@ -97,7 +104,7 @@
                                     <a href="#" class="btn btn-outline-warning btn-sm me-1 shadow-sm">
                                         <i class="fas fa-edit"></i> Edit
                                     </a>
-                                    <a href="#" onclick="return confirm('Yakin Ingin Hapus Data Ini?')" class="btn btn-outline-danger btn-sm shadow-sm">
+                                    <a href="{{ Route('admin.artikel.kategori.delete', $kategori->id_kategori) }}" onclick="return confirm('Yakin Ingin Hapus Data Ini?')" class="btn btn-outline-danger btn-sm shadow-sm">
                                         <i class="fas fa-trash"></i> Hapus
                                     </a>
                                 </td>

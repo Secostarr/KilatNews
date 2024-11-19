@@ -7,6 +7,7 @@ use App\Models\ArtikelTag;
 use App\Models\tag;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TagController extends Controller
 {
@@ -28,11 +29,19 @@ class TagController extends Controller
         return view('admin.tambah.tambah_tag');    
     }   
 
+    public function delete($id_tag)
+    {
+        $tag = tag::find($id_tag);
+        $tag->delete();
+
+        return redirect()->route('admin.artikel.kelola.tag')->with('success', 'Data Artikel Berhasil Di Hapus');
+    }
+
     public function store(Request $request)
     {
         $request->validate([
             'nama_tag' => 'required|unique:tag,nama_tag',
-        ]);
+        ]); 
 
         $slug = Str::slug($request->nama_tag);
 

@@ -90,7 +90,7 @@
                 <div class="d-flex flex-wrap gap-2">
                     <a href="" class="bi bi-clipboard btn btn-info btn-sm"> Detail</a>
                     <a href="" class="bi bi-pencil btn btn-warning btn-sm"> Edit</a>
-                    <a href="" class="bi bi-trash btn btn-danger btn-sm"> Hapus</a>
+                    <a href="{{ Route('admin.artikel.berita.delete', $artikel->id_artikel) }}" onclick="return confirm('Yakin Ingin Hapus Data Ini?')" class="bi bi-trash btn btn-danger btn-sm"> Hapus</a>
                 </div>
             </div>
         </div>
