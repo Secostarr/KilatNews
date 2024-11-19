@@ -16,34 +16,34 @@
             background-attachment: fixed;
         }
 
-        .profile {
+        .profile-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
             margin-top: 100px;
-        }
-
-        .card {
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.85);
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            background-color: rgba(255, 255, 255, 0.85);
-            padding: 2rem;
-            max-width: 800px;
-            margin: auto;
+        }
+
+        .profile-picture-container {
+            text-align: center;
+            flex: 1;
         }
 
         .profile-picture {
             width: 150px;
             height: 150px;
-            border-radius: 50%;
+            border-radius: 10px;
             object-fit: cover;
             border: 3px solid #007bff;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
+            margin-bottom: 10px;
         }
 
         .social-icons a {
@@ -55,35 +55,62 @@
         .social-icons a:hover {
             color: #0056b3;
         }
+
+        .profile-info {
+            flex: 2;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 
 <body>
 
-    <div class="profile">
-        <div class="card">
-            <div class="text-center mb-4">
-                <!-- Foto Profil -->
-                @if (Auth::user()->foto)
-                <img src="{{ asset('storage/' . Auth::user()->foto) }}" alt="Foto Profil" class="profile-picture mb-3">
-                @else
-                <img src="https://via.placeholder.com/150" alt="Default Foto Profil" class="profile-picture mb-3">
-                @endif
+    <div class="profile-container">
+        <!-- Foto Profil dan Media Sosial -->
+        <div class="profile-picture-container">
+            @if (Auth::user()->foto)
+            <img src="{{ asset('storage/' . Auth::user()->foto) }}" alt="Foto Profil" class="profile-picture">
+            @else
+            <img src="https://via.placeholder.com/150" alt="Default Foto Profil" class="profile-picture">
+            @endif
+            <div class="social-icons mt-3">
+                <a href="https://www.facebook.com/yourprofile" target="_blank" title="Facebook" data-bs-toggle="tooltip"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/yourprofile" target="_blank" title="Instagram" data-bs-toggle="tooltip"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:{{ Auth::user()->email }}" title="Gmail" data-bs-toggle="tooltip"><i class="fab fa-google"></i></a>
             </div>
+        </div>
 
-            <!-- Informasi Profil -->
-            <form action="" method="post" enctype="multipart/form-data">
+        <!-- Informasi Profil -->
+        <div class="profile-info">
+            <form action="{{ route('pengguna.profile.update') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
                 <div class="mb-3 row">
                     <label for="nama" class="col-sm-3 col-form-label"><b>Nama:</b></label>
                     <div class="col-sm-9">
-                        <input type="text" id="nama" class="form-control" value="{{ Auth::user()->nama }}" readonly>
+                        <input type="text" id="nama" name="nama" class="form-control" value="{{ Auth::user()->nama }}">
                     </div>
                 </div>
 
                 <div class="mb-3 row">
                     <label for="username" class="col-sm-3 col-form-label"><b>Username:</b></label>
                     <div class="col-sm-9">
-                        <input type="text" id="username" class="form-control" value="{{ Auth::user()->username }}" readonly>
+                        <input type="text" id="username" name="username" class="form-control" value="{{ Auth::user()->username }}">
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label for="email" class="col-sm-3 col-form-label"><b>Email:</b></label>
+                    <div class="col-sm-9">
+                        <input type="email" id="email" name="email" class="form-control" value="{{ Auth::user()->email }}">
                     </div>
                 </div>
 
@@ -97,24 +124,17 @@
                 <div class="mb-3 row">
                     <label for="bio" class="col-sm-3 col-form-label"><b>Bio:</b></label>
                     <div class="col-sm-9">
-                        <textarea id="bio" class="form-control" rows="4" readonly>{{ Auth::user()->bio ?? 'bio anda masih kosong' }}</textarea>
+                        <textarea id="bio" name="bio" class="form-control" rows="4">{{ Auth::user()->bio }}</textarea>
                     </div>
                 </div>
 
                 <!-- Tombol Aksi -->
                 <div class="text-center mt-4">
-                    <a href="{{ route('pengguna.profile.edit') }}" class="btn btn-primary me-2">Edit Profil</a>
-                    <a href="{{ route('pengguna.logout') }}" class="btn btn-danger me-2">Logout</a>
-                    <a href="{{ route('home') }}" class="btn btn-warning">Kembali</a>
+                    <button type="submit" class="btn btn-success me-2">Simpan</button>
+                    <a href="{{ route('home') }}" class="btn btn-warning me-2">Kembali</a>
+                    <a href="{{ route('pengguna.profile.edit') }}" class="btn btn-primary">Edit Profil</a>
                 </div>
             </form>
-
-            <!-- Ikon Media Sosial -->
-            <div class="text-center mt-4 social-icons">
-                <a href="https://www.facebook.com/yourprofile" target="_blank" title="Facebook" data-bs-toggle="tooltip"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.instagram.com/yourprofile" target="_blank" title="Instagram" data-bs-toggle="tooltip"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.instagram.com/yourprofile" target="_blank" title="{{ Auth::user()->email }}" data-bs-toggle="tooltip"><i class="fab fa-google"></i></a>
-            </div>
         </div>
     </div>
 
@@ -128,4 +148,5 @@
         });
     </script>
 </body>
+
 </html>

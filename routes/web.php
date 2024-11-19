@@ -55,7 +55,7 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/admin/kelola/tag', [TagController::class, 'kelola'])->name('admin.artikel.kelola.tag');
     Route::get('/admin/tag/tambah', [TagController::class, 'create'])->name('admin.artikel.tag.create');
     Route::post('/admin/tag/tambah', [TagController::class, 'store'])->name('admin.artikel.tag.store');
-    Route::post('/admin/tag/hapus/{$id_tag}', [TagController::class, 'delete'])->name('admin.artikel.tag.delete');
+    Route::post('/admin/tag/hapus/{id_tag}', [TagController::class, 'delete'])->name('admin.artikel.tag.delete');
     Route::post('/admin/tag/tambah/artikel', [TagController::class, 'storeArtikel'])->name('admin.artikel.artikel_tag.store');
 
     // Pengguna
