@@ -156,6 +156,7 @@
 
                         <div class="text-center">
                             <button type="submit" class="btn btn-success">Simpan</button>
+                            <a href="{{ Route('admin.artikel.berita') }}" class="btn btn-danger">Kembali</a>
                         </div>
                     </form>
                 </div>

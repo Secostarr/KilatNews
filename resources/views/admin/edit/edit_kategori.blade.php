@@ -46,6 +46,7 @@
 
                         <div class="mt-3">
                             <button type="submit" class="btn btn-success">Simpan</button>
+                            <a href="{{ route('admin.artikel.kategori') }}" class="btn btn-danger">Kembali</a>
                         </div>
                     </form>
                 </div>
