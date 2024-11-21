@@ -12,6 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('artikel', function (Blueprint $table) {
+            $table->boolean('is_highlight')->default(false)->after('kategori_id');
+            $table->boolean('is_trending')->default(false)->after('is_highlight');
             $table->integer('id_artikel')->primary()->autoIncrement();
             $table->string('judul', 150);
             $table->text('konten');
@@ -59,4 +61,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('artikel');
     }
+
 };

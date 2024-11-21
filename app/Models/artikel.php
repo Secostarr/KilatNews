@@ -39,6 +39,18 @@ class artikel extends Model
 
     public function kategori()
     {
-        return $this->belongsTo(Kategori::class, 'id_kategori');
+        return $this->belongsTo(kategori::class, 'id_kategori', 'id_kategori');
     }
+
+    // App\Models\Artikel.php
+public function scopeTrending($query)
+{
+    return $query->where('kategori', 'Trending');
+}
+
+public function scopeHighlight($query)
+{
+    return $query->where('kategori', 'Highlight');
+}
+
 }
