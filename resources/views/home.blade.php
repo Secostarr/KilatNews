@@ -81,40 +81,52 @@
     <!--   Weekly-News start -->
     <div class="weekly-news-area pt-50">
         <div class="container">
-            <div class="weekly-wrapper">
+           <div class="weekly-wrapper">
                 <!-- section Tittle -->
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-tittle mb-30">
-                            <h3>Weekly Top News</h3>
+                            <h3>rr Top News</h3>
                         </div>
                     </div>
                 </div>
-                @if($trendingLatestAll->isEmpty())
-                <p class="text-center">Tidak ada artikel trending untuk ditampilkan.</p>
-                @else
                 <div class="row">
                     <div class="col-12">
-                        <div class="weekly-news-active dot-style d-flex dot-style">
-                            @foreach($trendingLatestAll as $artikel)
-                            <div class="weekly-single">
-                                <div class="weekly-img">
-                                    <img src="{{ asset('storage/' . $artikel->media_utama) }}" alt="">
-                                </div>
-                                <div class="weekly-caption">
-                                    <span class="color1">{{ $artikel->kategori->nama_kategori }}</span>
-                                    <h4><a href=""></a></h4>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-                @endif
+                    <div class="weekly-news-active dot-style d-flex dot-style">
+    @php
+        $minimumPosts = 4;
+        $currentPosts = count($trendingLatestAll);
 
+        // Jika jumlah postingan kurang dari 4, ulangi dari awal
+        if ($currentPosts < $minimumPosts) {
+            $index = 0; // Indeks untuk mengulang dari awal
+            while (count($trendingLatestAll) < $minimumPosts) {
+                $trendingLatestAll[] = $trendingLatestAll[$index];
+                $index = ($index + 1) % $currentPosts; // Loop kembali ke awal jika indeks mencapai akhir
+            }
+        }
+    @endphp
+
+    @foreach($trendingLatestAll as $t)
+        <!-- awal -->
+        <div class="weekly-single">
+            <div class="weekly-img">
+                <img src="assets/img/news/weeklyNews2.jpg" alt="">
+            </div>
+            <div class="weekly-caption">
+                <span class="color1">Strike</span>
+                <h4><a href="#">{{$t->judul}}</a></h4>
             </div>
         </div>
-    </div>
+        <!-- akhir -->
+    @endforeach
+</div>
+
+                    </div>
+                </div>
+           </div>
+        </div>
+    </div>           
     <!-- End Weekly-News -->
     <!--   Weekly2-News start -->
     <div class="weekly2-news-area weekly2-pading gray-bg">
@@ -131,6 +143,23 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="weekly2-news-active dot-style d-flex dot-style">
+
+                        @php
+        $minimumPosts = 4;
+        $currentPosts = count($highlightLatestAll);
+
+        // Jika jumlah postingan kurang dari 4, ulangi dari awal
+        if ($currentPosts < $minimumPosts) {
+            $index = 0; // Indeks untuk mengulang dari awal
+            while (count($highlightLatestAll) < $minimumPosts) {
+                $highlightLatestAll[] = $highlightLatestAll[$index];
+                $index = ($index + 1) % $currentPosts; // Loop kembali ke awal jika indeks mencapai akhir
+            }
+        }
+    @endphp
+
+    @foreach($highlightLatestAll as $t)
+
                             <div class="weekly2-single">
                                 <div class="weekly2-img">
                                     <img src="assets/img/news/weekly2News1.jpg" alt="">
@@ -138,49 +167,10 @@
                                 <div class="weekly2-caption">
                                     <span class="color1">Corporate</span>
                                     <p>25 Jan 2020</p>
-                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
+                                    <h4><a href="#">{{$t->judul}}</a></h4>
                                 </div>
                             </div>
-                            <div class="weekly2-single">
-                                <div class="weekly2-img">
-                                    <img src="assets/img/news/weekly2News2.jpg" alt="">
-                                </div>
-                                <div class="weekly2-caption">
-                                    <span class="color1">Event night</span>
-                                    <p>25 Jan 2020</p>
-                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                </div>
-                            </div>
-                            <div class="weekly2-single">
-                                <div class="weekly2-img">
-                                    <img src="assets/img/news/weekly2News3.jpg" alt="">
-                                </div>
-                                <div class="weekly2-caption">
-                                    <span class="color1">Corporate</span>
-                                    <p>25 Jan 2020</p>
-                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                </div>
-                            </div>
-                            <div class="weekly2-single">
-                                <div class="weekly2-img">
-                                    <img src="assets/img/news/weekly2News4.jpg" alt="">
-                                </div>
-                                <div class="weekly2-caption">
-                                    <span class="color1">Event time</span>
-                                    <p>25 Jan 2020</p>
-                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                </div>
-                            </div>
-                            <div class="weekly2-single">
-                                <div class="weekly2-img">
-                                    <img src="assets/img/news/weekly2News4.jpg" alt="">
-                                </div>
-                                <div class="weekly2-caption">
-                                    <span class="color1">Corporate</span>
-                                    <p>25 Jan 2020</p>
-                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

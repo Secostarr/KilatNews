@@ -43,6 +43,7 @@ class HomeController extends Controller
             ->take(4)
             ->get();
 
+        
         return view('home', compact('trendingLatestAll', 'highlightLatestAll', 'trendingLatest', 'highlightLatest', 'artikelsTrending', 'artikelsHighlight'));
     }
 
