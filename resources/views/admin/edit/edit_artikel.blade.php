@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', 'Tambah Artikel')
+@section('title', 'Edit Artikel')
 
 @section('content')
 
@@ -7,20 +7,18 @@
     <div class="row justify-content-center">
         <div class="col-xl-12">
             <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white text-center">
-                    <h4>Tambah Artikel</h4>
-                </div>
                 <div class="card-body">
                     @if(session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
                     @endif
-                    <form action="{{ Route('admin.artikel.berita.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ Route('admin.artikel.berita.update', ['id_artikel' => $artikel->id_artikel]) }}" method="post" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="form-group mb-3">
                             <label for="judul" class="form-label">Judul Artikel</label>
-                            <input type="text" class="form-control" id="judul" name="judul">
+                            <input type="text" class="form-control" value="{{ old('judul', $artikel->judul) }}" id="judul" name="judul">
                             @error('judul')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -28,7 +26,7 @@
 
                         <div class="form-group mb-3">
                             <label for="konten" class="form-label">Konten</label>
-                            <textarea class="form-control" id="summernote" name="konten">{{ old('konten') }}</textarea>
+                            <textarea class="form-control" id="summernote" name="konten">{{ old('konten', $artikel->konten) }}</textarea>
                             @error('konten')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -53,11 +51,15 @@
 
                         <div class="form-group mb-3">
                             <label for="tanggal_publikasi" class="form-label">Tanggal Publikasi</label>
-                            <input type="date" class="form-control" id="tanggal_publikasi" name="tanggal_publikasi">
+                            <input type="date" class="form-control"
+                                id="tanggal_publikasi"
+                                value="{{ old('tanggal_publikasi', $artikel->tanggal_publikasi ? \Illuminate\Support\Carbon::parse($artikel->tanggal_publikasi)->format('Y-m-d') : '') }}"
+                                name="tanggal_publikasi">
                             @error('tanggal_publikasi')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
+
 
                         <div class="form-group mb-3">
                             <label for="media_utama" class="form-label">Media Utama</label>
@@ -65,6 +67,9 @@
                             @error('media_utama')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
+                        </div>
+                        <div class="mb-2">
+                            <img src="{{ asset('storage/' .$artikel->media_utama) }}" alt="" height="180">
                         </div>
 
                         <div class="d-flex flex-column gap-2">
@@ -112,7 +117,7 @@
                             @error('trending')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
-                        </div>
+                        </div>  
 
                         <div class="form-group mb-3">
                             <label for="kategori" class="form-label">Kategori</label>
@@ -217,7 +222,7 @@
     });
 
     function onlyOne(checkbox) {
-        const checkboxes = document.querySelectorAll(`input[name="${checkbox.name}"]`);
+        const checkboxes = document.querySelectorAll(input[name="${checkbox.name}"]);
         checkboxes.forEach((cb) => {
             if (cb !== checkbox) cb.checked = false;
         });

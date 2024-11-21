@@ -21,6 +21,12 @@ class KategoriController extends Controller
         return view('admin.tambah.tambah_kategori');
     }
 
+    public function edit($id_kategori)
+    {
+        $kategori = kategori::find($id_kategori);
+        return view('admin.edit.edit_kategori', compact('kategori'));
+    }
+
     public function store(Request $request)
     {
         // Validasi data
@@ -31,7 +37,7 @@ class KategoriController extends Controller
         ]);
 
         // Buat slug dari nama_kategori
-        $slug = Str::slug($validated['nama_kategori'], '-');
+        $slug = Str::slug($validated['nama_kategori'], '-');    
 
         // Simpan data ke database
         kategori::create([
@@ -44,6 +50,31 @@ class KategoriController extends Controller
         // Redirect ke halaman kategori dengan pesan sukses
         return redirect()->route('admin.artikel.kategori')->with('success', 'Kategori berhasil ditambahkan!');
     }
+
+    public function update(Request $request, $id_kategori)
+    {
+        $kategori = kategori::find($id_kategori);
+        // Validasi data
+        $validated = $request->validate([
+            'nama_kategori' => 'nullable|string|max:255',
+            'konten' => 'nullable|string',
+            'urutan' => 'nullable|integer',
+        ]);
+
+        // Buat slug dari nama_kategori
+        $slug = Str::slug($validated['nama_kategori'], '-');    
+
+        // Simpan data ke database
+        $kategori->update([
+            'nama_kategori' => $validated['nama_kategori'],
+            'slug' => $slug, // Tambahkan slug ke database
+            'deskripsi' => $validated['konten'],
+            'urutan' => $validated['urutan'] ?? null,
+        ]);
+
+        // Redirect ke halaman kategori dengan pesan sukses
+        return redirect()->route('admin.artikel.kategori.edit', $id_kategori)->with('success', 'Kategori berhasil di edit!');
+    }   
 
     public function delete($id_kategori)
     {

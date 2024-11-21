@@ -18,4 +18,9 @@ class tag extends Model
     {
         return $this->hasMany(ArtikelTag::class, 'id_tag', 'id_tag');
     }
+
+    public function artikelTag()
+    {
+        return $this->hasMany(tag::class, 'id_artikel');
+    }
 }

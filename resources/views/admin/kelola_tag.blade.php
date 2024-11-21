@@ -59,9 +59,6 @@
 
 
             <div class="d-flex align-items-center gap-2">
-                <a href="{{ route('admin.artikel.tag') }}" class="text-primary fs-3">
-                    <i class="bi bi-arrow-left-circle-fill"></i>
-                </a>
                 <h3 class="mb-0 text-dark">Management Tags</h3>
             </div>
 
@@ -98,7 +95,7 @@
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $tag->nama_tag }}</td>
                                 <td class="d-flex">
-                                    <a href="#" class="btn btn-outline-warning btn-sm me-1 shadow-sm">
+                                    <a href="{{ route('admin.artikel.tag.edit', $tag->id_tag) }}" class="btn btn-outline-warning btn-sm me-1 shadow-sm">
                                         <i class="fas fa-edit"></i>Edit</a>
                                         <form action="{{ route('admin.artikel.tag.delete', $tag->id_tag) }}" method="POST" style="display:inline;">
                                             @csrf
@@ -107,7 +104,6 @@
                                             </button>
                                         </form>
                                 </td>
-                                
                             </tr>
                             @endforeach
                         </tbody>

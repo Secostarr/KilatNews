@@ -84,7 +84,6 @@
             <div class="social-icons mt-3">
                 <a href="https://www.facebook.com/yourprofile" target="_blank" title="Facebook" data-bs-toggle="tooltip"><i class="fab fa-facebook"></i></a>
                 <a href="https://www.instagram.com/yourprofile" target="_blank" title="Instagram" data-bs-toggle="tooltip"><i class="fab fa-instagram"></i></a>
-                <a href="mailto:{{ Auth::user()->email }}" title="Gmail" data-bs-toggle="tooltip"><i class="fab fa-google"></i></a>
             </div>
         </div>
 
@@ -96,21 +95,21 @@
                 <div class="mb-3 row">
                     <label for="nama" class="col-sm-3 col-form-label"><b>Nama:</b></label>
                     <div class="col-sm-9">
-                        <input type="text" id="nama" name="nama" class="form-control" value="{{ Auth::user()->nama }}">
+                        <input type="text" id="nama" name="nama" class="form-control" value="{{ Auth::user()->nama }}" readonly>
                     </div>
                 </div>
 
                 <div class="mb-3 row">
                     <label for="username" class="col-sm-3 col-form-label"><b>Username:</b></label>
                     <div class="col-sm-9">
-                        <input type="text" id="username" name="username" class="form-control" value="{{ Auth::user()->username }}">
+                        <input type="text" id="username" name="username" class="form-control" value="{{ Auth::user()->username }}" readonly>
                     </div>
                 </div>
 
                 <div class="mb-3 row">
                     <label for="email" class="col-sm-3 col-form-label"><b>Email:</b></label>
                     <div class="col-sm-9">
-                        <input type="email" id="email" name="email" class="form-control" value="{{ Auth::user()->email }}">
+                        <input type="email" id="email" name="email" class="form-control" value="{{ Auth::user()->email }}" readonly>
                     </div>
                 </div>
 
@@ -124,15 +123,18 @@
                 <div class="mb-3 row">
                     <label for="bio" class="col-sm-3 col-form-label"><b>Bio:</b></label>
                     <div class="col-sm-9">
-                        <textarea id="bio" name="bio" class="form-control" rows="4">{{ Auth::user()->bio }}</textarea>
+                        <textarea id="bio" name="bio" class="form-control" rows="4" readonly>{{ Auth::user()->bio }}</textarea>
                     </div>
                 </div>
 
                 <!-- Tombol Aksi -->
-                <div class="text-center mt-4">
-                    <button type="submit" class="btn btn-success me-2">Simpan</button>
-                    <a href="{{ route('home') }}" class="btn btn-warning me-2">Kembali</a>
-                    <a href="{{ route('pengguna.profile.edit') }}" class="btn btn-primary">Edit Profil</a>
+                <div class="d-flex justify-content-between mt-4">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success me-2">Simpan</button>
+                        <a href="{{ route('home') }}" class="btn btn-warning me-2">Kembali</a>
+                        <a href="{{ route('pengguna.profile.edit') }}" class="btn btn-primary">Edit Profil</a>
+                    </div>
+                    <a href="/user/logout" class="btn btn-danger align-self-center">Logout</a>
                 </div>
             </form>
         </div>
