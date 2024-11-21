@@ -14,11 +14,12 @@ class kategori extends Model
         'deskripsi',
         'slug',
         'urutan',
+        'judul', 'konten', 'media_utama', 'kategori_id', 'is_trending', 'is_highlight',
     ];
 
     public function artikels()
     {
-        return $this->hasMany(Artikel::class, 'id_kategori');
+        return $this->hasMany(artikel::class, 'id_kategori', 'id_kategori');
     }
 }
 
