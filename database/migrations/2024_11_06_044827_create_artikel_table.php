@@ -33,6 +33,13 @@ return new class extends Migration
                   ->on('kategori_berita')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
+
+            $table->integer('id_tag');
+            $table->foreign('id_tag')
+                ->references('id_tag')
+                ->on('tag')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
                   
             $table->string('media_utama', 255);
             $table->enum('status_publikasi', ['published', 'draft', 'archived']);

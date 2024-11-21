@@ -15,19 +15,19 @@ class TagController extends Controller
     {
         $tags = tag::all();
         $artikels = artikel::all();
-        return view('admin.artikel_tag', compact('artikels', 'tags'));
-    }
-
-    public function kelola()
-    {
-        $tags = tag::all();
-        return view('admin.kelola_tag', compact('tags'));
+        return view('admin.kelola_tag', compact('artikels', 'tags'));
     }
 
     public function create()
     {
-        return view('admin.tambah.tambah_tag');    
-    }   
+        return view('admin.tambah.tambah_tag');
+    }
+
+    public function edit($id_tag)
+    {
+        $tag = tag::find($id_tag);
+        return view('admin.edit.edit_tag', compact('tag'));
+    }
 
     public function delete($id_tag)
     {
@@ -39,32 +39,51 @@ class TagController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'nama_tag' => 'required|unique:tag,nama_tag',
-        ]); 
+        ]);
 
-        $slug = Str::slug($request->nama_tag);
+        $slug = Str::slug($validated['nama_tag'], '-');
+
+        // Cek apakah slug sudah ada di database
+        $originalSlug = $slug;
+        $counter = 1;
+        while (Artikel::where('slug', $slug)->exists()) {
+            $slug = "$originalSlug-$counter";
+            $counter++;
+        }
 
         tag::create([
             'nama_tag' => $request->nama_tag,
             'slug' => $slug,
         ]);
 
-        return redirect()->route('admin.artikel.kelola.tag')->with('success', 'Tag Berhasil di tambahkan');
+        return redirect()->route('admin.artikel.tag')->with('success', 'Tag Berhasil di tambahkan');
     }
 
-    public function storeArtikel(Request $request)
+    public function update(Request $request, $id_tag)
     {
-        $request->validate([
-            'id_artikel' => 'required',
-            'id_tag' => 'required',
+        $tag = tag::find($id_tag);
+
+        $validated = $request->validate([
+            'nama_tag' => 'required|unique:tag,nama_tag',
         ]);
 
-        ArtikelTag::create([
-            'id_artikel' => $request->id_artikel,
-            'id_tag' => $request->id_tag,
+        $slug = Str::slug($validated['nama_tag'], '-');
+
+        // Cek apakah slug sudah ada di database
+        $originalSlug = $slug;
+        $counter = 1;
+        while (Artikel::where('slug', $slug)->exists()) {
+            $slug = "$originalSlug-$counter";
+            $counter++;
+        }
+
+        $tag->update([
+            'nama_tag' => $request->nama_tag,
+            'slug' => $slug,
         ]);
 
-        return redirect()->route('admin.artikel.tag')->with('success', 'tag Berhasil di sesuaikan.');
+        return redirect()->route('admin.artikel.tag.edit', $id_tag)->with('success', 'Tag Berhasil di edit');
     }
 }

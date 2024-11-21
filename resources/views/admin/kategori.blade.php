@@ -101,7 +101,7 @@
                                 <td>{{ $kategori->deskripsi }}</td>
                                 <td>{{ $kategori->urutan }}</td>
                                 <td class="d-flex">
-                                    <a href="#" class="btn btn-outline-warning btn-sm me-1 shadow-sm">
+                                    <a href="{{ Route('admin.artikel.kategori.edit', $kategori->id_kategori) }}" class="btn btn-outline-warning btn-sm me-1 shadow-sm">
                                         <i class="fas fa-edit"></i> Edit
                                     </a>
                                     <a href="{{ Route('admin.artikel.kategori.delete', $kategori->id_kategori) }}" onclick="return confirm('Yakin Ingin Hapus Data Ini?')" class="btn btn-outline-danger btn-sm shadow-sm">

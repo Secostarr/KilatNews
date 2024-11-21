@@ -16,6 +16,7 @@ class artikel extends Model
         'tanggal_publikasi',
         'id_user',
         'id_kategori',
+        'id_tag',
         'media_utama',
         'status_publikasi',
         'highlight',
@@ -25,6 +26,11 @@ class artikel extends Model
     ];
 
     public function ArtikelToTag()
+    {
+        return $this->hasOne(tag::class, 'id_tag', 'id_tag');
+    }
+
+    public function ArtikelToArtikelTag()
     {
         return $this->hasOne(ArtikelTag::class, 'id_artikel', 'id_artikel');
     }
