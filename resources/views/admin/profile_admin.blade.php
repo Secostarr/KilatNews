@@ -4,12 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Profil Pengguna</title>
+    <title>Profil Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
-            background-image: url('{{ asset('images/bg_berita.jpg') }}');
+            background-image: url('../images/bg_berita.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -82,56 +82,48 @@
             <img src="https://via.placeholder.com/150" alt="Default Foto Profil" class="profile-picture">
             @endif
             <div class="social-icons mt-3">
-                <input type="text" name="facebook" class="form-control" placeholder="Facebook">
-                <br> 
-                <input type="text" name="instagram" class="form-control" placeholder="Instagram">
+                <a href="https://www.facebook.com/yourprofile" target="_blank" title="Facebook" data-bs-toggle="tooltip"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/yourprofile" target="_blank" title="Instagram" data-bs-toggle="tooltip"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
 
         <!-- Informasi Profil -->
         <div class="profile-info">
-            <form action="{{ route('pengguna.profile.update') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mb-3 row">
                     <label for="nama" class="col-sm-3 col-form-label"><b>Nama:</b></label>
                     <div class="col-sm-9">
-                        <input type="text" id="nama" name="nama" class="form-control" value="{{ Auth::user()->nama }}" >
+                        <input type="text" id="nama" name="nama" class="form-control" value="{{ Auth::user()->nama }}" readonly>
                     </div>
                 </div>
 
                 <div class="mb-3 row">
                     <label for="username" class="col-sm-3 col-form-label"><b>Username:</b></label>
                     <div class="col-sm-9">
-                        <input type="text" id="username" name="username" class="form-control" value="{{ Auth::user()->username }}" >
+                        <input type="text" id="username" name="username" class="form-control" value="{{ Auth::user()->username }}" readonly>
                     </div>
                 </div>
 
                 <div class="mb-3 row">
                     <label for="email" class="col-sm-3 col-form-label"><b>Email:</b></label>
                     <div class="col-sm-9">
-                        <input type="email" id="email" name="email" class="form-control" value="{{ Auth::user()->email }}" >
-                    </div>
-                </div>
-
-                <div class="mb-3 row">
-                    <label for="password" class="col-sm-3 col-form-label"><b>Password:</b></label>
-                    <div class="col-sm-9">
-                        <input type="password" id="password" name="password" class="form-control" value="" >
+                        <input type="email" id="email" name="email" class="form-control" value="{{ Auth::user()->email }}" readonly>
                     </div>
                 </div>
 
                 <div class="mb-3 row">
                     <label for="role" class="col-sm-3 col-form-label"><b>Role:</b></label>
                     <div class="col-sm-9">
-                        <input type="text" id="role" class="form-control" value="{{ Auth::user()->role }}" >
+                        <input type="text" id="role" class="form-control" value="{{ Auth::user()->role }}" readonly>
                     </div>
                 </div>
 
                 <div class="mb-3 row">
                     <label for="bio" class="col-sm-3 col-form-label"><b>Bio:</b></label>
                     <div class="col-sm-9">
-                        <textarea id="bio" name="bio" class="form-control" rows="4" >{{ Auth::user()->bio }}</textarea>
+                        <textarea id="bio" name="bio" class="form-control" rows="4" readonly>{{ Auth::user()->bio }}</textarea>
                     </div>
                 </div>
 
@@ -139,7 +131,8 @@
                 <div class="d-flex justify-content-between mt-4">
                     <div class="text-center">
                         <button type="submit" class="btn btn-success me-2">Simpan</button>
-                        <a href="{{ route('user.profile') }}" class="btn btn-warning me-2">Kembali</a>
+                        <a href="{{ route('admin.dashboard') }}" class="btn btn-warning me-2">Kembali</a>
+                        <a href="{{ route('admin.profile.edit') }}" class="btn btn-primary">Edit Profil</a>
                     </div>
                 </div>
             </form>
