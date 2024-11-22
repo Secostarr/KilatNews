@@ -3,7 +3,6 @@
 @section('content')
 
 <style>
-    
     /* Styling the search container */
     .search-container {
         display: flex;
@@ -60,8 +59,6 @@
     .shadow-sm {
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     }
-
-    
 </style>
 
 <!-- Blank Start -->
@@ -105,7 +102,7 @@
                 </div>
             </div>
 
-            
+
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                     <div class="table-responsive">
@@ -113,33 +110,20 @@
                             <thead>
                                 <tr>
                                     <th scope="col">No</th>
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Last Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Country</th>
-                                    <th scope="col">ZIP</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col">Nama Kategori</th>
+                                    <th scope="col">Jumlah Artikel</th>
+                                    <th scope="col">Jumlah View</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($categories as $index => $category)
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>jhon@email.com</td>
-                                    <td>USA</td>
-                                    <td>123</td>
-                                    <td>Member</td>
+                                    <th scope="row">{{ $index + 1 }}</th>
+                                    <td>{{ $category->nama_kategori }}</td>
+                                    <td>{{ $category->artikels_count }}</td>
+                                    <td>{{ $category->total_views ?? 'Belum ada view' }}</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>jhon@email.com</td>
-                                    <td>USA</td>
-                                    <td>123</td>
-                                    <td>Member</td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -148,26 +132,22 @@
                     <div class="table-responsive">
                         <table class="table" id="likes">
                             <thead>
-                                <tr>
+                            <tr>
                                     <th scope="col">No</th>
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Last Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Country</th>
-                                    <th scope="col">ZIP</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col">Nama Kategori</th>
+                                    <th scope="col">Jumlah Artikel</th>
+                                    <th scope="col">Jumlah Like</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($categories as $index => $category)
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>jhon@email.com</td>
-                                    <td>USA</td>
-                                    <td>123</td>
-                                    <td>Member</td>
+                                    <th scope="row">{{ $index + 1 }}</th>
+                                    <td>{{ $category->nama_kategori }}</td>
+                                    <td>{{ $category->artikels_count }}</td>
+                                    <td>{{ $category->total_likes ?? 0 }}</td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -176,26 +156,22 @@
                     <div class="table-responsive">
                         <table class="table" id="comment">
                             <thead>
-                                <tr>
+                            <tr>
                                     <th scope="col">No</th>
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Last Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Country</th>
-                                    <th scope="col">ZIP</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col">Nama Kategori</th>
+                                    <th scope="col">Jumlah Artikel</th>
+                                    <th scope="col">Jumlah Komentar</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($categories as $index => $category)
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>jhon@email.com</td>
-                                    <td>USA</td>
-                                    <td>123</td>
-                                    <td>Member</td>
+                                    <th scope="row">{{ $index + 1 }}</th>
+                                    <td>{{ $category->nama_kategori }}</td>
+                                    <td>{{ $category->artikels_count }}</td>
+                                    <td>{{ $category->total_comments ?? 0 }}</td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -205,44 +181,43 @@
     </div>
 
     <script>
-    function activateSearch() {
-    const container = document.querySelector('.search-container');
-    container.classList.toggle('active');
+        function activateSearch() {
+            const container = document.querySelector('.search-container');
+            container.classList.toggle('active');
 
-    // Set focus ke input field ketika search container aktif
-    const input = document.querySelector('.search-input');
-    if (container.classList.contains('active')) {
-        input.focus();
-    } else {
-        input.blur();
-    }
-}
+            // Set focus ke input field ketika search container aktif
+            const input = document.querySelector('.search-input');
+            if (container.classList.contains('active')) {
+                input.focus();
+            } else {
+                input.blur();
+            }
+        }
 
-$(document).ready(function() {
-    // Inisialisasi DataTable untuk masing-masing tabel
-    var viewsTable = $('#views').DataTable({
-        dom: 'lrtip'
-    });
+        $(document).ready(function() {
+            // Inisialisasi DataTable untuk masing-masing tabel
+            var viewsTable = $('#views').DataTable({
+                dom: 'lrtip'
+            });
 
-    var likesTable = $('#likes').DataTable({
-        dom: 'lrtip'
-    });
+            var likesTable = $('#likes').DataTable({
+                dom: 'lrtip'
+            });
 
-    var commentTable = $('#comment').DataTable({
-        dom: 'lrtip'
-    });
+            var commentTable = $('#comment').DataTable({
+                dom: 'lrtip'
+            });
 
-    // Event listener untuk pencarian di input
-    $('#search-input').on('keyup', function() {
-        // Menerapkan pencarian pada masing-masing tabel
-        var searchTerm = this.value;
-        viewsTable.search(searchTerm).draw();
-        likesTable.search(searchTerm).draw();
-        commentTable.search(searchTerm).draw();
-    });
-});
-
-</script>
+            // Event listener untuk pencarian di input
+            $('#search-input').on('keyup', function() {
+                // Menerapkan pencarian pada masing-masing tabel
+                var searchTerm = this.value;
+                viewsTable.search(searchTerm).draw();
+                likesTable.search(searchTerm).draw();
+                commentTable.search(searchTerm).draw();
+            });
+        });
+    </script>
 
 
     @endsection

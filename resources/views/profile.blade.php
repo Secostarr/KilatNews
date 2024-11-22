@@ -134,7 +134,6 @@
                         <a href="{{ route('home') }}" class="btn btn-warning me-2">Kembali</a>
                         <a href="{{ route('pengguna.profile.edit') }}" class="btn btn-primary">Edit Profil</a>
                     </div>
-                    <a href="/user/logout" class="btn btn-danger align-self-center">Logout</a>
                 </div>
             </form>
         </div>

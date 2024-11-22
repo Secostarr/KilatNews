@@ -22,6 +22,8 @@ class artikel extends Model
         'highlight',
         'lokasi',
         'viewer_count',
+        'like_count',
+        'comment_count',
         'trending',
     ];
 

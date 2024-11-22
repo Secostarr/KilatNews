@@ -38,8 +38,6 @@ class AdminController extends Controller
     
         return view('edit_admin', compact('admin')); // Pastikan 'edit_admin' adalah nama file view yang benar
     }
-    
-    
 }
 
 

@@ -72,7 +72,6 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-person-fill me-2"></i>Pengguna</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{{ Route('admin.pengguna.user') }}" class="dropdown-item {{ request()->routeIs('admin.pengguna.user*') ? 'active' : '' }}"><i class="bi bi-person-fill me-2"></i>User</a>
-                            <a href="{{ Route('admin.pengguna.komentar') }}" class="dropdown-item {{ request()->routeIs('admin.pengguna.komentar*') ? 'active' : '' }}"><i class="bi bi-chat-left-dots-fill me-2"></i>Komentar</a>
                             <a href="{{ Route('admin.pengguna.notifikasi') }}" class="dropdown-item {{ request()->routeIs('admin.pengguna.notifikasi*') ? 'active' : '' }}"><i class="bi bi-bell-fill me-2"></i>Notifikasi</a>
                         </div>
                     </div>
@@ -96,7 +95,7 @@
             </a>
             <div class="navbar-nav align-items-center ms-auto">
                 <div class="nav-item dropdown">
-                    <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                    <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"   >
                         <img class="rounded-circle me-lg-2" src="{{ asset('storage/' . Auth::user()->foto) }}" alt="" style="width: 40px; height: 40px;">
                         <span class="d-none d-lg-inline-flex">{{ Auth::user()->nama_admin }}</span>
                     </a>

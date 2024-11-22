@@ -83,4 +83,24 @@ class PenggunaController extends Controller
 
         return redirect()->route('pengguna.profile.edit')->with('success', 'Profil berhasil diperbarui.');
     }
+
+    public function register(Request $request)
+    {
+        
+        $request->validate([
+            'nama' => 'required|max:70',
+            'username' => 'required|max:50',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8'
+        ]);
+
+        User::create([
+            'nama' => $request->nama,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('user.login')->with('success', 'Registrasi berhasil silahkan masukkan untuk login');
+    }
 }
