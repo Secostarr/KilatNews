@@ -17,13 +17,13 @@ class AdminController extends Controller
     $categories = kategori::withCount([
         'artikels', // Menghitung jumlah artikel per kategori
         'artikels as total_views' => function ($query) {
-            $query->select(DB::raw('SUM(viewer_count)')); // Jumlahkan viewer_count
+            $query->select(DB::raw('SUM(viewer_count)')); 
         },
         'artikels as total_likes' => function ($query) {
-            $query->select(DB::raw('SUM(like_count)')); // Jumlahkan like_count
+            $query->select(DB::raw('SUM(like_count)')); 
         },
         'artikels as total_comments' => function ($query) {
-            $query->select(DB::raw('SUM(comment_count)')); // Jumlahkan comment_count
+            $query->select(DB::raw('SUM(comment_count)')); 
         },
     ])->get();
 
