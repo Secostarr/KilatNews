@@ -4,12 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Profil Pengguna</title>
+    <title> Edit Profil Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
-            background-image: url('{{ asset('images/bg_berita.jpg') }}');
+            background-image: url('../images/bg_berita.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -90,7 +90,7 @@
 
         <!-- Informasi Profil -->
         <div class="profile-info">
-            <form action="{{ route('pengguna.profile.update') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mb-3 row">
@@ -139,7 +139,7 @@
                 <div class="d-flex justify-content-between mt-4">
                     <div class="text-center">
                         <button type="submit" class="btn btn-success me-2">Simpan</button>
-                        <a href="{{ route('user.profile') }}" class="btn btn-warning me-2">Kembali</a>
+                        <a href="{{ route('admin.profile') }}" class="btn btn-warning me-2">Kembali</a>
                     </div>
                 </div>
             </form>

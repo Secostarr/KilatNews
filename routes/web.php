@@ -37,7 +37,10 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['role:admin'])->group(function () {
     // ADMIN
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/admin/profile', [UserLoginController::class, 'profile'])->name('admin.profile');
     Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
+    Route::get('/admin/profile/edit', [AdminController::class, 'edit'])->name('admin.profile.edit');
+    Route::put('/admin/profile/edit', [AdminController::class, 'update'])->name('admin.profile.update');
 
     // Artikel
     Route::get('/admin/artikel', [ArtikelController::class, 'artikel'])->name('admin.artikel.berita');

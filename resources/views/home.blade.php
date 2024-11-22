@@ -12,7 +12,6 @@
                     <div class="col-lg-12">
                         <div class="trending-tittle">
                             <strong>Trending now</strong>
-                            <!-- <p>Rem ipsum dolor sit amet, consectetur adipisicing elit.</p> -->
                             <div class="trending-animated">
                                 <ul id="js-news" class="js-hidden">
                                     <li class="news-item">Headline 1</li>
@@ -57,9 +56,9 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Riht content -->
+                    <!-- Right content -->
                     <div class="col-lg-4">
-                        @foreach($artikelsHighlight as $artikel) <!-- Menambahkan take(3) -->
+                        @foreach($artikelsHighlight as $artikel)
                         <div class="trand-right-single d-flex">
                             <div class="trand-right-img">
                                 <img src="{{ asset('storage/'. $artikel->media_utama) }}" alt="">
@@ -76,63 +75,59 @@
         </div>
     </div>
 
-    <!--Recent Articles End -->
-
-    <!--   Weekly-News start -->
+    <!-- Weekly-News Start -->
     <div class="weekly-news-area pt-50">
         <div class="container">
-           <div class="weekly-wrapper">
-                <!-- section Tittle -->
+            <div class="weekly-wrapper">
+                <!-- Section Title -->
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-tittle mb-30">
-                            <h3>rr Top News</h3>
+                            <h3>Top News</h3>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
-                    <div class="weekly-news-active dot-style d-flex dot-style">
-    @php
-        $minimumPosts = 4;
-        $currentPosts = count($trendingLatestAll);
+                        <div class="weekly-news-active dot-style d-flex dot-style">
+                            @php
+                                $minimumPosts = 4;
+                                $currentPosts = count($trendingLatestAll);
 
-        // Jika jumlah postingan kurang dari 4, ulangi dari awal
-        if ($currentPosts < $minimumPosts) {
-            $index = 0; // Indeks untuk mengulang dari awal
-            while (count($trendingLatestAll) < $minimumPosts) {
-                $trendingLatestAll[] = $trendingLatestAll[$index];
-                $index = ($index + 1) % $currentPosts; // Loop kembali ke awal jika indeks mencapai akhir
-            }
-        }
-    @endphp
+                                // Jika jumlah postingan kurang dari 4, ulangi dari awal
+                                if ($currentPosts < $minimumPosts) {
+                                    $index = 0;
+                                    while (count($trendingLatestAll) < $minimumPosts) {
+                                        $trendingLatestAll[] = $trendingLatestAll[$index];
+                                        $index = ($index + 1) % $currentPosts;
+                                    }
+                                }
+                            @endphp
 
-    @foreach($trendingLatestAll as $t)
-        <!-- awal -->
-        <div class="weekly-single">
-            <div class="weekly-img">
-                <img src="assets/img/news/weeklyNews2.jpg" alt="">
-            </div>
-            <div class="weekly-caption">
-                <span class="color1">Strike</span>
-                <h4><a href="#">{{$t->judul}}</a></h4>
-            </div>
-        </div>
-        <!-- akhir -->
-    @endforeach
-</div>
-
+                            @foreach($trendingLatestAll as $t)
+                            <div class="weekly-single">
+                                <div class="weekly-img">
+                                    <img src="assets/img/news/weeklyNews2.jpg" alt="">
+                                </div>
+                                <div class="weekly-caption">
+                                    <span class="color1">Strike</span>
+                                    <h4><a href="#">{{$t->judul}}</a></h4>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
-           </div>
+            </div>
         </div>
-    </div>           
+    </div>
     <!-- End Weekly-News -->
-    <!--   Weekly2-News start -->
+
+    <!-- Weekly2-News Start -->
     <div class="weekly2-news-area weekly2-pading gray-bg">
         <div class="container">
             <div class="weekly2-wrapper">
-                <!-- section Tittle -->
+                <!-- Section Title -->
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-tittle mb-30">
@@ -143,23 +138,23 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="weekly2-news-active dot-style d-flex dot-style">
+                            @php
+                                $minimumPosts = 5;
+                                $currentPosts = count($highlightLatestAll);
 
-                        @php
-        $minimumPosts = 4;
-        $currentPosts = count($highlightLatestAll);
+                                $allArticles = $highlightLatestAll;
 
-        // Jika jumlah postingan kurang dari 4, ulangi dari awal
-        if ($currentPosts < $minimumPosts) {
-            $index = 0; // Indeks untuk mengulang dari awal
-            while (count($highlightLatestAll) < $minimumPosts) {
-                $highlightLatestAll[] = $highlightLatestAll[$index];
-                $index = ($index + 1) % $currentPosts; // Loop kembali ke awal jika indeks mencapai akhir
-            }
-        }
-    @endphp
+                                // Jika jumlah postingan kurang dari 5, ulangi dari awal
+                                if ($currentPosts < $minimumPosts) {
+                                    $index = 0;
+                                    while (count($allArticles) < $minimumPosts) {
+                                        $allArticles[] = $highlightLatestAll[$index];
+                                        $index = ($index + 1) % $currentPosts;
+                                    }
+                                }
+                            @endphp
 
-    @foreach($highlightLatestAll as $t)
-
+                            @foreach($allArticles as $t)
                             <div class="weekly2-single">
                                 <div class="weekly2-img">
                                     <img src="assets/img/news/weekly2News1.jpg" alt="">
@@ -177,8 +172,9 @@
             </div>
         </div>
     </div>
-    <!-- End Weekly-News -->
-    <!--Start pagination -->
+    <!-- End Weekly2-News -->
+
+    <!-- Start Pagination -->
     <div class="pagination-area pb-45 text-center">
         <div class="container">
             <div class="row">
@@ -198,7 +194,7 @@
             </div>
         </div>
     </div>
-    <!-- End pagination  -->
+    <!-- End Pagination -->
 </main>
 
 @endsection

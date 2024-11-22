@@ -100,7 +100,7 @@
                         <span class="d-none d-lg-inline-flex">{{ Auth::user()->nama_admin }}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                        <a href="" class="dropdown-item">My Profile</a>
+                        <a href="{{ Route('admin.profile') }}" class="dropdown-item">My Profile</a>
                         <a href="{{ Route('admin.logout') }}" class="dropdown-item">Log Out</a>
                     </div>
                 </div>
