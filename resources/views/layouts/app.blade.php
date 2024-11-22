@@ -24,6 +24,9 @@
     <link rel="stylesheet" href="{{ asset('assets/css/slick.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 
 <body>
@@ -60,20 +63,42 @@
                                         <li><a href="#"><i class="fab fa-github"></i></a></li>
                                         @if (Auth::user())
                                         <li>
-                                            <a href="{{ Route('user.profile') }}"><i class="fas fa-user ms-0"></i>
-                                            @if (Auth::user())
-                                                {{ Auth::user()->nama }}
-                                            @endif
-                                            </a>
+                                            <div class="nav-item dropdown">
+                                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+                                                    <i class="fas fa-user ms-0"></i>
+                                                    @if (Auth::user())
+                                                    {{ Auth::user()->nama }}
+                                                    @endif
+                                                </a>
+                                                <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded m-0">
+                                                    <li><a href="{{ Route('user.profile') }}" class="dropdown-item text-dark custom-hover">My Profile</a></li>
+                                                    <li><a href="{{ Route('user.profile') }}" class="dropdown-item text-dark custom-hover">Daftar Contributor</a></li>
+                                                    <li><a href="/user/logout" class="dropdown-item text-dark custom-hover">Log Out</a></li>
+                                                </ul>
+                                            </div>
+                                            <style>
+                                                .custom-hover {
+                                                    transition: color 0.3s ease;
+                                                }
+
+                                                .custom-hover:hover {
+                                                    color: orange;
+                                                }
+
+                                                .dropdown-menu {
+                                                    min-width: 100%;
+                                                    /* Untuk memastikan ukuran dropdown responsif */
+                                                }
+                                            </style>
                                         </li>
                                         @else
                                         <li>
                                             <a href="{{ Route('user.login') }}"><i class="fas fa-user"></i>
-                                            @if (Auth::user())
+                                                @if (Auth::user())
                                                 {{ Auth::user()->nama }}
-                                            @else 
+                                                @else
                                                 Login
-                                            @endif
+                                                @endif
                                             </a>
                                         </li>
                                         @endif

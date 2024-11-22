@@ -95,7 +95,7 @@
             </a>
             <div class="navbar-nav align-items-center ms-auto">
                 <div class="nav-item dropdown">
-                    <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                    <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"   >
                         <img class="rounded-circle me-lg-2" src="{{ asset('storage/' . Auth::user()->foto) }}" alt="" style="width: 40px; height: 40px;">
                         <span class="d-none d-lg-inline-flex">{{ Auth::user()->nama_admin }}</span>
                     </a>
