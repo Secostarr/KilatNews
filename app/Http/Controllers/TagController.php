@@ -86,4 +86,10 @@ class TagController extends Controller
 
         return redirect()->route('admin.artikel.tag.edit', $id_tag)->with('success', 'Tag Berhasil di edit');
     }
+
+    public function kelola()
+    {      
+        $tags = Tag::all();
+        return view('admin.kelola_tag', compact('tags'));
+    }
 }
