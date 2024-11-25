@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\pendaftaran;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,13 +15,13 @@ class PenggunaController extends Controller
     public function pengguna()
     {
         $users = User::all();
-        return view('admin.pengguna', compact('users'));     
+        return view('admin.pengguna', compact('users'));
     }
 
     // Halaman Tambah Pengguna
     public function create()
     {
-        return view('admin.tambah.tambah_pengguna');  
+        return view('admin.tambah.tambah_pengguna');
     }
 
     // Logout
@@ -86,7 +87,7 @@ class PenggunaController extends Controller
 
     public function register(Request $request)
     {
-        
+
         $request->validate([
             'nama' => 'required|max:70',
             'username' => 'required|max:50',
@@ -102,5 +103,43 @@ class PenggunaController extends Controller
         ]);
 
         return redirect()->route('user.login')->with('success', 'Registrasi berhasil silahkan masukkan untuk login');
+    }
+
+    // PENDAFTARAN
+    public function pendaftaran()
+    {
+        $user = Auth::user()->id_user;
+
+        $sudahMendaftar = \App\Models\Pendaftaran::where('id_user', $user)->exists();
+
+        if ($sudahMendaftar) {
+            return redirect()->back()->with('error', 'Anda sudah terdaftar sebagai contributor.');
+        }
+
+        return view('pendaftaran', compact('user'));
+    }
+
+    public function store(Request $request)
+    {
+        $user = Auth::user()->id_user;
+        // Validasi input
+        $validatedData = $request->validate([
+            'keterangan' => 'required|string',
+            'no_telfon' => 'required|string|max:25|unique:pendaftaran,no_telfon',
+        ]);
+
+        // Tetapkan default status jika tidak ada
+        $validatedData['status'] = $request->input('status', 'pending');
+
+        // Simpan ke database
+        pendaftaran::create([
+            'id_user' => $user,
+            'keterangan' => $validatedData['keterangan'],
+            'no_telfon' => $validatedData['no_telfon'],
+            'status' => 'pending',
+        ]);
+
+        // Redirect atau response
+        return redirect()->back()->with('success', 'Pendaftaran berhasil!');
     }
 }

@@ -66,14 +66,29 @@
                                             <div class="nav-item dropdown">
                                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
                                                     <i class="fas fa-user ms-0"></i>
-                                                    @if (Auth::user())
                                                     {{ Auth::user()->nama }}
-                                                    @endif
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded m-0">
                                                     <li><a href="{{ Route('user.profile') }}" class="dropdown-item text-dark custom-hover">My Profile</a></li>
-                                                    <li><a href="{{ Route('user.profile') }}" class="dropdown-item text-dark custom-hover">Daftar Contributor</a></li>
-                                                    <li><a href="/user/logout" class="dropdown-item text-dark custom-hover">Log Out</a></li>
+
+                                                    @if (Auth::user()->role === 'user')
+                                                    @php
+                                                    // Periksa apakah pengguna sudah mendaftar
+                                                    $sudahMendaftar = \App\Models\Pendaftaran::where('id_user', Auth::user()->id_user)->exists();
+                                                    @endphp
+                                                    @if (!$sudahMendaftar)
+                                                    <!-- Jika pengguna belum mendaftar -->
+                                                    <li><a href="{{ Route('pendaftaran') }}" class="dropdown-item text-dark custom-hover">Daftar Contributor</a></li>
+                                                    @elseif ($sudahMendaftar)
+                                                    <!-- Jika pengguna sudah mendaftar -->
+                                                    <li><a href="{{ Route('pendaftaran') }}" class="dropdown-item text-dark custom-hover">Sudah Mendaftar</a></li>
+                                                    @endif
+                                                    @elseif (Auth::user()->role === 'contributor')
+                                                    <!-- Jika role adalah contributor -->
+                                                    <li><a href="" class="dropdown-item text-dark custom-hover">Dashboard Saya</a></li>
+                                                    @endif
+
+                                                    <li><a href="{{ route('pengguna.logout') }}" class="dropdown-item text-dark custom-hover">Log Out</a></li>
                                                 </ul>
                                             </div>
                                             <style>
@@ -87,18 +102,13 @@
 
                                                 .dropdown-menu {
                                                     min-width: 100%;
-                                                    /* Untuk memastikan ukuran dropdown responsif */
                                                 }
                                             </style>
                                         </li>
                                         @else
                                         <li>
                                             <a href="{{ Route('user.login') }}"><i class="fas fa-user"></i>
-                                                @if (Auth::user())
-                                                {{ Auth::user()->nama }}
-                                                @else
                                                 Login
-                                                @endif
                                             </a>
                                         </li>
                                         @endif
