@@ -23,7 +23,7 @@
                             <input type="text" class="form-control" id="judul" name="judul">
                             @error('judul')
                             <div class="text-danger">{{ $message }}</div>
-                            @enderror
+                            @enderror   
                         </div>
 
                         <div class="form-group mb-3">

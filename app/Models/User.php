@@ -17,17 +17,22 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    
+
     protected $table = 'users';
     protected $primaryKey = 'id_user';
     protected $fillable = [
-    'nama',
-    'username',
-    'email',
-    'password',
-    'bio',
-    'foto',
-];
+        'nama',
+        'username',
+        'email',
+        'password',
+        'bio',
+        'foto',
+    ];
+
+    public function pendaftaran()
+    {
+        return $this->hasOne(Pendaftaran::class, 'id_user', 'id_user');
+    }
 
 
     /**
