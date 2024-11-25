@@ -72,8 +72,16 @@
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded m-0">
                                                     <li><a href="{{ Route('user.profile') }}" class="dropdown-item text-dark custom-hover">My Profile</a></li>
-                                                    <li><a href="{{ Route('user.profile') }}" class="dropdown-item text-dark custom-hover">Daftar Contributor</a></li>
-                                                    <li><a href="/user/logout" class="dropdown-item text-dark custom-hover">Log Out</a></li>
+
+                                                    @if (Auth::user() && Auth::user()->role === 'user')
+                                                    <!-- Jika role adalah user -->
+                                                    <li><a href="" class="dropdown-item text-dark custom-hover">Daftar Contributor</a></li>
+                                                    @elseif (Auth::user() && Auth::user()->role === 'contributor')
+                                                    <!-- Jika role adalah contributor -->
+                                                    <li><a href="" class="dropdown-item text-dark custom-hover">Dashboard Saya</a></li>
+                                                    @endif
+
+                                                    <li><a href="{{ route('pengguna.logout') }}" class="dropdown-item text-dark custom-hover">Log Out</a></li>
                                                 </ul>
                                             </div>
                                             <style>
