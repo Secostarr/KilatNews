@@ -48,7 +48,7 @@
                                         <div class="trend-bottom-cap">
                                             <span class="color1">{{ $artikel->kategori->nama_kategori }}</span>
                                             <h4><a href="">{{ $artikel->judul }}</a></h4>
-                                            <p>{{ Str::words($artikel->konten, 10, '...') }}</p>
+                                            <p>{!! Str::words($artikel->konten, 10, '...') !!}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -61,7 +61,7 @@
                         @foreach($artikelsHighlight as $artikel)
                         <div class="trand-right-single d-flex">
                             <div class="trand-right-img">
-                                <img src="{{ asset('storage/'. $artikel->media_utama) }}" alt="">
+                                <img src="{{ asset('storage/'. $artikel->media_utama) }}" alt="" style="width: 150px;">
                             </div>
                             <div class="trand-right-cap">
                                 <span class="color1">{{ $artikel->kategori->nama_kategori }}</span>

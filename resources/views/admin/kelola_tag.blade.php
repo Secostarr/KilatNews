@@ -100,7 +100,7 @@
                                         <form action="{{ route('admin.artikel.tag.delete', $tag->id_tag) }}" method="POST" style="display:inline;">
                                             @csrf
                                             <button type="submit" onclick="return confirm('Yakin Ingin Hapus Data Ini?')" class="btn btn-outline-danger btn-sm shadow-sm">
-                                                <i class="fas fa-trash"></i> Hapus
+                                                <i class="fas fa-trash">Hapus</i> 
                                             </button>
                                         </form>
                                 </td>

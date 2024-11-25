@@ -61,6 +61,7 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/admin/tag', [TagController::class, 'tag'])->name('admin.artikel.tag');
     Route::get('/admin/tag/tambah', [TagController::class, 'create'])->name('admin.artikel.tag.create');
     Route::post('/admin/tag/tambah', [TagController::class, 'store'])->name('admin.artikel.tag.store');
+    Route::get('/admin/tag/kelola', [TagController::class, 'kelola'])->name('admin.artikel.kelola.tag');
     Route::post('/admin/tag/tambah/artikel', [TagController::class, 'storeArtikel'])->name('admin.artikel.artikel_tag.store');
     Route::post('/admin/tag/hapus/{id_tag}', [TagController::class, 'delete'])->name('admin.artikel.tag.delete');
     Route::get('/admin/tag/edit/{id_tag}', [TagController::class, 'edit'])->name('admin.artikel.tag.edit');
