@@ -109,7 +109,7 @@
                             {{ strip_tags($artikel->konten) }}
                         </p>
                         <div class="d-flex flex-wrap gap-2">
-                            <a href="#" class="btn btn-info btn-sm">Detail</a>
+                            <a href="{{ route('admin.artikel.berita.detail', $artikel->id_artikel) }}" class="btn btn-info btn-sm">Detail</a>
                             <a href="{{ route('admin.artikel.berita.edit', $artikel->id_artikel) }}" class="btn btn-warning btn-sm">Edit</a>
                             <a href="{{ route('admin.artikel.berita.delete', $artikel->id_artikel) }}" onclick="return confirm('Yakin ingin menghapus artikel ini?')" class="btn btn-danger btn-sm">Hapus</a>
                         </div>
@@ -132,7 +132,7 @@
                             {{ strip_tags($artikel->konten) }}
                         </p>
                         <div class="d-flex flex-wrap gap-2">
-                            <a href="#" class="btn btn-info btn-sm">Detail</a>
+                            <a href="{{ route('admin.artikel.berita.detail', $artikel->id_artikel) }}" class="btn btn-info btn-sm">Detail</a>
                             <a href="{{ route('admin.artikel.berita.edit', $artikel->id_artikel) }}" class="btn btn-warning btn-sm">Edit</a>
                             <a href="{{ route('admin.artikel.berita.delete', $artikel->id_artikel) }}" onclick="return confirm('Yakin ingin menghapus artikel ini?')" class="btn btn-danger btn-sm">Hapus</a>
                         </div>
@@ -155,7 +155,7 @@
                             {{ strip_tags($artikel->konten) }}
                         </p>
                         <div class="d-flex flex-wrap gap-2">
-                            <a href="#" class="btn btn-info btn-sm">Detail</a>
+                            <a href="{{ route('admin.artikel.berita.detail', $artikel->id_artikel) }}" class="btn btn-info btn-sm">Detail</a>
                             <a href="{{ route('admin.artikel.berita.edit', $artikel->id_artikel) }}" class="btn btn-warning btn-sm">Edit</a>
                             <a href="{{ route('admin.artikel.berita.delete', $artikel->id_artikel) }}" onclick="return confirm('Yakin ingin menghapus artikel ini?')" class="btn btn-danger btn-sm">Hapus</a>
                         </div>

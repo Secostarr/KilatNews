@@ -49,6 +49,7 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/admin/artikel/edit/{id_artikel}', [ArtikelController::class, 'edit'])->name('admin.artikel.berita.edit');
     Route::put('/admin/artikel/update/{id_artikel}', [ArtikelController::class, 'update'])->name('admin.artikel.berita.update');
     Route::get('/admin/artikel/hapus/{id_artikel}', [ArtikelController::class, 'delete'])->name('admin.artikel.berita.delete');
+    Route::get('/admin/artikel/detail/{id_artikel}', [ArtikelController::class, 'detail'])->name('admin.artikel.berita.detail');
 
     Route::get('/admin/kategori', [KategoriController::class, 'kategori'])->name('admin.artikel.kategori');
     Route::get('/admin/kategori/tambah', [KategoriController::class, 'create'])->name('admin.artikel.kategori.create');

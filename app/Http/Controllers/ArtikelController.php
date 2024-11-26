@@ -172,4 +172,10 @@ class ArtikelController extends Controller
 
         return redirect()->route('admin.artikel.berita')->with('success', 'Data Artikel Berhasil Di Hapus');
     }
+
+    public function detail($id_artikel)
+    {
+        $artikel = artikel::find($id_artikel);
+        return view('admin.detail_artikel', compact('artikel'));
+    }
 }
