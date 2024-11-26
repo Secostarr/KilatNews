@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\artikel;
 use App\Models\kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,7 +14,10 @@ class KategoriController extends Controller
     public function kategori()
     {
         $kategoris = kategori::all();
-        return view('admin.kategori', compact('kategoris'));
+
+        $artikels = artikel::where('status_publikasi', 'published')->get();
+
+        return view('admin.kategori', compact('kategoris', 'artikels'));
     }
 
     public function create()

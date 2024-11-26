@@ -22,7 +22,7 @@ class HomeController extends Controller
             ->get();
 
         // Artikel terbaru yang trending
-        $trendingLatest = Artikel::where('trending', 1)
+        $trendingLatest = Artikel::where('trending', 1)->where('status_publikasi', 'published')
             ->latest()
             ->first();
 
@@ -32,13 +32,13 @@ class HomeController extends Controller
             ->first();
 
         // Tiga artikel tambahan yang trending
-        $artikelsTrending = Artikel::where('trending', 1)
+        $artikelsTrending = Artikel::where('trending', 1)->where('status_publikasi', 'published')
             ->latest()
             ->take(3)
             ->get();
 
         // Empat artikel tambahan yang highlight
-        $artikelsHighlight = Artikel::where('highlight', 1)
+        $artikelsHighlight = Artikel::where('highlight', 1)->where('status_publikasi', 'published')
             ->latest()
             ->take(4)
             ->get();
@@ -54,7 +54,10 @@ class HomeController extends Controller
 
     public function categori()
     {
-        return view('categori');
+        $artikels = artikel::where('status_publikasi', 'published')->get();
+        $artikelstwo = artikel::where('status_publikasi', 'published')->get();
+
+        return view('categori', compact('artikels', 'artikelstwo'));
     }
 
     public function about()
