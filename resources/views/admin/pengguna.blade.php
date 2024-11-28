@@ -57,7 +57,7 @@
                 <h3 class="mb-0 text-dark">PENGGUNA</h3>
             </div>
 
-            <a href="" class="btn btn-sm btn-primary d-flex align-items-center gap-2">
+            <a href="{{ Route('admin.pengguna.user.create') }}" class="btn btn-sm btn-primary d-flex align-items-center gap-2">
                 <i class="fas fa-plus"></i>
                 Tambah Pengguna
             </a>
@@ -70,23 +70,24 @@
             </div>
         </div>
 
-        <div class="comment d-flex mb-4 p-3 shadow-sm rounded">
-            <div class="comment-avatar me-3">
-                <img src="avatar-placeholder.png" alt="User Avatar" class="rounded-circle">
-            </div>
-            <div class="comment-content flex-grow-1">
-                <div class="comment-header d-flex justify-content-between align-items-center mb-2">
-                    <span class="comment-author fw-bold">Nama Pengguna</span>
-                    <span class="comment-time text-muted">Role</span>
+        @foreach ($users as $user)
+            <div class="comment d-flex mb-4 p-3 shadow-sm rounded">
+                <div class="comment-avatar me-3">
+                    <img src="{{ $user->foto ? asset('storage/' . $user->foto) : asset('images/profil.jpeg') }}" alt="User Avatar" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
                 </div>
-                <p class="comment-text mb-2">Email Pengguna</p>
-                <div class="comment-actions">
-                    <button class="btn btn-success btn-sm me-2"><i class="fas fa-check"></i> Balas</button>
-                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</button>
+                <div class="comment-content flex-grow-1">
+                    <div class="comment-header d-flex justify-content-between align-items-center mb-2">
+                        <span class="comment-author fw-bold">{{ $user->nama }}</span>
+                        <span class="comment-time text-muted">{{ $user->role }}</span>
+                    </div>
+                    <p class="comment-text mb-2">{{ $user->email }}</p>
+                    <div class="comment-actions">
+                        <button class="btn btn-success btn-sm me-2"><i class="fas fa-eye fa-solid"></i> Info Detail</button>
+                        <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</button>
+                    </div>
                 </div>
             </div>
-        </div>
-
+        @endforeach
     </div>
 </div>
 

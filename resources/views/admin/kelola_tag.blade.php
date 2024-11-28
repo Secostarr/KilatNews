@@ -50,23 +50,21 @@
 
 <div class="container-fluid pt-2 px-1">
     <div class="row bg-light rounded align-items-center mx-0 p-4">
-
         @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
         @endif
-
         <div class="d-flex justify-content-between align-items-center w-100">
 
+
             <div class="d-flex align-items-center gap-2">
-                <i class="text-primary"></i>
-                <h3 class="mb-0 text-dark">KATEGORI</h3>
+                <h3 class="mb-0 text-dark">Management Tags</h3>
             </div>
 
-            <a href="{{ Route('admin.artikel.kategori.create') }}" class="btn btn-sm btn-primary d-flex align-items-center gap-2">
+            <a href="{{ Route('admin.artikel.tag.create') }}" class="btn btn-sm btn-primary d-flex align-items-center gap-2">
                 <i class="fas fa-plus"></i>
-                Tambah Kategori
+                Tambah Tags
             </a>
         </div>
 
@@ -80,33 +78,31 @@
         <div class="container my-4">
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">Daftar Kategori</h4>
+                    <h4 class="mb-0">Daftar Tags</h4>
                 </div>
                 <div class="card-body">
                     <table class="table table-hover table-bordered table-striped" id="kategori">
                         <thead class="table-light">
                             <tr>
-                                <th>No</th>
-                                <th>Nama Kategori</th>
-                                <th>Deskripsi</th>
-                                <th>Urutan</th>
-                                <th>Action</th>
+                                <th width="10">No</th>
+                                <th>Nama Tag</th>
+                                <th width="120">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($kategoris as $kategori)
+                            @foreach ($tags as $tag)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $kategori->nama_kategori }}</td>
-                                <td>{{ $kategori->deskripsi }}</td>
-                                <td>{{ $kategori->urutan }}</td>
+                                <td>{{ $tag->nama_tag }}</td>
                                 <td class="d-flex">
-                                    <a href="{{ Route('admin.artikel.kategori.edit', $kategori->id_kategori) }}" class="btn btn-outline-warning btn-sm me-1 shadow-sm">
-                                        <i class="fas fa-edit"></i> Edit
-                                    </a>
-                                    <a href="{{ Route('admin.artikel.kategori.delete', $kategori->id_kategori) }}" onclick="return confirm('Yakin Ingin Hapus Data Ini?')" class="btn btn-outline-danger btn-sm shadow-sm">
-                                        <i class="fas fa-trash"></i> Hapus
-                                    </a>
+                                    <a href="{{ route('admin.artikel.tag.edit', $tag->id_tag) }}" class="btn btn-outline-warning btn-sm me-1 shadow-sm">
+                                        <i class="fas fa-edit"></i>Edit</a>
+                                        <form action="{{ route('admin.artikel.tag.delete', $tag->id_tag) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            <button type="submit" onclick="return confirm('Yakin Ingin Hapus Data Ini?')" class="btn btn-outline-danger btn-sm shadow-sm">
+                                                <i class="fas fa-trash">Hapus</i> 
+                                            </button>
+                                        </form>
                                 </td>
                             </tr>
                             @endforeach

@@ -28,6 +28,9 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
 </head>
 
 <style>
@@ -51,16 +54,16 @@
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">{{ Auth::guard('admin')->user()->nama_admin }}</h6>
+                        <h6 class="mb-0">{{ Auth::user()->nama }}</h6>
                         <span>Admin</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
                     <a href="{{ Route('admin.dashboard') }}" class="nav-item nav-link {{ request()->routeIs('admin.dashboard*') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>artikel</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Konten</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="{{ Route('admin.artikel.berita') }}" class="dropdown-item {{ request()->routeIs('admin.artikel.berita*') ? 'active' : '' }}"><i class="bi bi-book-fill me-2"></i>Berita</a>
+                            <a href="{{ Route('admin.artikel.berita') }}" class="dropdown-item {{ request()->routeIs('admin.artikel.berita*') ? 'active' : '' }}"><i class="bi bi-book-fill me-2"></i>Artikel</a>
                             <a href="{{ Route('admin.artikel.kategori') }}" class="dropdown-item {{ request()->routeIs('admin.artikel.kategori*') ? 'active' : '' }}"><i class="bi bi-bookmark-fill me-2"></i>kategori</a>
                             <a href="{{ Route('admin.artikel.tag') }}" class="dropdown-item {{ request()->routeIs('admin.artikel.tag*') ? 'active' : '' }}"><i class="bi bi-tag-fill me-2"></i>Tag</a>
                         </div>
@@ -69,7 +72,6 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-person-fill me-2"></i>Pengguna</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{{ Route('admin.pengguna.user') }}" class="dropdown-item {{ request()->routeIs('admin.pengguna.user*') ? 'active' : '' }}"><i class="bi bi-person-fill me-2"></i>User</a>
-                            <a href="{{ Route('admin.pengguna.komentar') }}" class="dropdown-item {{ request()->routeIs('admin.pengguna.komentar*') ? 'active' : '' }}"><i class="bi bi-chat-left-dots-fill me-2"></i>Komentar</a>
                             <a href="{{ Route('admin.pengguna.notifikasi') }}" class="dropdown-item {{ request()->routeIs('admin.pengguna.notifikasi*') ? 'active' : '' }}"><i class="bi bi-bell-fill me-2"></i>Notifikasi</a>
                         </div>
                     </div>
@@ -93,12 +95,12 @@
             </a>
             <div class="navbar-nav align-items-center ms-auto">
                 <div class="nav-item dropdown">
-                    <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                        <img class="rounded-circle me-lg-2" src="{{ asset('storage/' . Auth::guard('admin')->user()->foto) }}" alt="" style="width: 40px; height: 40px;">
-                        <span class="d-none d-lg-inline-flex">{{ Auth::guard('admin')->user()->nama_admin }}</span>
+                    <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"   >
+                        <img class="rounded-circle me-lg-2" src="{{ asset('storage/' . Auth::user()->foto) }}" alt="" style="width: 40px; height: 40px;">
+                        <span class="d-none d-lg-inline-flex">{{ Auth::user()->nama_admin }}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                        <a href="" class="dropdown-item">My Profile</a>
+                        <a href="{{ Route('admin.profile') }}" class="dropdown-item">My Profile</a>
                         <a href="{{ Route('admin.logout') }}" class="dropdown-item">Log Out</a>
                     </div>
                 </div>
@@ -133,5 +135,53 @@
     <!-- Template Javascript -->
     <script src="{{ asset('js/main.js') }}"></script>
 </body>
+
+<script>
+    $(document).ready(function() {
+        $('#konten').summernote({
+            height: 300,
+            placeholder: 'Tuliskan konten artikel di sini...',
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+            ]
+        });
+    });
+
+    // Inisialisasi Leaflet Map
+    var map = L.map('map').setView([-6.200000, 106.816666], 10); // Jakarta sebagai default
+
+    // Tambahkan tile dari OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    var marker;
+
+    // Fungsi untuk mendapatkan nama lokasi dari koordinat
+    function getLocationName(lat, lng) {
+        $.getJSON(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`, function(data) {
+            $('#lokasi').val(data.display_name); // Menampilkan nama lokasi pada input "lokasi"
+        });
+    }
+
+    // Event listener saat peta diklik
+    map.on('click', function(e) {
+        var lat = e.latlng.lat;
+        var lng = e.latlng.lng;
+
+        if (marker) {
+            map.removeLayer(marker);
+        }
+
+        marker = L.marker([lat, lng]).addTo(map);
+        getLocationName(lat, lng); // Mengambil nama lokasi berdasarkan koordinat
+    });
+</script>
 
 </html>
