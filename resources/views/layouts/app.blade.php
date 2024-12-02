@@ -60,7 +60,6 @@
                                 </div>
                                 <div class="header-info-right">
                                     <ul class="header-social">
-                                        <li><a href="#"><i class="fab fa-github"></i></a></li>
                                         @if (Auth::user())
                                         <li>
                                             <div class="nav-item dropdown">
@@ -85,7 +84,7 @@
                                                     @endif
                                                     @elseif (Auth::user()->role === 'contributor')
                                                     <!-- Jika role adalah contributor -->
-                                                    <li><a href="" class="dropdown-item text-dark custom-hover">Dashboard Saya</a></li>
+                                                    <li><a href="{{ Route('dashboard', ) }}" class="dropdown-item text-dark custom-hover">Dashboard Saya</a></li>
                                                     @endif
 
                                                     <li><a href="{{ route('pengguna.logout') }}" class="dropdown-item text-dark custom-hover">Log Out</a></li>

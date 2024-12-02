@@ -5,23 +5,24 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
 
 class User
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @param  mixed  ...$roles
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function handle(Request $request, Closure $next, $role)
+    public function handle(Request $request, Closure $next, ...$roles)
     {
-        if (Auth::check() && Auth::user()->role === $role) {
+        if (Auth::check() && in_array(Auth::user()->role, $roles)) {
             return $next($request);
         }
 
-        // Arahkan ke halaman lain jika tidak sesuai role
-        return redirect()->route($role.'.login')
-            ->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        // Arahkan ke halaman lain jika role tidak sesuai
+        return redirect()->route('login')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
     }
 }

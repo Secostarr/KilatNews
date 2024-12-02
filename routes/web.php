@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\UserLoginController;
+use App\Http\Controllers\ContributorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KomentarController;
@@ -52,6 +53,7 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/admin/artikel/edit/{id_artikel}', [ArtikelController::class, 'edit'])->name('admin.artikel.berita.edit');
     Route::put('/admin/artikel/update/{id_artikel}', [ArtikelController::class, 'update'])->name('admin.artikel.berita.update');
     Route::get('/admin/artikel/hapus/{id_artikel}', [ArtikelController::class, 'delete'])->name('admin.artikel.berita.delete');
+    Route::get('/admin/artikel/detail/{id_artikel}', [ArtikelController::class, 'detail'])->name('admin.artikel.berita.detail');
 
     Route::get('/admin/kategori', [KategoriController::class, 'kategori'])->name('admin.artikel.kategori');
     Route::get('/admin/kategori/tambah', [KategoriController::class, 'create'])->name('admin.artikel.kategori.create');
@@ -87,12 +89,14 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/admin/pengaturan', [PengaturanController::class, 'pengaturan'])->name('admin.pengaturan');
 });
 
-Route::middleware('role:user,contributor')->group(function () {
+Route::middleware(['role:user,contributor'])->group(function () {
     Route::get('/user/profile', [UserLoginController::class, 'profile'])->name('user.profile');
     Route::get('/user/logout', [PenggunaController::class, 'logout'])->name('pengguna.logout');
     Route::get('/user/profile/edit', [PenggunaController::class, 'edit'])->name('pengguna.profile.edit');
     Route::put('/user/profile/edit', [PenggunaController::class, 'update'])->name('pengguna.profile.update');
-    
+
     Route::get('/home/pedaftaran', [PenggunaController::class, 'pendaftaran'])->name('pendaftaran');
     Route::post('/home/pedaftaran/berhasil', [PenggunaController::class, 'store'])->name('pendaftaran.store');
+
+    Route::get('/home/dashboard/contributor', [ContributorController::class, 'dashboard'])->name('dashboard');
 });

@@ -44,15 +44,22 @@ class artikel extends Model
     }
 
     // App\Models\Artikel.php
-public function scopeTrending($query)
-{
-    return $query->where('kategori', 'Trending');
-}
+    public function scopeTrending($query)
+    {
+        return $query->where('kategori', 'Trending');
+    }
 
-public function scopeHighlight($query)
-{
-    return $query->where('kategori', 'Highlight');
-}
+<<<<<<< HEAD
 
-
+=======
+    public function scopeHighlight($query)
+    {
+        return $query->where('kategori', 'Highlight');
+    }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user', 'id_user');
+    }
+>>>>>>> 14661e8bbb12e702cf61343a8a2014affd3290e4
 }
