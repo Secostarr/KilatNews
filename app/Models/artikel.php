@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Egulias\EmailValidator\Parser\Comment;
 use Illuminate\Database\Eloquent\Model;
 
 class artikel extends Model
@@ -52,5 +53,6 @@ public function scopeHighlight($query)
 {
     return $query->where('kategori', 'Highlight');
 }
+
 
 }

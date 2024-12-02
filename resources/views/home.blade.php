@@ -30,7 +30,7 @@
                                 <img src="{{ asset('storage/' . $trendingLatest->media_utama) }}" alt="{{ $trendingLatest->judul }}">
                                 <div class="trend-top-cap">
                                     <span>{{ $trendingLatest->kategori->nama_kategori }}</span>
-                                    <h2><a href="">{{ $trendingLatest->judul }}</a></h2>
+                                    <h2><a href="{{ route('berita.show', $trendingLatest->slug) }}">{{ $trendingLatest->judul }}</a></h2>
                                 </div>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                                         </div>
                                         <div class="trend-bottom-cap">
                                             <span class="color1">{{ $artikel->kategori->nama_kategori }}</span>
-                                            <h4><a href="">{{ $artikel->judul }}</a></h4>
+                                            <h4><a href="{{ route('berita.show', $artikel->slug) }}">{{ $artikel->judul }}</a></h4>
                                             <p>{!! Str::words($artikel->konten, 10, '...') !!}</p>
                                         </div>
                                     </div>
@@ -65,7 +65,7 @@
                             </div>
                             <div class="trand-right-cap">
                                 <span class="color1">{{ $artikel->kategori->nama_kategori }}</span>
-                                <h4><a href="details.html">{{$artikel->judul}}</a></h4>
+                                <h4><a href="{{ route('berita.show', $artikel->slug) }}">{{ $artikel->judul }}</a></h4>
                             </div>
                         </div>
                         @endforeach

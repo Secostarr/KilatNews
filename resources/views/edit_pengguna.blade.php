@@ -73,65 +73,96 @@
 
 <body>
 
-    <div class="profile-container">
-        <!-- Foto Profil dan Media Sosial -->
-        <div class="profile-picture-container">
-            @if (Auth::user()->foto)
-            <img src="{{ asset('storage/' . Auth::user()->foto) }}" alt="Foto Profil" class="profile-picture">
-            @else
-            <img src="https://via.placeholder.com/150" alt="Default Foto Profil" class="profile-picture">
-            @endif
-            <div class="social-icons mt-3">
-                <input type="text" name="facebook" class="form-control" placeholder="Facebook">
-                <br> 
-                <input type="text" name="instagram" class="form-control" placeholder="Instagram">
+    <form action="{{ route('pengguna.profile.update') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+        <div class="profile-container">
+            <!-- Foto Profil dan Media Sosial -->
+            <div class="profile-picture-container">
+                @if (Auth::user()->foto)
+                <img src="{{ asset('storage/' . Auth::user()->foto) }}" alt="Foto Profil" class="profile-picture">
+                @else
+                <img src="https://via.placeholder.com/150" alt="Default Foto Profil" class="profile-picture">
+                @endif
+                <div class="social-icons mt-3">
+                    <input type="text" name="username_facebook" class="form-control" placeholder="Username Facebook" value="{{ Auth::user()->socialMedia->username_facebook }}">
+                    @error('username_facebook')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                    <br>
+                    <input type="text" name="username_instagram" class="form-control" placeholder="Username Instagram" value="{{ Auth::user()->socialMedia->username_instagram }}">
+                    @error('username_instagram')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                    <br>
+                    <input type="text" name="url_facebook" class="form-control" placeholder="Url Facebook" value="{{ Auth::user()->socialMedia->url_facebook }}">
+                    @error('url_facebook')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                    <br>
+                    <input type="text" name="url_instagram" class="form-control" placeholder="Url Instagram" value="{{ Auth::user()->socialMedia->url_facebook }}">
+                    @error('url_instagram')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
             </div>
-        </div>
 
-        <!-- Informasi Profil -->
-        <div class="profile-info">
-            <form action="{{ route('pengguna.profile.update') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
+            <!-- Informasi Profil -->
+            <div class="profile-info">
                 <div class="mb-3 row">
                     <label for="nama" class="col-sm-3 col-form-label"><b>Nama:</b></label>
                     <div class="col-sm-9">
-                        <input type="text" id="nama" name="nama" class="form-control" value="{{ Auth::user()->nama }}" >
+                        <input type="text" id="nama" name="nama" class="form-control" value="{{ Auth::user()->nama }}">
+                        @error('nama')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
                 <div class="mb-3 row">
                     <label for="username" class="col-sm-3 col-form-label"><b>Username:</b></label>
                     <div class="col-sm-9">
-                        <input type="text" id="username" name="username" class="form-control" value="{{ Auth::user()->username }}" >
+                        <input type="text" id="username" name="username" class="form-control" value="{{ Auth::user()->username }}">
+                        @error('username')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
                 <div class="mb-3 row">
                     <label for="email" class="col-sm-3 col-form-label"><b>Email:</b></label>
                     <div class="col-sm-9">
-                        <input type="email" id="email" name="email" class="form-control" value="{{ Auth::user()->email }}" >
+                        <input type="email" id="email" name="email" class="form-control" value="{{ Auth::user()->email }}">
+                        @error('email')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
                 <div class="mb-3 row">
                     <label for="password" class="col-sm-3 col-form-label"><b>Password:</b></label>
                     <div class="col-sm-9">
-                        <input type="password" id="password" name="password" class="form-control" value="" >
+                        <input type="password" id="password" name="password" class="form-control" value="">
+                        @error('password')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
                 <div class="mb-3 row">
                     <label for="role" class="col-sm-3 col-form-label"><b>Role:</b></label>
                     <div class="col-sm-9">
-                        <input type="text" id="role" class="form-control" value="{{ Auth::user()->role }}" >
+                        <input type="text" id="role" class="form-control" value="{{ Auth::user()->role }}">
                     </div>
                 </div>
 
                 <div class="mb-3 row">
                     <label for="bio" class="col-sm-3 col-form-label"><b>Bio:</b></label>
                     <div class="col-sm-9">
-                        <textarea id="bio" name="bio" class="form-control" rows="4" >{{ Auth::user()->bio }}</textarea>
+                        <textarea id="bio" name="bio" class="form-control" rows="4">{{ Auth::user()->bio }}</textarea>
+                        @error('bio')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
@@ -142,9 +173,9 @@
                         <a href="{{ route('user.profile') }}" class="btn btn-warning me-2">Kembali</a>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
+    </form>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 

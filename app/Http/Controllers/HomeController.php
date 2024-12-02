@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\artikel;
+use App\Models\kategori;
 use Illuminate\Support\Str;
 
 class HomeController extends Controller
@@ -43,7 +44,7 @@ class HomeController extends Controller
             ->take(4)
             ->get();
 
-        
+
         return view('home', compact('trendingLatestAll', 'highlightLatestAll', 'trendingLatest', 'highlightLatest', 'artikelsTrending', 'artikelsHighlight'));
     }
 
@@ -56,9 +57,11 @@ class HomeController extends Controller
     {
         $artikels = artikel::where('status_publikasi', 'published')->get();
         $artikelstwo = artikel::where('status_publikasi', 'published')->get();
-
-        return view('categori', compact('artikels', 'artikelstwo'));
+        $categoris = kategori::all();
+        return view('categori', compact('artikels', 'artikelstwo', 'categoris'));
     }
+
+
 
     public function about()
     {
@@ -69,4 +72,20 @@ class HomeController extends Controller
     {
         return view('latest_news');
     }
+
+    public function showBerita($slug)
+    {
+        // Cari artikel berdasarkan slug
+        $artikel = Artikel::where('slug', $slug)->firstOrFail();
+
+        // Artikel terkait
+        $relatedArtikels = Artikel::where('id_artikel', '!=', $artikel->id_artikel)
+            ->where('id_kategori', $artikel->id_kategori)
+            ->take(5)
+            ->get();
+
+        return view('detail', compact('artikel', 'relatedArtikels',));
+    }
+
+    
 }

@@ -57,4 +57,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function socialMedia()
+    {
+        return $this->hasOne(SosialMedia::class, 'id_user', 'id_user');
+    }
 }
