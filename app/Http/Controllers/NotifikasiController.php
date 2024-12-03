@@ -50,6 +50,22 @@ class NotifikasiController extends Controller
         return redirect()->back()->with('success', 'Pengguna berhasil disetujui sebagai kontributor.');
     }
 
+    public function rejected($id)
+    {
+        // Cari data pendaftaran berdasarkan ID
+        $pendaftaran = Pendaftaran::find($id);
+
+        // Periksa apakah data pendaftaran ditemukan
+        if (!$pendaftaran) {
+            return redirect()->back()->with('error', 'Data pendaftaran tidak ditemukan.');
+        }
+
+        // Hapus data pendaftaran
+        $pendaftaran->delete();
+
+        // Redirect ke halaman sebelumnya dengan pesan sukses
+        return redirect()->back()->with('success', 'Pendaftaran telah ditolak dan datanya berhasil dihapus.');
+    }
 
 
     public function penyetor()

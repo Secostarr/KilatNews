@@ -74,57 +74,61 @@
 
                         <div class="d-flex flex-column gap-2">
                             <h5>Status Publikasi</h5>
-
                             <div class="d-flex gap-3">
                                 @foreach(['published', 'draft', 'archived'] as $status)
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="{{ $status }}" name="status_publikasi" value="{{ $status }}" onclick="onlyOne(this)" {{ old('status_publikasi') === $status ? 'checked' : '' }}>
+                                    <input type="radio" class="form-check-input" id="{{ $status }}"
+                                        name="status_publikasi"
+                                        value="{{ $status }}"
+                                        {{ old('status_publikasi', $artikel->status_publikasi) === $status ? 'checked' : '' }}>
                                     <label class="form-check-label" for="{{ $status }}">{{ ucfirst($status) }}</label>
                                 </div>
                                 @endforeach
                             </div>
                         </div>
 
+
                         <div class="d-flex flex-column mt-0">
                             <h5>Highlight Berita</h5>
                             <div class="d-flex gap-3">
-                                <!-- Opsi "Iya" -->
                                 <div class="form-group form-check mb-3">
-                                    <input type="checkbox" class="form-check-input" id="highlightTrue" name="highlight" value="true" onclick="onlyOne(this)">
+                                    <input type="radio" class="form-check-input" id="highlightTrue"
+                                        name="highlight"
+                                        value="1"
+                                        {{ old('highlight', $artikel->highlight) == true ? 'checked' : '' }}>
                                     <label class="form-check-label" for="highlightTrue">Iya</label>
-                                    @error('highlight')
-                                    <div class="text-danger">{{ $message }}</div>
-                                    @enderror
                                 </div>
-                                <!-- Opsi "Tidak" -->
                                 <div class="form-group form-check mb-3">
-                                    <input type="checkbox" class="form-check-input" id="highlightFalse" name="highlight" value="false" onclick="onlyOne(this)">
+                                    <input type="radio" class="form-check-input" id="highlightFalse"
+                                        name="highlight"
+                                        value="0"
+                                        {{ old('highlight', $artikel->highlight) == false ? 'checked' : '' }}>
                                     <label class="form-check-label" for="highlightFalse">Tidak</label>
-                                    @error('highlight')
-                                    <div class="text-danger">{{ $message }}</div>
-                                    @enderror
                                 </div>
                             </div>
                         </div>
 
+
+
                         <div class="form-group mb-3">
                             <label for="trending" class="form-label">Status Trending</label>
                             <select class="form-select" id="trending" name="trending">
-                            <option value="" selected disabled>Pilih Trending</option>
-                                <option value="true">Trending</option>
-                                <option value="false">Tidak Trending</option>
+                                <option value="" disabled>Pilih Trending</option>
+                                <option value="true" {{ old('trending', $artikel->trending) === 'true' ? 'selected' : '' }}>Trending</option>
+                                <option value="false" {{ old('trending', $artikel->trending) === 'false' ? 'selected' : '' }}>Tidak Trending</option>
                             </select>
                             @error('trending')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
-                        </div>  
+                        </div>
+
 
                         <div class="form-group mb-3">
                             <label for="kategori" class="form-label">Kategori</label>
                             <select class="form-select" id="kategori" name="id_kategori">
                                 <option value="" selected disabled>Pilih Kategori</option>
                                 @foreach($kategoris as $kategori)
-                                <option value="{{ $kategori->id_kategori }}">{{ $kategori->nama_kategori }}</option>
+                                <option value="{{ $artikel->id_artikel }}" {{ $kategori->id_kategori == $kategori->id_kategori ? 'selected' : '' }}>{{ $kategori->nama_kategori }}</option>
                                 @endforeach
                             </select>
                             @error('id_kategori')
@@ -133,11 +137,14 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="tag" class="form-label">tag</label>
+                            <label for="tag" class="form-label">Tag</label>
                             <select class="form-select" id="tag" name="id_tag">
-                                <option value="" selected disabled>Pilih tag</option>
+                                <option value="" disabled>Pilih Tag</option>
                                 @foreach($tags as $tag)
-                                <option value="{{ $tag->id_tag }}">{{ $tag->nama_tag }}</option>
+                                <option value="{{ $tag->id_tag }}"
+                                    {{ old('id_tag', $artikel->id_tag) == $tag->id_tag ? 'selected' : '' }}>
+                                    {{ $tag->nama_tag }}
+                                </option>
                                 @endforeach
                             </select>
                             @error('id_tag')
@@ -145,14 +152,18 @@
                             @enderror
                         </div>
 
+
                         <div class="form-group mb-3">
                             <label for="lokasi" class="form-label">Lokasi</label>
-                            <input type="text" class="form-control" id="lokasi" name="lokasi">
+                            <input type="text" class="form-control" id="lokasi"
+                                name="lokasi"
+                                value="{{ old('lokasi', $artikel->lokasi) }}">
                             <div id="map" style="height: 400px;"></div>
                             @error('lokasi')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
+
 
                         <div class="text-center">
                             <button type="submit" class="btn btn-success">Simpan</button>
@@ -223,7 +234,7 @@
     });
 
     function onlyOne(checkbox) {
-        const checkboxes = document.querySelectorAll(input[name="${checkbox.name}"]);
+        const checkboxes = document.querySelectorAll(input[name = "${checkbox.name}"]);
         checkboxes.forEach((cb) => {
             if (cb !== checkbox) cb.checked = false;
         });

@@ -93,12 +93,12 @@
                                 </button>
                             </form>
                             <!-- Reject Button -->
-                            <form action="" method="POST">
+                            <form action="{{ route('pendaftaran.rejected', $item->user->id_user) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menolak pendaftaran ini?')">
                                 @csrf
-                                <button type="submit" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-times"></i> Tolak
-                                </button>
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Tolak</button>
                             </form>
+
                         </div>
                     </div>
                 </div>
