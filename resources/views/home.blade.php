@@ -12,18 +12,21 @@
                     <div class="col-lg-12">
                         <div class="trending-tittle">
                             <strong>Trending now</strong>
+                            <!-- <p>Rem ipsum dolor sit amet, consectetur adipisicing elit.</p> -->
                             <div class="trending-animated">
                                 <ul id="js-news" class="js-hidden">
-                                    <li class="news-item">Headline 1</li>
-                                    <li class="news-item">Headline 2</li>
-                                    <li class="news-item">Headline 3</li>
+                                    <li class="news-item">Bangladesh dolor sit amet, consectetur adipisicing elit.</li>
+                                    <li class="news-item">Spondon IT sit amet, consectetur.......</li>
+                                    <li class="news-item">Rem ipsum dolor sit amet, consectetur adipisicing elit.</li>
                                 </ul>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-8">
+                        <!-- Trending Top -->
                         @if ($trendingLatest)
                         <div class="trending-top mb-30">
                             <div class="trend-top-img">
@@ -35,20 +38,19 @@
                             </div>
                         </div>
                         @endif
-
+                        <!-- Trending Bottom -->
                         <div class="trending-bottom">
-                            <h3>More Trending Articles</h3>
                             <div class="row">
-                                @foreach ($artikelsTrending as $artikel)
+                                @foreach($artikelsTrending as $artikel)
                                 <div class="col-lg-4">
                                     <div class="single-bottom mb-35">
                                         <div class="trend-bottom-img mb-30">
-                                            <img src="{{ asset('storage/' . $artikel->media_utama) }}" alt="{{ $artikel->judul }}">
+                                            <img src="{{ asset('storage/' . $artikel->media_utama) }}" alt="" style="width: 150px; height: 150px; object-fit: cover;">
                                         </div>
                                         <div class="trend-bottom-cap">
                                             <span class="color1">{{ $artikel->kategori->nama_kategori }}</span>
                                             <h4><a href="{{ route('berita.show', $artikel->slug) }}">{{ $artikel->judul }}</a></h4>
-                                            <p>{!! Str::words($artikel->konten, 10, '...') !!}</p>
+                                            <p>{{ Str::limit(strip_tags($artikel->konten), 50) }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -56,12 +58,12 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Right content -->
+                    <!-- Riht content -->
                     <div class="col-lg-4">
                         @foreach($artikelsHighlight as $artikel)
                         <div class="trand-right-single d-flex">
                             <div class="trand-right-img">
-                                <img src="{{ asset('storage/'. $artikel->media_utama) }}" alt="" style="width: 150px;">
+                                <img src="{{ asset('storage/'. $artikel->media_utama) }}" alt="" style="width: 150px; height: 150px; object-fit: cover;">
                             </div>
                             <div class="trand-right-cap">
                                 <span class="color1">{{ $artikel->kategori->nama_kategori }}</span>
@@ -74,6 +76,7 @@
             </div>
         </div>
     </div>
+    <!-- Trending Area End -->
 
     <!-- Weekly-News Start -->
     <div class="weekly-news-area pt-50">

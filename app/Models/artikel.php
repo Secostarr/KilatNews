@@ -58,4 +58,12 @@ class artikel extends Model
     {
         return $this->belongsTo(User::class, 'id_user', 'id_user');
     }
+
+    public function komentars()
+    {
+        return $this->hasMany(Komentar::class, 'id_artikel');
+    }
+    
 }
+
+
