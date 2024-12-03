@@ -33,17 +33,9 @@
                             {{ strip_tags($artikel->konten) }}
                         </div>
 
-                        <!-- Like Button -->
-                        <form action="{{ route('like.article', $artikel->slug) }}" method="POST">
-                            @csrf
-                            <button class="btn btn-primary">
-                                <span>{{ $artikel->like_count }}</span> 👍 Like
-                            </button>
-                        </form>
-
                         <!-- View Count -->
                         <div class="view-count">
-                            <p>View: {{ $artikel->views }} </p>
+                            <p>View: {{ $artikel->viewer_count }} </p>
                         </div>
 
                         <div id="disqus_thread"></div>
@@ -66,18 +58,21 @@
                             })();
                         </script>
                         <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
                     </div>
                 </div>
 
                 <div class="col-lg-4">
-                    <div class="section-tittle mb-40">
-                        <h3>Follow Us</h3>
+                    @foreach($relatedArtikelsten as $artikel)
+                    <div class="trand-right-single d-flex">
+                        <div class="trand-right-img">
+                            <img src="{{ asset('storage/'. $artikel->media_utama) }}" alt="" style="width: 100px; height: 150px; object-fit: cover;">
+                        </div>
+                        <div class="trand-right-cap">
+                            <span class="color1">{{ $artikel->kategori->nama_kategori }}</span>
+                            <h4><a href="{{ route('berita.show', $artikel->slug) }}">{{ $artikel->judul }}</a></h4>
+                        </div>
                     </div>
-                    <!-- Social Links -->
-                    <div class="single-follow mb-45">
-                        <!-- Add your social media icons here -->
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
