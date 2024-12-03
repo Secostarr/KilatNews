@@ -178,4 +178,5 @@ class ArtikelController extends Controller
         $artikel = artikel::find($id_artikel);
         return view('admin.detail_artikel', compact('artikel'));
     }
+
 }

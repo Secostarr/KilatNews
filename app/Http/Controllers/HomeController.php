@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\artikel;
 use App\Models\kategori;
+use App\Models\komentar;
 use Illuminate\Support\Str;
 
 class HomeController extends Controller
@@ -61,8 +62,6 @@ class HomeController extends Controller
         return view('categori', compact('artikels', 'artikelstwo', 'categoris'));
     }
 
-
-
     public function about()
     {
         return view('about');
@@ -76,7 +75,12 @@ class HomeController extends Controller
     public function showBerita($slug)
     {
         // Cari artikel berdasarkan slug
-        $artikel = Artikel::where('slug', $slug)->firstOrFail();
+        $artikel = Artikel::where('slug', $slug)
+        ->with('komentars.user')
+        ->firstOrFail();
+
+        // Meningkatkan jumlah views setiap kali artikel dibuka
+        $artikel->increment('viewer_count'); // Ini akan menambah 1 pada view_count
 
         // Artikel terkait
         $relatedArtikels = Artikel::where('id_artikel', '!=', $artikel->id_artikel)
@@ -84,8 +88,16 @@ class HomeController extends Controller
             ->take(5)
             ->get();
 
-        return view('detail', compact('artikel', 'relatedArtikels',));
+        $komentars = komentar::where('id_artikel', $slug)->get();
+
+        return view('detail', compact('artikel', 'relatedArtikels', 'komentars'));
     }
 
+    public function likeArtikel(Request $request, $slug)
+    {
+        $artikel = Artikel::where('slug', $slug)->firstOrFail();
+        $artikel->increment('like_count');
     
+        return back();
+    }
 }

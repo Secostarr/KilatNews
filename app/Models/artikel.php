@@ -49,9 +49,6 @@ class artikel extends Model
         return $query->where('kategori', 'Trending');
     }
 
-<<<<<<< HEAD
-
-=======
     public function scopeHighlight($query)
     {
         return $query->where('kategori', 'Highlight');
@@ -61,5 +58,12 @@ class artikel extends Model
     {
         return $this->belongsTo(User::class, 'id_user', 'id_user');
     }
->>>>>>> 14661e8bbb12e702cf61343a8a2014affd3290e4
+
+    public function komentars()
+    {
+        return $this->hasMany(Komentar::class, 'id_artikel');
+    }
+    
 }
+
+
