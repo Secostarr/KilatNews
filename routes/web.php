@@ -43,9 +43,9 @@ Route::middleware(['role:admin'])->group(function () {
     // ADMIN
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/profile', [UserLoginController::class, 'profile'])->name('admin.profile');
-    Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
-    Route::get('/admin/profile/edit', [AdminController::class, 'edit'])->name('admin.profile.edit');
-    Route::put('/admin/profile/edit', [AdminController::class, 'update'])->name('admin.profile.update');
+    Route::get('/admin/logout', [PenggunaController::class, 'logout'])->name('admin.logout');
+    Route::get('/admin/profile/edit', [AdminController::class, 'editProfile'])->name('admin.profile.edit');
+    Route::put('/admin/profile/edit', [PenggunaController::class, 'update'])->name('admin.profile.update');
 
     // Artikel
     Route::get('/admin/artikel', [ArtikelController::class, 'artikel'])->name('admin.artikel.berita');
@@ -83,6 +83,7 @@ Route::middleware(['role:admin'])->group(function () {
 
     Route::get('/admin/notifikasi/pendaftar', [NotifikasiController::class, 'pendaftar'])->name('admin.pengguna.notifikasi.pendaftar');
     Route::post('/admin/notifikasi/approve/{id}', [NotifikasiController::class, 'approve'])->name('admin.notifikasi.approve');
+    Route::delete('/pendaftaran/{id}/rejected', [NotifikasiController::class, 'rejected'])->name('pendaftaran.rejected');
 
     Route::get('/admin/notifikasi/penyetor', [NotifikasiController::class, 'penyetor'])->name('admin.pengguna.notifikasi.penyetor');
 

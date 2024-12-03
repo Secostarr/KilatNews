@@ -51,7 +51,7 @@ class PenggunaController extends Controller
     public function update(Request $request)
     {
         // Ambil ID pengguna yang sedang login
-        $id = Auth::user()->id_user; // Ubah ke 'id' jika default primary key
+        $id = Auth::user()->id_user; // Ubah    ke 'id' jika default primary key
 
         // Temukan pengguna berdasarkan ID
         $pengguna = User::findOrFail($id);
@@ -64,6 +64,7 @@ class PenggunaController extends Controller
             'nama' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users,username,' . $id . ',id_user',
             'email' => 'required|email|unique:users,email,' . $id . ',id_user',
+            'password' => 'nullable|min:8',
             'bio' => 'nullable|string',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
 
@@ -75,15 +76,14 @@ class PenggunaController extends Controller
         ]);
 
         // Handling Foto Profil
-        $foto = $pengguna->foto; // Ambil foto lama
+        $foto = $pengguna->foto;
         if ($request->hasFile('foto')) {
-            // Hapus foto lama jika ada
             if ($foto) {
                 Storage::disk('public')->delete($foto);
             }
-
-            // Simpan foto baru
-            $foto = $request->file('foto')->store('foto_pengguna', 'public');
+            $uniqueFile = uniqid() . '_' . $request->file('foto')->getClientOriginalName();
+            $request->file('foto')->storeAs('foto_pengguna', $uniqueFile, 'public');
+            $foto = 'foto_pengguna/' . $uniqueFile;
         }
 
         // Update data pengguna
@@ -91,6 +91,7 @@ class PenggunaController extends Controller
             'nama' => $request->nama,
             'username' => $request->username,
             'email' => $request->email,
+            'password' => $request->filled('password') ? Hash::make($request->password) : $pengguna->password,
             'bio' => $request->bio,
             'foto' => $foto,
         ]);
@@ -103,9 +104,16 @@ class PenggunaController extends Controller
             'url_instagram' => $request->url_instagram,
         ]);
 
-        // Redirect dengan pesan sukses
-        return redirect()->route('pengguna.profile.edit')->with('success', 'Profil berhasil diperbarui.');
+        // Redirect berdasarkan role
+        $role = Auth::user()->role;
+
+        if ($role === 'admin') {
+            return redirect()->route('admin.profile.edit')->with('success', 'Profil berhasil diperbarui.');
+        } else {
+            return redirect()->route('user.profile.edit')->with('success', 'Profil berhasil diperbarui.');
+        }
     }
+
 
     public function show($id)
     {

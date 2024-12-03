@@ -25,7 +25,7 @@ class UserLoginController extends Controller
 
     public function profile()
     {
-        return view('profile');
+        return view('admin.profile_admin');
     }
 
     public function auth(Request $request)
