@@ -107,14 +107,14 @@
                                 }
                             @endphp
 
-                            @foreach($trendingLatestAll as $t)
+                            @foreach($trendingLatestAll as $artikel)
                             <div class="weekly-single">
                                 <div class="weekly-img">
                                     <img src="assets/img/news/weeklyNews2.jpg" alt="">
                                 </div>
                                 <div class="weekly-caption">
-                                    <span class="color1">Strike</span>
-                                    <h4><a href="#">{{$t->judul}}</a></h4>
+                                    <span class="color1">{{ $artikel->kategori->nama_kategori }}</span>
+                                    <h4><a href="{{ route('berita.show', $artikel->slug) }}">{{ $artikel->judul }}</a></h4>
                                 </div>
                             </div>
                             @endforeach
@@ -163,9 +163,8 @@
                                     <img src="assets/img/news/weekly2News1.jpg" alt="">
                                 </div>
                                 <div class="weekly2-caption">
-                                    <span class="color1">Corporate</span>
-                                    <p>25 Jan 2020</p>
-                                    <h4><a href="#">{{$t->judul}}</a></h4>
+                                    <span class="color1">{{ $t->kategori->nama_kategori }}</span>
+                                    <h4><a href="{{ route('berita.show', $artikel->slug) }}">{{ $t->judul }}</a></h4>
                                 </div>
                             </div>
                             @endforeach

@@ -14,12 +14,12 @@ class HomeController extends Controller
     public function home()
     {
         // Artikel terbaru yang trending
-        $trendingLatestAll = Artikel::where('trending', 1)
+        $trendingLatestAll = Artikel::where('trending', 1)->where('status_publikasi', 'published')
             ->latest()
             ->get();
 
         // Artikel terbaru yang highlight
-        $highlightLatestAll = Artikel::where('highlight', 1)
+        $highlightLatestAll = Artikel::where('highlight', 1)->where('status_publikasi', 'published')
             ->latest()
             ->get();
 
@@ -29,7 +29,7 @@ class HomeController extends Controller
             ->first();
 
         // Artikel terbaru yang highlight
-        $highlightLatest = Artikel::where('highlight', 1)
+        $highlightLatest = Artikel::where('highlight', 1)->where('status_publikasi', 'published')
             ->latest()
             ->first();
 
@@ -76,11 +76,18 @@ class HomeController extends Controller
     {
         // Cari artikel berdasarkan slug
         $artikel = Artikel::where('slug', $slug)
-        ->with('komentars.user')
-        ->firstOrFail();
+            ->with('komentars.user')
+            ->firstOrFail();
 
-        // Meningkatkan jumlah views setiap kali artikel dibuka
-        $artikel->increment('viewer_count'); // Ini akan menambah 1 pada view_count
+        // Periksa session untuk menghindari penambahan view count terus-menerus
+        $viewedKey = 'viewed_artikel_' . $artikel->id_artikel;
+
+        if (!session()->has($viewedKey)) {
+            // Meningkatkan jumlah views hanya jika belum pernah dilihat pada sesi ini
+            $artikel->increment('viewer_count');
+            // Tandai artikel ini sebagai sudah dilihat dalam sesi
+            session()->put($viewedKey, true);
+        }
 
         // Artikel terkait
         $relatedArtikels = Artikel::where('id_artikel', '!=', $artikel->id_artikel)
@@ -88,16 +95,15 @@ class HomeController extends Controller
             ->take(5)
             ->get();
 
-        $komentars = komentar::where('id_artikel', $slug)->get();
+        // Komentar
+        $komentars = Komentar::where('id_artikel', $artikel->id_artikel)->get();
 
-        return view('detail', compact('artikel', 'relatedArtikels', 'komentars'));
-    }
+        // Ambil artikel terkait berdasarkan kategori
+        $relatedArtikelsten = Artikel::where('id_kategori', $artikel->id_kategori)
+            ->where('id_artikel', '!=', $artikel->id_artikel) // Tidak termasuk artikel yang sedang dibuka
+            ->take(5) // Batas maksimal artikel terkait
+            ->get();
 
-    public function likeArtikel(Request $request, $slug)
-    {
-        $artikel = Artikel::where('slug', $slug)->firstOrFail();
-        $artikel->increment('like_count');
-    
-        return back();
+        return view('detail', compact('artikel', 'relatedArtikels', 'komentars', 'relatedArtikelsten'));
     }
 }

@@ -21,8 +21,9 @@ Route::get('/categori', [HomeController::class, 'categori'])->name('categori');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/latest_news', [HomeController::class, 'latest_news'])->name('latest_news');
 Route::get('/berita/{slug}', [HomeController::class, 'showBerita'])->name('berita.show');
-Route::post('/artikel/{slug}/comment', [HomeController::class, 'storeComment'])->name('artikel.comment');
 Route::post('/like-article/{slug}', [HomeController::class, 'likeArtikel'])->name('like.article');
+Route::get('/artikel/{slug}', [HomeController::class, 'showArtikel'])->name('artikel.show');
+
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/admin/login', [UserLoginController::class, 'login'])->name('admin.login');
