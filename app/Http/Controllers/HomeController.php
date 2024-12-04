@@ -13,40 +13,15 @@ class HomeController extends Controller
 {
     public function home()
     {
-        // Artikel terbaru yang trending
-        $trendingLatestAll = Artikel::where('trending', 1)->where('status_publikasi', 'published')
-            ->latest()
-            ->get();
+        $namaDaerah = null; // Tidak ada daerah yang dipilih
+        $trendingLatestAll = Artikel::where('trending', 1)->where('status_publikasi', 'published')->latest()->get();
+        $highlightLatestAll = Artikel::where('highlight', 1)->where('status_publikasi', 'published')->latest()->get();
+        $trendingLatest = Artikel::where('trending', 1)->where('status_publikasi', 'published')->latest()->first();
+        $highlightLatest = Artikel::where('highlight', 1)->where('status_publikasi', 'published')->latest()->first();
+        $artikelsTrending = Artikel::where('trending', 1)->where('status_publikasi', 'published')->latest()->take(3)->get();
+        $artikelsHighlight = Artikel::where('highlight', 1)->where('status_publikasi', 'published')->latest()->take(4)->get();
 
-        // Artikel terbaru yang highlight
-        $highlightLatestAll = Artikel::where('highlight', 1)->where('status_publikasi', 'published')
-            ->latest()
-            ->get();
-
-        // Artikel terbaru yang trending
-        $trendingLatest = Artikel::where('trending', 1)->where('status_publikasi', 'published')
-            ->latest()
-            ->first();
-
-        // Artikel terbaru yang highlight
-        $highlightLatest = Artikel::where('highlight', 1)->where('status_publikasi', 'published')
-            ->latest()
-            ->first();
-
-        // Tiga artikel tambahan yang trending
-        $artikelsTrending = Artikel::where('trending', 1)->where('status_publikasi', 'published')
-            ->latest()
-            ->take(3)
-            ->get();
-
-        // Empat artikel tambahan yang highlight
-        $artikelsHighlight = Artikel::where('highlight', 1)->where('status_publikasi', 'published')
-            ->latest()
-            ->take(4)
-            ->get();
-
-
-        return view('home', compact('trendingLatestAll', 'highlightLatestAll', 'trendingLatest', 'highlightLatest', 'artikelsTrending', 'artikelsHighlight'));
+        return view('home', compact('trendingLatestAll', 'highlightLatestAll', 'trendingLatest', 'highlightLatest', 'artikelsTrending', 'artikelsHighlight', 'namaDaerah'));
     }
 
     public function contact()

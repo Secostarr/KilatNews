@@ -24,7 +24,6 @@ Route::get('/berita/{slug}', [HomeController::class, 'showBerita'])->name('berit
 Route::post('/like-article/{slug}', [HomeController::class, 'likeArtikel'])->name('like.article');
 Route::get('/artikel/{slug}', [HomeController::class, 'showArtikel'])->name('artikel.show');
 
-
 Route::middleware(['guest'])->group(function () {
     Route::get('/admin/login', [UserLoginController::class, 'login'])->name('admin.login');
     Route::post('/admin/login', [UserLoginController::class, 'auth'])->name('admin.auth');

@@ -20,7 +20,7 @@
                                     <li class="news-item">Rem ipsum dolor sit amet, consectetur adipisicing elit.</li>
                                 </ul>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -94,21 +94,11 @@
                     <div class="col-12">
                         <div class="weekly-news-active dot-style d-flex dot-style">
                             @php
-                                $minimumPosts = 4;
-                                $currentPosts = count($trendingLatestAll);
+                            $minimumPosts = 4;
+                            $currentPosts = count($trendingLatestAll);
 
-                                // Jika jumlah postingan kurang dari 4, ulangi dari awal
-                                if ($currentPosts < $minimumPosts) {
-                                    $index = 0;
-                                    while (count($trendingLatestAll) < $minimumPosts) {
-                                        $trendingLatestAll[] = $trendingLatestAll[$index];
-                                        $index = ($index + 1) % $currentPosts;
-                                    }
-                                }
-                            @endphp
-
-                            @foreach($trendingLatestAll as $artikel)
-                            <div class="weekly-single">
+                            // Jika jumlah postingan kurang dari 4, ulangi dari awal
+                            if ($currentPosts < $minimumPosts) { $index=0; while (count($trendingLatestAll) < $minimumPosts) { $trendingLatestAll[]=$trendingLatestAll[$index]; $index=($index + 1) % $currentPosts; } } @endphp @foreach($trendingLatestAll as $artikel) <div class="weekly-single">
                                 <div class="weekly-img">
                                     <img src="assets/img/news/weeklyNews2.jpg" alt="">
                                 </div>
@@ -116,13 +106,13 @@
                                     <span class="color1">{{ $artikel->kategori->nama_kategori }}</span>
                                     <h4><a href="{{ route('berita.show', $artikel->slug) }}">{{ $artikel->judul }}</a></h4>
                                 </div>
-                            </div>
-                            @endforeach
                         </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- End Weekly-News -->
 
@@ -142,23 +132,13 @@
                     <div class="col-12">
                         <div class="weekly2-news-active dot-style d-flex dot-style">
                             @php
-                                $minimumPosts = 5;
-                                $currentPosts = count($highlightLatestAll);
+                            $minimumPosts = 5;
+                            $currentPosts = count($highlightLatestAll);
 
-                                $allArticles = $highlightLatestAll;
+                            $allArticles = $highlightLatestAll;
 
-                                // Jika jumlah postingan kurang dari 5, ulangi dari awal
-                                if ($currentPosts < $minimumPosts) {
-                                    $index = 0;
-                                    while (count($allArticles) < $minimumPosts) {
-                                        $allArticles[] = $highlightLatestAll[$index];
-                                        $index = ($index + 1) % $currentPosts;
-                                    }
-                                }
-                            @endphp
-
-                            @foreach($allArticles as $t)
-                            <div class="weekly2-single">
+                            // Jika jumlah postingan kurang dari 5, ulangi dari awal
+                            if ($currentPosts < $minimumPosts) { $index=0; while (count($allArticles) < $minimumPosts) { $allArticles[]=$highlightLatestAll[$index]; $index=($index + 1) % $currentPosts; } } @endphp @foreach($allArticles as $t) <div class="weekly2-single">
                                 <div class="weekly2-img">
                                     <img src="assets/img/news/weekly2News1.jpg" alt="">
                                 </div>
@@ -166,14 +146,24 @@
                                     <span class="color1">{{ $t->kategori->nama_kategori }}</span>
                                     <h4><a href="{{ route('berita.show', $artikel->slug) }}">{{ $t->judul }}</a></h4>
                                 </div>
-                            </div>
-                            @endforeach
                         </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+
+    <div class="container my-3">
+        <a href="{{ route('home') }}" class="btn btn-primary">Kembali ke Semua Artikel</a>
+        @if(isset($namaDaerah) && $namaDaerah)
+        <h2>Artikel Daerah: {{ ucfirst($namaDaerah) }}</h2>
+        @else
+        @endif
+    </div>
+
+
     <!-- End Weekly2-News -->
 
     <!-- Start Pagination -->
@@ -196,7 +186,6 @@
             </div>
         </div>
     </div>
-    <!-- End Pagination -->
 </main>
-
 @endsection
+<!-- End Pagination -->

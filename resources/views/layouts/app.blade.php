@@ -10,6 +10,8 @@
     <link rel="manifest" href="{{ asset('site.webmanifest')}}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 
     <!-- CSS here -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css')}}">
@@ -148,15 +150,14 @@
                                         <ul id="navigation">
                                             <li><a href="{{ route('home') }}">Home</a></li>
                                             <li><a href="{{ route('categori') }}">Category</a></li>
-                                            <li><a href="{{ route('about') }}">About</a></li>
                                             <li><a href="{{ route('latest_news') }}">Latest News</a></li>
                                             <li><a href="{{ route('contact') }}">Contact</a></li>
                                             <li><a href="#">Daerah</a>
                                                 <ul class="submenu">
-                                                    <li><a href="elements.html">Lampung Timur</a></li>
-                                                    <li><a href="blog.html">Lampung Selatan</a></li>
-                                                    <li><a href="single-blog.html">Metro</a></li>
-                                                    <li><a href="details.html">Lampung Tengah</a></li>
+                                                    <li><a href="{{ route('home', 'lampung-timur') }}">Lampung Timur</a></li>
+                                                    <li><a href="{{ route('home', 'lampung-selatan') }}">Lampung Selatan</a></li>
+                                                    <li><a href="{{ route('home', 'metro') }}">Metro</a></li>
+                                                    <li><a href="{{ route('home', 'lampung-tengah') }}">Lampung Tengah</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -186,75 +187,63 @@
         <!-- Header End -->
     </header>
 
+    <!-- Navbar -->
+    @yield('navbar')
+
     @yield('konten')
 
-    <footer>
-        <!-- Footer Start-->
-        <div class="footer-area footer-padding fix">
-            <div class="container">
-                <div class="row d-flex justify-content-between">
-                    <div class="col-xl-5 col-lg-5 col-md-7 col-sm-12">
-                        <div class="single-footer-caption">
-                            <div class="single-footer-caption">
-                                <!-- logo -->
-                                <div class="footer-logo" style="margin: 10;">
-                                    <a href="index.html"><img src="{{ asset('img/logolagi.jpg') }}" width="200px"></a>
-                                </div>
-                                <div class="footer-tittle">
-                                    <div class="footer-pera">
-                                        <p>Suscipit mauris pede for con sectetuer sodales adipisci for cursus fames lectus tempor da blandit gravida sodales Suscipit mauris pede for con sectetuer sodales adipisci for cursus fames lectus tempor da blandit gravida sodales Suscipit mauris pede for sectetuer.</p>
-                                    </div>
-                                </div>
-                                <!-- social -->
-                                <div class="footer-social">
-                                    <a href="#"><i class="fas fa-user"></i></a>
-                                    <a href="#"><i class="fab fa-github"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-4  col-sm-6">
-                        <div class="single-footer-caption mt-60">
+    <footer class="bg-dark text-white pt-4">
+        <div class="container">
+            <div class="row">
+                <!-- Section 1 -->
+                <div class="col-md-3">
+                    <h6 class="text-uppercase text-white fw-bold">Company Name</h6>
+                    <hr class="mb-4 mt-0" style="width: 60px; background-color: #7c4dff; height: 2px;">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
 
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
-                        <div class="single-footer-caption mb-50 mt-60">
+                <!-- Section 2 -->
+                <div class="col-md-3">
+                    <h6 class="text-uppercase text-white fw-bold">Products</h6>
+                    <hr class="mb-4 mt-0" style="width: 60px; background-color: #7c4dff; height: 2px;">
+                    <ul class="list-unstyled">
+                        <li><a href="#!" class="text-white">MDBootstrap</a></li>
+                        <li><a href="#!" class="text-white">MDWordPress</a></li>
+                        <li><a href="#!" class="text-white">BrandFlow</a></li>
+                        <li><a href="#!" class="text-white">Bootstrap Angular</a></li>
+                    </ul>
+                </div>
 
-                        </div>
-                    </div>
+                <!-- Section 3 -->
+                <div class="col-md-3">
+                    <h6 class="text-uppercase text-white fw-bold">Useful Links</h6>
+                    <hr class="mb-4 mt-0" style="width: 60px; background-color: #7c4dff; height: 2px;">
+                    <ul class="list-unstyled">
+                        <li><a href="#!" class="text-white">Your Account</a></li>
+                        <li><a href="#!" class="text-white">Affiliate</a></li>
+                        <li><a href="#!" class="text-white">Shipping Rates</a></li>
+                        <li><a href="#!" class="text-white">Help</a></li>
+                    </ul>
+                </div>
+
+                <!-- Section 4 -->
+                <div class="col-md-3">
+                    <h6 class="text-uppercase text-white fw-bold">Contact</h6>
+                    <hr class="mb-4 mt-0" style="width: 60px; background-color: #7c4dff; height: 2px;">
+                    <p><i class="fas fa-home"></i> Indonesia, Lampung</p>
+                    <p><i class="fas fa-envelope"></i> news@example.com</p>
+                    <p><i class="fas fa-phone"></i> +62 234 567 88</p>
+                    <p><i class="fas fa-print"></i> +62 234 567 89</p>
                 </div>
             </div>
         </div>
-        <!-- footer-bottom aera -->
-        <div class="footer-bottom-area">
-            <div class="container">
-                <div class="footer-border">
-                    <div class="row d-flex align-items-center justify-content-between">
-                        <div class="col-lg-6">
-                            <div class="footer-copy-right">
-                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                    Copyright &copy;<script>
-                                        document.write(new Date().getFullYear());
-                                    </script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="footer-menu f-right">
-                                <ul>
-                                    <li><a href="#">Terms of use</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Contact</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+        <!-- Copyright -->
+        <div class="text-center py-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2024 Copyright: <a class="text-white" href="https://example.com/">KilatNews.com</a>
         </div>
-        <!-- Footer End-->
     </footer>
+
 
     <!-- JS here -->
 
