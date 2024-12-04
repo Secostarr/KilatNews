@@ -84,7 +84,7 @@
                                                     @endif
                                                     @elseif (Auth::user()->role === 'contributor')
                                                     <!-- Jika role adalah contributor -->
-                                                    <li><a href="{{ Route('dashboard', ) }}" class="dropdown-item text-dark custom-hover">Dashboard Saya</a></li>
+                                                    <li><a href="{{ Route('contributor.dashboard', ) }}" class="dropdown-item text-dark custom-hover">Dashboard Saya</a></li>
                                                     @endif
 
                                                     <li><a href="{{ route('pengguna.logout') }}" class="dropdown-item text-dark custom-hover">Log Out</a></li>
