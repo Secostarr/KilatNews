@@ -23,6 +23,13 @@ class User
         }
 
         // Arahkan ke halaman lain jika role tidak sesuai
-        return redirect()->route('login')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        if (!Auth::user()->role === 'admin') {
+            // Arahkan ke halaman lain jika tidak sesuai role
+            return redirect()->route('admin.login')
+                ->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        } elseif (!Auth::user()->role === 'user' || 'contributor') {
+            return redirect()->route('user.login')
+                ->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
 }

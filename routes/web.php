@@ -41,7 +41,7 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['role:admin'])->group(function () {
     // ADMIN
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/admin/profile', [UserLoginController::class, 'profile'])->name('admin.profile');
+    Route::get('/admin/profile', [UserLoginController::class, 'profileAdmin'])->name('admin.profile');
     Route::get('/admin/logout', [PenggunaController::class, 'logout'])->name('admin.logout');
     Route::get('/admin/profile/edit', [AdminController::class, 'editProfile'])->name('admin.profile.edit');
     Route::put('/admin/profile/edit', [PenggunaController::class, 'update'])->name('admin.profile.update');
@@ -89,7 +89,7 @@ Route::middleware(['role:admin'])->group(function () {
 });
 
 Route::middleware(['role:user,contributor'])->group(function () {
-    Route::get('/user/profile', [UserLoginController::class, 'profile'])->name('user.profile');
+    Route::get('/user/profile', [UserLoginController::class, 'profileUser'])->name('user.profile');
     Route::get('/user/logout', [PenggunaController::class, 'logout'])->name('pengguna.logout');
     Route::get('/user/profile/edit', [PenggunaController::class, 'edit'])->name('pengguna.profile.edit');
     Route::put('/user/profile/edit', [PenggunaController::class, 'update'])->name('pengguna.profile.update');

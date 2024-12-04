@@ -70,9 +70,11 @@
                                                     {{ Auth::user()->nama }}
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded m-0">
+                                                    @if(Auth::user()->role === 'admin')
+                                                    <li><a href="{{ Route('admin.profile') }}" class="dropdown-item text-dark custom-hover">My Profile</a></li>
+                                                    @elseif(Auth::user()->role === 'user')
                                                     <li><a href="{{ Route('user.profile') }}" class="dropdown-item text-dark custom-hover">My Profile</a></li>
-
-                                                    @if (Auth::user()->role === 'user')
+                                                    @endif
                                                     @php
                                                     // Periksa apakah pengguna sudah mendaftar
                                                     $sudahMendaftar = \App\Models\Pendaftaran::where('id_user', Auth::user()->id_user)->exists();
@@ -83,13 +85,15 @@
                                                     @elseif ($sudahMendaftar)
                                                     <!-- Jika pengguna sudah mendaftar -->
                                                     <li><a href="{{ Route('pendaftaran') }}" class="dropdown-item text-dark custom-hover">Sudah Mendaftar</a></li>
-                                                    @endif
                                                     @elseif (Auth::user()->role === 'contributor')
                                                     <!-- Jika role adalah contributor -->
                                                     <li><a href="{{ Route('contributor.dashboard', ) }}" class="dropdown-item text-dark custom-hover">Dashboard Saya</a></li>
                                                     @endif
-
+                                                    @if(Auth::user()->role === 'admin')
+                                                    <li><a href="{{ route('admin.logout') }}" class="dropdown-item text-dark custom-hover">Log Out</a></li>
+                                                    @elseif(Auth::user()->role === 'user' || 'contributor')
                                                     <li><a href="{{ route('pengguna.logout') }}" class="dropdown-item text-dark custom-hover">Log Out</a></li>
+                                                    @endif
                                                 </ul>
                                             </div>
                                             <style>

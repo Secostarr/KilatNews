@@ -23,9 +23,14 @@ class UserLoginController extends Controller
         return view('auth.user_register');
     }
 
-    public function profile()
+    public function profileAdmin()
     {
         return view('admin.profile_admin');
+    }
+
+    public function profileUser()
+    {
+        return view('profile');
     }
 
     public function auth(Request $request)
@@ -45,7 +50,7 @@ class UserLoginController extends Controller
                 Auth::logout();
                 return redirect()->route('admin.login')->withErrors(['login_error' => 'Halaman tidak sesuai untuk role anda.']);
             }
-            
+
 
             // Arahkan ke halaman sesuai role
             if ($user->role === 'admin') {
