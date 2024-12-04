@@ -84,8 +84,6 @@ Route::middleware(['role:admin'])->group(function () {
     Route::post('/admin/notifikasi/approve/{id}', [NotifikasiController::class, 'approve'])->name('admin.notifikasi.approve');
     Route::delete('/pendaftaran/{id}/rejected', [NotifikasiController::class, 'rejected'])->name('pendaftaran.rejected');
 
-    Route::get('/admin/notifikasi/penyetor', [NotifikasiController::class, 'penyetor'])->name('admin.pengguna.notifikasi.penyetor');
-
     // Pengaturan
     Route::get('/admin/pengaturan', [PengaturanController::class, 'pengaturan'])->name('admin.pengaturan');
 });
@@ -99,5 +97,10 @@ Route::middleware(['role:user,contributor'])->group(function () {
     Route::get('/home/pedaftaran', [PenggunaController::class, 'pendaftaran'])->name('pendaftaran');
     Route::post('/home/pedaftaran/berhasil', [PenggunaController::class, 'store'])->name('pendaftaran.store');
 
-    Route::get('/home/dashboard/contributor', [ContributorController::class, 'dashboard'])->name('dashboard');
+    Route::get('/home/dashboard/contributor', [ContributorController::class, 'dashboard'])->name('contributor.dashboard');
+    Route::get('/home/dashboard/contributor/create', [ContributorController::class, 'create'])->name('contributor.dashboard.create');
+    Route::post('/home/dashboard/contributor/store', [ContributorController::class, 'store'])->name('contributor.dashboard.store');
+    Route::get('/home/dashboard/contributor/edit/{id_artikel}', [ContributorController::class, 'edit'])->name('contributor.dashboard.edit');
+    Route::put('/home/dashboard/contributor/update/{id_artikel}', [ContributorController::class, 'update'])->name('contributor.dashboard.update');
+    Route::delete('/home/dashboard/contributor/delete/{id_artikel}', [ContributorController::class, 'delete'])->name('contributor.dashboard.delete');
 });

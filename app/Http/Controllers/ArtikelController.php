@@ -102,7 +102,7 @@ class ArtikelController extends Controller
             'media_utama' => 'file|mimes:jpg,jpeg,png|max:2048',
             'trending' => 'in:true,false',
             'status_publikasi' => 'nullable|in:published,draft,archived', // Nullable jika kosong
-            'highlight' => 'in:true,false',
+            'highlight' => 'in:1,0',
             'id_kategori' => 'nullable',
             'id_tag' => 'nullable',
             'lokasi' => 'nullable|string|max:255',
@@ -143,7 +143,7 @@ class ArtikelController extends Controller
             'media_utama' => $media_utama,
             'trending' => $request->trending === 'true',
             'status_publikasi' => $status_publikasi, // Gunakan nilai sebelumnya jika kosong
-            'highlight' => $request->highlight === 'true',
+            'highlight' => $request->highlight == '1',
             'id_kategori' => $id_kategori,
             'id_tag' => $id_tag,
             'lokasi' => $request->lokasi,

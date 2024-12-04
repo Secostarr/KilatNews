@@ -95,12 +95,9 @@
             </div>
         </div>
 
-        <div class="d-flex gap-5 mt-3 justify-content-center">
+        <div class="d-flex gap-5 mt-3">
             <a href="{{ Route('admin.pengguna.notifikasi.pendaftar') }}" class="btn btn-custom btn-custom-success">
                 <i class="fas fa-user-check"></i> Notif Konfirmasi Pendaftar
-            </a>
-            <a href="{{ Route('admin.pengguna.notifikasi.penyetor') }}" class="btn btn-custom btn-custom-primary">
-                <i class="fas fa-file-signature"></i> Notif Konfirmasi Penyetor
             </a>
         </div>
     </div>

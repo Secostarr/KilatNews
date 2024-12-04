@@ -92,19 +92,18 @@
                             <h5>Highlight Berita</h5>
                             <div class="d-flex gap-3">
                                 <div class="form-group form-check mb-3">
-                                    <input type="radio" class="form-check-input" id="highlightTrue"
-                                        name="highlight"
-                                        value="1"
-                                        {{ old('highlight', $artikel->highlight) == true ? 'checked' : '' }}>
+                                    <input type="radio" class="form-check-input" id="highlightTrue" name="highlight" value="1"
+                                        {{ old('highlight', $artikel->highlight) == '1' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="highlightTrue">Iya</label>
                                 </div>
                                 <div class="form-group form-check mb-3">
-                                    <input type="radio" class="form-check-input" id="highlightFalse"
-                                        name="highlight"
-                                        value="0"
-                                        {{ old('highlight', $artikel->highlight) == false ? 'checked' : '' }}>
+                                    <input type="radio" class="form-check-input" id="highlightFalse" name="highlight" value="0"
+                                        {{ old('highlight', $artikel->highlight) == '0' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="highlightFalse">Tidak</label>
                                 </div>
+                                @error('highlight')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
 

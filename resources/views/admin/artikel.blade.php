@@ -78,7 +78,7 @@
                 <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false"><i class="bi bi-archive-fill me-2"></i>Draft</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false"><i class="bi bi-eye-slash-fill me-2"></i>Arcived</button>
+                <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false"><i class="bi bi-eye-slash-fill me-2"></i>Archived</button>
             </li>
         </ul>
 
@@ -101,6 +101,9 @@
                         <h5 class="fw-bold text-truncate" style="max-width: 100%;">{{ $artikel->judul }}</h5>
                         <p class="text-muted text-truncate">
                             {{ strip_tags($artikel->konten) }}
+                        </p>
+                        <p class="text-muted text-truncate">
+                            Penulis : {{ $artikel->user->nama }}
                         </p>
                         <div class="d-flex flex-wrap gap-2">
                             <a href="{{ route('admin.artikel.berita.detail', $artikel->id_artikel) }}" class="btn btn-info btn-sm">Detail</a>
@@ -125,6 +128,9 @@
                         <p class="text-muted text-truncate">
                             {{ strip_tags($artikel->konten) }}
                         </p>
+                        <p class="text-muted text-truncate">
+                            Penulis : {{ $artikel->user->nama }}
+                        </p>
                         <div class="d-flex flex-wrap gap-2">
                             <a href="{{ route('admin.artikel.berita.detail', $artikel->id_artikel) }}" class="btn btn-info btn-sm">Detail</a>
                             <a href="{{ route('admin.artikel.berita.edit', $artikel->id_artikel) }}" class="btn btn-warning btn-sm">Edit</a>
@@ -135,7 +141,6 @@
                 @endforeach
             </div>
 
-            <!-- Tab Archived -->
             <!-- Tab Archived -->
             <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                 @foreach ($archived as $artikel)
@@ -148,6 +153,9 @@
                         <h5 class="fw-bold text-truncate" style="max-width: 100%;">{{ $artikel->judul }}</h5>
                         <p class="text-muted text-truncate">
                             {{ strip_tags($artikel->konten) }}
+                        </p>
+                        <p class="text-muted text-truncate">
+                            Penulis : {{ $artikel->user->nama }}
                         </p>
                         <div class="d-flex flex-wrap gap-2">
                             <a href="{{ route('admin.artikel.berita.detail', $artikel->id_artikel) }}" class="btn btn-info btn-sm">Detail</a>
