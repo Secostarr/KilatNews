@@ -186,4 +186,18 @@ class PenggunaController extends Controller
         // Redirect atau response
         return redirect()->back()->with('success', 'Pendaftaran berhasil!');
     }
+
+    public function delete($id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->back()->with('error', 'User tidak ditemukan.');
+        }
+
+        // Hapus data pengguna
+        $user->delete();
+
+        return redirect()->back()->with('success', 'User berhasil dihapus.');
+    }   
 }

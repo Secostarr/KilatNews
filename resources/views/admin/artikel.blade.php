@@ -87,7 +87,7 @@
                 <input type="text" id="search-input" class="form-control search-input" placeholder="Cari...">
                 <i class="fas fa-search search-icon"></i>
             </div>
-        </div>
+        </div>  
 
         <div class="tab-content" id="pills-tabContent">
             <!-- Tab Published -->
