@@ -127,7 +127,7 @@
                             <select class="form-select" id="kategori" name="id_kategori">
                                 <option value="" selected disabled>Pilih Kategori</option>
                                 @foreach($kategoris as $kategori)
-                                <option value="{{ $artikel->id_artikel }}" {{ $kategori->id_kategori == $kategori->id_kategori ? 'selected' : '' }}>{{ $kategori->nama_kategori }}</option>
+                                <option value="{{ $kategori->id_kategori }}" {{ $artikel->id_kategori == $kategori->id_kategori ? 'selected' : '' }}>{{ $kategori->nama_kategori }}</option>
                                 @endforeach
                             </select>
                             @error('id_kategori')
