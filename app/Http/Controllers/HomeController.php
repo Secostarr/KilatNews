@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\artikel;
+use App\Models\Artikel; // Pastikan model Artikel ada
 use App\Models\kategori;
 use App\Models\komentar;
 use Illuminate\Support\Str;
@@ -13,7 +12,7 @@ class HomeController extends Controller
 {
     public function home()
     {
-        $namaDaerah = null; // Tidak ada daerah yang dipilih
+        $namaDaerah = null;
         $trendingLatestAll = Artikel::where('trending', 1)->where('status_publikasi', 'published')->latest()->get();
         $highlightLatestAll = Artikel::where('highlight', 1)->where('status_publikasi', 'published')->latest()->get();
         $trendingLatest = Artikel::where('trending', 1)->where('status_publikasi', 'published')->latest()->first();
@@ -24,6 +23,17 @@ class HomeController extends Controller
         return view('home', compact('trendingLatestAll', 'highlightLatestAll', 'trendingLatest', 'highlightLatest', 'artikelsTrending', 'artikelsHighlight', 'namaDaerah'));
     }
 
+    public function latest_news()
+    {
+        // Ambil berita yang dibuat dalam 5 hari terakhir
+        $latest_news = Artikel::where('created_at', '>=', now()->subDays(5))
+            ->where('status_publikasi', 'published')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('latest_news', compact('latest_news'));
+    }
+
     public function contact()
     {
         return view('contact');
@@ -31,8 +41,8 @@ class HomeController extends Controller
 
     public function categori()
     {
-        $artikels = artikel::where('status_publikasi', 'published')->get();
-        $artikelstwo = artikel::where('status_publikasi', 'published')->get();
+        $artikels = Artikel::where('status_publikasi', 'published')->get();
+        $artikelstwo = Artikel::where('status_publikasi', 'published')->get();
         $categoris = kategori::all();
         return view('categori', compact('artikels', 'artikelstwo', 'categoris'));
     }
@@ -40,11 +50,6 @@ class HomeController extends Controller
     public function about()
     {
         return view('about');
-    }
-
-    public function latest_news()
-    {
-        return view('latest_news');
     }
 
     public function showBerita($slug)
@@ -71,7 +76,7 @@ class HomeController extends Controller
             ->get();
 
         // Komentar
-        $komentars = Komentar::where('id_artikel', $artikel->id_artikel)->get();
+        $komentars = komentar::where('id_artikel', $artikel->id_artikel)->get();
 
         // Ambil artikel terkait berdasarkan kategori
         $relatedArtikelsten = Artikel::where('id_kategori', $artikel->id_kategori)
