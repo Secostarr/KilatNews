@@ -3,85 +3,41 @@
 @section('konten')
 
 <main>
-        <!-- Start Youtube -->
-        <div class="youtube-area">
-            <div class="container">
-                <!-- Hot Aimated News Tittle-->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="trending-tittle">
-                            <strong>Trending now</strong>                           
-                        </div>
+    <!-- Start Latest News -->
+    <div class="latest-news">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="trending-tittle">
+                        <strong>Latest News</strong>
                     </div>
                 </div>
-                
             </div>
-        </div> 
-         
-                   <div class="row">
-                        <div class="col-lg-8">
-                            <!-- Trending Tittle -->
-                            <div class="about-right mb-90">
-                                <div class="about-img">
-                                    <img src="assets/img/trending/trending_top.jpg" alt="">
+            <div class="row">
+                @if($latest_news->isEmpty())
+                    <div class="col-12">
+                        <p>No news available from the last 5 days.</p>
+                    </div>
+                @else
+                    @foreach($latest_news as $news)
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="single-news">
+                                <div class="news-img">
+                                    <img src="{{ asset('storage/' . $news->media_utama) }}" alt="{{ $news->judul }}" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
                                 </div>
-                                <div class="social-share pt-30">
-                                    <div class="section-tittle">
-                                        <h3 class="mr-20">Share:</h3>
-                                        <ul>
-                                            <li><a href="#"><img src="assets/img/news/icon-ins.png" alt=""></a></li>
-                                            <li><a href="#"><img src="assets/img/news/icon-fb.png" alt=""></a></li>
-                                            <li><a href="#"><img src="assets/img/news/icon-tw.png" alt=""></a></li>
-                                            <li><a href="#"><img src="assets/img/news/icon-yo.png" alt=""></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- From -->
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <form class="form-contact contact_form mb-80" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <textarea class="form-control w-100 error" name="message" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder="Enter Message"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <input class="form-control error" name="name" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" placeholder="Enter your name">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <input class="form-control error" name="email" id="email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Email">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <input class="form-control error" name="subject" id="subject" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'" placeholder="Enter Subject">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group mt-3">
-                                            <button type="submit" class="button button-contactForm boxed-btn">Send</button>
-                                        </div>
-                                    </form>
+                                <div class="news-content">
+                                    <h4><a href="{{ route('berita.show', $news->slug) }}">{{ $news->judul }}</a></h4>
+                                    <p>{{ Str::limit(strip_tags($news->konten), 50) }}</p>
+                                    <span class="news-date">{{ $news->created_at->format('d M Y') }}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4">
-                            <!-- Section Tittle -->
-                            
-                            <!-- New Poster -->
-                            <div class="news-poster d-none d-lg-block">
-                                <img src="assets/img/news/news_card.jpg" alt="">
-                            </div>
-                        </div>
-                   </div>
+                    @endforeach
+                @endif
             </div>
         </div>
-        <!-- About US End -->
-    </main>
+    </div>
+    <!-- Latest News End -->
+</main>
 
 @endsection
