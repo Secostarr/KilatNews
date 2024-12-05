@@ -45,7 +45,6 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/admin/logout', [PenggunaController::class, 'logout'])->name('admin.logout');
     Route::get('/admin/profile/edit', [AdminController::class, 'editProfile'])->name('admin.profile.edit');
     Route::put('/admin/profile/edit', [PenggunaController::class, 'update'])->name('admin.profile.update');
-
     // Artikel
     Route::get('/admin/artikel', [ArtikelController::class, 'artikel'])->name('admin.artikel.berita');
     Route::get('/admin/artikel/tambah', [ArtikelController::class, 'create'])->name('admin.artikel.berita.create');
@@ -75,8 +74,9 @@ Route::middleware(['role:admin'])->group(function () {
     // Pengguna
     Route::get('/admin/pengguna', [PenggunaController::class, 'pengguna'])->name('admin.pengguna.user');
     Route::get('/admin/pengguna/tambah', [PenggunaController::class, 'create'])->name('admin.pengguna.user.create');
-    Route::get('admin/pengguna/edit/{id}', [PenggunaController::class, 'edit'])->name('admin.pengguna.user.edit');
-    Route::put('admin/pengguna/edit/{id}', [PenggunaController::class, 'update'])->name('admin.pengguna.user.update');
+    Route::get('/admin/pengguna/edit/{id}', [PenggunaController::class, 'edit'])->name('admin.pengguna.user.edit');
+    Route::put('/admin/pengguna/edit/{id}', [PenggunaController::class, 'update'])->name('admin.pengguna.user.update');
+    Route::delete('/admin/pengguna/delete/{id}', [PenggunaController::class, 'delete'])->name('admin.pengguna.user.delete');
 
     Route::get('/admin/notifikasi', [NotifikasiController::class, 'notifikasi'])->name('admin.pengguna.notifikasi');
 
