@@ -156,7 +156,6 @@
                                             <li><a href="{{ route('home') }}">Home</a></li>
                                             <li><a href="{{ route('categori') }}">Category</a></li>
                                             <li><a href="{{ route('latest_news') }}">Latest News</a></li>
-                                            <li><a href="{{ route('contact') }}">Contact</a></li>
                                             <li><a href="#">Daerah</a>
                                                 <ul class="submenu">
                                                     <li><a href="{{ route('home', 'lampung-timur') }}">Lampung Timur</a></li>
