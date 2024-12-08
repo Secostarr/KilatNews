@@ -97,12 +97,32 @@
                                 <td class="d-flex">
                                     <a href="{{ route('admin.artikel.tag.edit', $tag->id_tag) }}" class="btn btn-outline-warning btn-sm me-1 shadow-sm">
                                         <i class="fas fa-edit"></i>Edit</a>
-                                        <form action="{{ route('admin.artikel.tag.delete', $tag->id_tag) }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            <button type="submit" onclick="return confirm('Yakin Ingin Hapus Data Ini?')" class="btn btn-outline-danger btn-sm shadow-sm">
-                                                <i class="fas fa-trash">Hapus</i> 
-                                            </button>
-                                        </form>
+                                    <form id="delete-form-{{ $tag->id_tag }}" action="{{ route('admin.artikel.tag.delete', $tag->id_tag) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" onclick="confirmDelete({{ $tag->id_tag }})" class="btn btn-outline-danger btn-sm shadow-sm">
+                                            <i class="fas fa-trash"></i> Hapus
+                                        </button>
+                                    </form>
+                                    <script>
+                                        function confirmDelete(id) {
+                                            Swal.fire({
+                                                title: "Yakin ingin menghapus?",
+                                                text: "Data yang dihapus tidak bisa dikembalikan!",
+                                                icon: "warning",
+                                                showCancelButton: true,
+                                                confirmButtonColor: "#3085d6",
+                                                cancelButtonColor: "#d33",
+                                                confirmButtonText: "Ya, hapus!",
+                                                cancelButtonText: "Batal"
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    // Submit form jika konfirmasi diterima
+                                                    document.getElementById('delete-form-' + id).submit();
+                                                }
+                                            });
+                                        }
+                                    </script>
                                 </td>
                             </tr>
                             @endforeach

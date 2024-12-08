@@ -106,15 +106,15 @@
             <div class="d-flex justify-content-center gap-4">
                 <div class="text-center">
                     <i class="fas fa-eye text-secondary fa-2x"></i>
-                    <p class="mt-1 text-dark">{{ $artikel->views ?? 0 }} Views</p>
+                    <p class="mt-1 text-dark">{{ $artikel->viewer_count ?? 0 }} Views</p>
                 </div>
                 <div class="text-center">
                     <i class="fas fa-thumbs-up text-primary fa-2x"></i>
-                    <p class="mt-1 text-dark">{{ $artikel->likes ?? 0 }} Likes</p>
+                    <p class="mt-1 text-dark">{{ $artikel->like_count ?? 0 }} Likes</p>
                 </div>
                 <div class="text-center">
                     <i class="fas fa-comments text-success fa-2x"></i>
-                    <p class="mt-1 text-dark">{{ $artikel->comments_count ?? 0 }} Komentar</p>
+                    <p class="mt-1 text-dark">{{ $artikel->comment_count ?? 0 }} Komentar</p>
                 </div>
             </div>
         </div>

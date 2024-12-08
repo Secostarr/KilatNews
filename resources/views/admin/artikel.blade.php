@@ -31,6 +31,8 @@
         font-size: 20px;
         color: #333;
         transition: transform 0.4s;
+        z-index: 1;
+        /* Pastikan ikon berada di atas elemen lain */
     }
 
     /* Active state of input field */
@@ -87,7 +89,7 @@
                 <input type="text" id="search-input" class="form-control search-input" placeholder="Cari...">
                 <i class="fas fa-search search-icon"></i>
             </div>
-        </div>  
+        </div>
 
         <div class="tab-content" id="pills-tabContent">
             <!-- Tab Published -->
@@ -108,7 +110,11 @@
                         <div class="d-flex flex-wrap gap-2">
                             <a href="{{ route('admin.artikel.berita.detail', $artikel->id_artikel) }}" class="btn btn-info btn-sm">Detail</a>
                             <a href="{{ route('admin.artikel.berita.edit', $artikel->id_artikel) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <a href="{{ route('admin.artikel.berita.delete', $artikel->id_artikel) }}" onclick="return confirm('Yakin ingin menghapus artikel ini?')" class="btn btn-danger btn-sm">Hapus</a>
+                            <a href="javascript:void(0);"
+                                onclick="confirmDelete('{{ route('admin.artikel.berita.delete', $artikel->id_artikel) }}')"
+                                class="btn btn-danger btn-sm">
+                                Hapus
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -134,7 +140,11 @@
                         <div class="d-flex flex-wrap gap-2">
                             <a href="{{ route('admin.artikel.berita.detail', $artikel->id_artikel) }}" class="btn btn-info btn-sm">Detail</a>
                             <a href="{{ route('admin.artikel.berita.edit', $artikel->id_artikel) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <a href="{{ route('admin.artikel.berita.delete', $artikel->id_artikel) }}" onclick="return confirm('Yakin ingin menghapus artikel ini?')" class="btn btn-danger btn-sm">Hapus</a>
+                            <a href="javascript:void(0);"
+                                onclick="confirmDelete('{{ route('admin.artikel.berita.delete', $artikel->id_artikel) }}')"
+                                class="btn btn-danger btn-sm">
+                                Hapus
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -160,7 +170,11 @@
                         <div class="d-flex flex-wrap gap-2">
                             <a href="{{ route('admin.artikel.berita.detail', $artikel->id_artikel) }}" class="btn btn-info btn-sm">Detail</a>
                             <a href="{{ route('admin.artikel.berita.edit', $artikel->id_artikel) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <a href="{{ route('admin.artikel.berita.delete', $artikel->id_artikel) }}" onclick="return confirm('Yakin ingin menghapus artikel ini?')" class="btn btn-danger btn-sm">Hapus</a>
+                            <a href="javascript:void(0);"
+                                onclick="confirmDelete('{{ route('admin.artikel.berita.delete', $artikel->id_artikel) }}')"
+                                class="btn btn-danger btn-sm">
+                                Hapus
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -209,6 +223,24 @@
                 console.log('Tab aktif:', e.target.id);
             });
         });
+
+        function confirmDelete(deleteUrl) {
+            Swal.fire({
+                title: "Yakin ingin menghapus?",
+                text: "Artikel yang dihapus tidak bisa dikembalikan!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya, hapus!",
+                cancelButtonText: "Batal"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect ke URL penghapusan jika dikonfirmasi
+                    window.location.href = deleteUrl;
+                }
+            });
+        }
     </script>
 
     @endsection

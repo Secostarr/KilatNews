@@ -104,9 +104,30 @@
                                     <a href="{{ Route('admin.artikel.kategori.edit', $kategori->id_kategori) }}" class="btn btn-outline-warning btn-sm me-1 shadow-sm">
                                         <i class="fas fa-edit"></i> Edit
                                     </a>
-                                    <a href="{{ Route('admin.artikel.kategori.delete', $kategori->id_kategori) }}" onclick="return confirm('Yakin Ingin Hapus Data Ini?')" class="btn btn-outline-danger btn-sm shadow-sm">
+                                    <a href="javascript:void(0);"
+                                        onclick="confirmDelete('{{ Route('admin.artikel.kategori.delete', $kategori->id_kategori) }}')"
+                                        class="btn btn-outline-danger btn-sm shadow-sm">
                                         <i class="fas fa-trash"></i> Hapus
                                     </a>
+                                    <script>
+                                        function confirmDelete(deleteUrl) {
+                                            Swal.fire({
+                                                title: "Yakin ingin menghapus?",
+                                                text: "Data yang dihapus tidak bisa dikembalikan!",
+                                                icon: "warning",
+                                                showCancelButton: true,
+                                                confirmButtonColor: "#3085d6",
+                                                cancelButtonColor: "#d33",
+                                                confirmButtonText: "Ya, hapus!",
+                                                cancelButtonText: "Batal"
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    // Redirect ke URL penghapusan jika dikonfirmasi
+                                                    window.location.href = deleteUrl;
+                                                }
+                                            });
+                                        }
+                                    </script>
                                 </td>
                             </tr>
                             @endforeach
