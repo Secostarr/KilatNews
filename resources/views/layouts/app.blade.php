@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
+    <!-- jQuery -->
+    <script src="{{ asset('assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
 
     <!-- CSS here -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css')}}">
@@ -28,6 +30,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
 
 </head>
 
@@ -129,8 +133,9 @@
                         <div class="row d-flex align-items-center">
                             <!-- Logo -->
                             <div class="col-xl-3 col-lg-3 col-md-3 pt-0 pb-0">
-                                <div class="logo">
+                                <div class="logo d-flex align-items-center">
                                     <a href="index.html"><img src="{{ asset('img/logokilat.jpg') }}" width="200" alt=""></a>
+                                    <p>{{ $pengaturan->nama_situs }}</p>
                                 </div>
                             </div>
                             <div class="col-xl-9 col-lg-9 col-md-9">
@@ -156,6 +161,7 @@
                                             <li><a href="{{ route('home') }}">Home</a></li>
                                             <li><a href="{{ route('categori') }}">Category</a></li>
                                             <li><a href="{{ route('latest_news') }}">Latest News</a></li>
+                                            <li><a href="{{ route('contact') }}">Contact</a></li>
                                             <li><a href="#">Daerah</a>
                                                 <ul class="submenu">
                                                     <li><a href="{{ route('home', 'lampung-timur') }}">Lampung Timur</a></li>
@@ -234,10 +240,9 @@
                 <div class="col-md-3">
                     <h6 class="text-uppercase text-white fw-bold">Contact</h6>
                     <hr class="mb-4 mt-0" style="width: 60px; background-color: #7c4dff; height: 2px;">
-                    <p><i class="fas fa-home"></i> Indonesia, Lampung</p>
-                    <p><i class="fas fa-envelope"></i> news@example.com</p>
-                    <p><i class="fas fa-phone"></i> +62 234 567 88</p>
-                    <p><i class="fas fa-print"></i> +62 234 567 89</p>
+                    <p><i class="fas fa-home"></i>{{ $pengaturan->lokasi }}</p>
+                    <p><i class="fas fa-envelope"></i>{{ $pengaturan->kontak_email }}</p>
+                    <p><i class="fas fa-phone"></i>{{ $pengaturan->kontak_nomor }}</p>
                 </div>
             </div>
         </div>
@@ -254,7 +259,6 @@
     <!-- All JS Custom Plugins Link Here here -->
     <script src="{{ asset('assets/js/vendor/modernizr-3.5.0.min.js') }}"></script>
     <!-- Jquery, Popper, Bootstrap -->
-    <script src="{{ asset('assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <!-- Jquery Mobile Menu -->

@@ -24,7 +24,7 @@
                 <div class="col-lg-8">
                     <div class="about-right mb-90">
                         <div class="about-img">
-                            <img src="{{ asset('storage/' . $artikel->media_utama) }}" alt="{{ $artikel->judul }}">
+                            <img src="{{ asset('storage/' . $artikel->media_utama) }}" alt="{{ $artikel->judul }}" >
                         </div>
                         <div class="section-tittle mb-30 pt-30">
                             <h3>{{ $artikel->judul }}</h3>
@@ -65,7 +65,7 @@
                     @foreach($relatedArtikelsten as $artikel)
                     <div class="trand-right-single d-flex">
                         <div class="trand-right-img">
-                            <img src="{{ asset('storage/'. $artikel->media_utama) }}" alt="" style="width: 100px; height: 150px; object-fit: cover;">
+                            <img src="{{ asset('storage/'. $artikel->media_utama) }}" alt="" style="width: 150px; height: 150px; object-fit: cover;">
                         </div>
                         <div class="trand-right-cap">
                             <span class="color1">{{ $artikel->kategori->nama_kategori }}</span>

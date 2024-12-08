@@ -6,12 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-  
-
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::table('artikels', function (Blueprint $table) {
-            $table->integer('view_count')->default(0); // Menambahkan kolom view_count dengan nilai default 0
+        Schema::table('pengaturan_situs', function (Blueprint $table) {
+            $table->string('kontak_nomor');
+            $table->string('lokasi');
         });
     }
 
@@ -20,8 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('artikels', function (Blueprint $table) {
-            $table->dropColumn('view_count');
+        Schema::table('pengaturan_situs', function (Blueprint $table) {
+            //
         });
     }
 };
