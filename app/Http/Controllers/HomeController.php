@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Artikel; // Pastikan model Artikel ada
 use App\Models\kategori;
 use App\Models\komentar;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class HomeController extends Controller
@@ -85,5 +86,19 @@ class HomeController extends Controller
             ->get();
 
         return view('detail', compact('artikel', 'relatedArtikels', 'komentars', 'relatedArtikelsten'));
+    }
+
+    public function getLokasi()
+    {
+        try {
+            $lokasi = DB::table('pengaturan_situs')->value('lokasi'); // Ambil nama lokasi dari database
+            if (!$lokasi) {
+                return response()->json(['lokasi' => null, 'error' => 'Lokasi tidak ditemukan'], 404);
+            }
+
+            return response()->json(['lokasi' => $lokasi]); // Kirim nama lokasi
+        } catch (\Exception $e) {
+            return response()->json(['lokasi' => null, 'error' => 'Gagal mengambil lokasi dari database'], 500);
+        }
     }
 }

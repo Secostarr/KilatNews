@@ -1,71 +1,129 @@
 @extends('layouts.app')
-@section('title', 'Home')
+@section('title', 'Contact')
 @section('konten')
 
-
-<!-- ================ contact section start ================= -->
+<!-- ================ Contact Section Start ================= -->
 <section class="contact-section">
     <div class="container">
-        <div class="d-none d-sm-block mb-5 pb-4"></div>
-        <div class="row">
-            <div class="col-12">
-                <h2 class="contact-title">Get in Touch</h2>
-            </div>
-            <div class="col-lg-8">
-                <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder=" Enter Message"></textarea>
-                            </div>
+        <div class="text-center mb-5">
+            <h2 class="section-title text-uppercase">Contact Us</h2>
+            <p class="section-subtitle">We'd love to hear from you! Reach out to us through any of the channels below.</p>
+        </div>
+        <div class="row justify-content-center">
+            <!-- Contact Info Cards -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm border-0 text-center">
+                    <div class="card-body">
+                        <div class="contact-icon mb-3">
+                            <i class="ti-home text-primary display-4"></i>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <input class="form-control valid" name="name" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" placeholder="Enter your name">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <input class="form-control valid" name="email" id="email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Email">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <input class="form-control" name="subject" id="subject" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'" placeholder="Enter Subject">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group mt-3">
-                        <button type="submit" class="button button-contactForm boxed-btn">Send</button>
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-3 offset-lg-1">
-                <div class="media contact-info">
-                    <span class="contact-info__icon"><i class="ti-home"></i></span>
-                    <div class="media-body">
-                        <h3>Buttonwood, California.</h3>
-                        <p>Rosemead, CA 91770</p>
+                        <h5 class="card-title">Our Office</h5>
+                        <p>{{ $pengaturan->lokasi }}</p>
+                        <span>Rosemead, CA 91770</span>
                     </div>
                 </div>
-                <div class="media contact-info">
-                    <span class="contact-info__icon"><i class="ti-tablet"></i></span>
-                    <div class="media-body">
-                        <h3>+1 253 565 2365</h3>
-                        <p>Mon to Fri 9am to 6pm</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm border-0 text-center">
+                    <div class="card-body">
+                        <div class="contact-icon mb-3">
+                            <i class="ti-tablet text-primary display-4"></i>
+                        </div>
+                        <h5 class="card-title">Call Us</h5>
+                        <p>{{ $pengaturan->kontak_nomor }}</p>
+                        <span>Mon to Fri, 9 AM - 6 PM</span>
                     </div>
                 </div>
-                <div class="media contact-info">
-                    <span class="contact-info__icon"><i class="ti-email"></i></span>
-                    <div class="media-body">
-                        <h3>support@colorlib.com</h3>
-                        <p>Send us your query anytime!</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm border-0 text-center">
+                    <div class="card-body">
+                        <div class="contact-icon mb-3">
+                            <i class="ti-email text-primary display-4"></i>
+                        </div>
+                        <h5 class="card-title">Email Us</h5>
+                        <p>{{ $pengaturan->kontak_email }}</p>
+                        <span>We respond within 24 hours</span>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Optional: Map Section -->
+        <div class="mt-5">
+            <h4 class="text-center mb-4">Find Us Here</h4>
+            <div id="map" style="height: 400px; border-radius: 10px; overflow: hidden;"></div>
+            <input type="hidden" id="lokasi" class="form-control mt-3" placeholder="Nama lokasi akan muncul di sini" value="{{ $pengaturan->lokasi }}" readonly>
+        </div>
     </div>
 </section>
-<!-- ================ contact section end ================= -->
+<!-- ================ Contact Section End ================= -->
+<script>
+    // Inisialisasi Leaflet Map
+    var map = L.map('map').setView([-6.200000, 106.816666], 10); // Jakarta sebagai default
 
+    // Tambahkan tile dari OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    var marker;
+
+    // Fungsi untuk mendapatkan nama lokasi dari koordinat
+    function getLocationName(lat, lng) {
+        $.getJSON(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`, function(data) {
+            $('#lokasi').val(data.display_name); // Menampilkan nama lokasi pada input "lokasi"
+        });
+    }
+
+    // Ambil data lokasi dari server melalui API
+    $.ajax({
+        url: '/api/lokasi', // Endpoint API backend
+        method: 'GET',
+        success: function(response) {
+            if (response && response.lokasi) {
+                // Nama lokasi yang diterima dari server
+                var lokasi = response.lokasi;
+
+                // Menampilkan nama lokasi di input
+                $('#lokasi').val(lokasi);
+
+                // Update peta untuk menunjukkan lokasi
+                updateMapWithLocationName(lokasi);
+            } else {
+                alert("Lokasi tidak ditemukan di database!");
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Error: ", error);
+            console.error("Status: ", status);
+            console.error("Response: ", xhr.responseText);
+            alert("Gagal mengambil data lokasi dari server!");
+        }
+    });
+
+    // Fungsi untuk memperbarui peta dengan nama lokasi
+    function updateMapWithLocationName(locationName) {
+        // Gunakan Nominatim untuk mendapatkan koordinat berdasarkan nama lokasi
+        $.getJSON(`https://nominatim.openstreetmap.org/search?format=json&q=${locationName}`, function(data) {
+            if (data.length > 0) {
+                var lat = parseFloat(data[0].lat);
+                var lon = parseFloat(data[0].lon);
+
+                // Pindahkan peta ke lokasi baru
+                map.setView([lat, lon], 15); // Update peta dengan koordinat baru
+
+                // Tambahkan atau perbarui marker di lokasi baru
+                if (marker) {
+                    marker.setLatLng([lat, lon]); // Perbarui marker jika sudah ada
+                } else {
+                    marker = L.marker([lat, lon]).addTo(map); // Tambahkan marker baru jika belum ada
+                }
+            } else {
+                alert("Lokasi tidak ditemukan di peta!");
+            }
+        });
+    }
+</script>
 @endsection
