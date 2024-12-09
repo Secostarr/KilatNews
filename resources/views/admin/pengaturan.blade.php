@@ -12,62 +12,116 @@
         </div>
     </div>
 
-    <form action="#" method="post" class="mt-4">
-        @csrf
-        
-        <!-- Input 1 -->
-        <div class="mb-3">
-            <label for="app_name" class="form-label">Nama Aplikasi</label>
-            <input type="text" class="form-control" id="app_name" name="app_name" placeholder="Masukkan nama aplikasi">
+    <div class="row mt-4">
+        <!-- Form untuk Nama Website -->
+        <div class="col-md-6 mb-3">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Nama Website</h5>
+                    <form action="#" method="post">
+                        @csrf
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="app_name" name="app_name" placeholder="Masukkan nama website">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Simpan
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
-        <!-- Input 2 -->
-        <div class="mb-3">
-            <label for="admin_email" class="form-label">Email Admin</label>
-            <input type="email" class="form-control" id="admin_email" name="admin_email" placeholder="Masukkan email admin">
+        <!-- Form untuk Kontak Email -->
+        <div class="col-md-6 mb-3">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Kontak Email</h5>
+                    <form action="#" method="post">
+                        @csrf
+                        <div class="input-group">
+                            <input type="email" class="form-control" id="admin_email" name="admin_email" placeholder="Masukkan kontak email">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Simpan
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
-        <!-- Input 3 -->
-        <div class="mb-3">
-            <label for="site_mode" class="form-label">Mode Situs</label>
-            <select class="form-select" id="site_mode" name="site_mode">
-                <option value="live">Live</option>
-                <option value="maintenance">Maintenance</option>
-            </select>
+        <!-- Form untuk Nomor Kontak -->
+        <div class="col-md-6 mb-3">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Nomor Kontak</h5>
+                    <form action="#" method="post">
+                        @csrf
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="contact_number" name="contact_number" placeholder="Masukkan nomor kontak">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Simpan
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
-        <!-- Input 4 -->
-        <div class="mb-3">
-            <label for="contact_number" class="form-label">Nomor Kontak</label>
-            <input type="text" class="form-control" id="contact_number" name="contact_number" placeholder="Masukkan nomor kontak">
+        <!-- Form untuk Upload Logo -->
+        <div class="col-md-6 mb-3">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Upload Logo</h5>
+                    <form action="#" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="input-group">
+                            <input type="file" class="form-control" id="logo_upload" name="logo_upload">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Simpan
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
-        <!-- Input 5 -->
-        <div class="mb-3">
-            <label for="address" class="form-label">Alamat</label>
-            <textarea class="form-control" id="address" name="address" rows="2" placeholder="Masukkan alamat"></textarea>
+        <!-- Form untuk Lokasi -->
+        <div class="col-md-6 mb-3">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Lokasi</h5>
+                    <form action="#" method="post">
+                        @csrf
+                        <div class="input-group">
+                            <textarea class="form-control" id="address" name="address" rows="2" placeholder="Masukkan lokasi"></textarea>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Simpan
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
-        <!-- Input 6 -->
-        <div class="mb-3">
-            <label for="timezone" class="form-label">Zona Waktu</label>
-            <select class="form-select" id="timezone" name="timezone">
-                <option value="UTC">UTC</option>
-                <option value="Asia/Jakarta">Asia/Jakarta</option>
-                <option value="Asia/Makassar">Asia/Makassar</option>
-                <option value="Asia/Jayapura">Asia/Jayapura</option>
-            </select>
+        <!-- Form untuk Deskripsi -->
+        <div class="col-md-6 mb-3">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Deskripsi</h5>
+                    <form action="#" method="post">
+                        @csrf
+                        <div class="input-group">
+                            <textarea class="form-control" id="description" name="description" rows="2" placeholder="Masukkan deskripsi singkat"></textarea>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Simpan
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
-        <!-- Input 7 -->
-        <div class="mb-3">
-            <label for="logo_upload" class="form-label">Upload Logo</label>
-            <input type="file" class="form-control" id="logo_upload" name="logo_upload">
-        </div>
-
-        <div class="d-flex justify-content-end">
-            <button type="submit" class="btn btn-primary">Simpan Pengaturan</button>
-        </div>
-    </form>
+    </div>
+</div>
 
 @endsection

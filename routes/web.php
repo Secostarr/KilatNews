@@ -88,6 +88,24 @@ Route::middleware(['role:admin'])->group(function () {
 
     // Pengaturan
     Route::get('/admin/pengaturan', [PengaturanController::class, 'pengaturan'])->name('admin.pengaturan');
+
+    // Route untuk menyimpan perubahan nama website
+    Route::post('/pengaturan/nama-website', [PengaturanController::class, 'updateNamaWebsite'])->name('pengaturan.updateNamaWebsite');
+
+    // Route untuk menyimpan perubahan kontak email
+    Route::post('/pengaturan/kontak-email', [PengaturanController::class, 'updateKontakEmail'])->name('pengaturan.updateKontakEmail');
+
+    // Route untuk menyimpan perubahan nomor kontak
+    Route::post('/pengaturan/nomor-kontak', [PengaturanController::class, 'updateNomorKontak'])->name('pengaturan.updateNomorKontak');
+
+    // Route untuk menyimpan logo yang diupload
+    Route::post('/pengaturan/upload-logo', [PengaturanController::class, 'uploadLogo'])->name('pengaturan.uploadLogo');
+
+    // Route untuk menyimpan lokasi
+    Route::post('/pengaturan/lokasi', [PengaturanController::class, 'updateLokasi'])->name('pengaturan.updateLokasi');
+
+    // Route untuk menyimpan deskripsi
+    Route::post('/pengaturan/deskripsi', [PengaturanController::class, 'updateDeskripsi'])->name('pengaturan.updateDeskripsi');
 });
 
 Route::middleware(['role:user,contributor'])->group(function () {
