@@ -74,7 +74,7 @@
                                                     {{ Auth::user()->nama }}
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded m-0">
-                                                    @if(Au-th::user()->role === 'admin')
+                                                    @if(Auth::user()->role === 'admin')
                                                     <li><a href="{{ Route('admin.profile') }}" class="dropdown-item text-dark custom-hover">My Profile</a></li>
                                                     @elseif(Auth::user()->role === 'user' || 'contributor')
                                                     <li><a href="{{ Route('user.profile') }}" class="dropdown-item text-dark custom-hover">My Profile</a></li>
@@ -140,7 +140,7 @@
                             </div>
                             <div class="col-xl-9 col-lg-9 col-md-9">
                                 <div class="header-banner f-right ">
-                                    <img src="assets/img/hero/header_card.jpg" alt="">
+
                                 </div>
                             </div>
                         </div>
@@ -162,14 +162,6 @@
                                             <li><a href="{{ route('categori') }}">Category</a></li>
                                             <li><a href="{{ route('latest_news') }}">Latest News</a></li>
                                             <li><a href="{{ route('contact') }}">Contact</a></li>
-                                            <li><a href="#">Daerah</a>
-                                                <ul class="submenu">
-                                                    <li><a href="{{ route('home', 'lampung-timur') }}">Lampung Timur</a></li>
-                                                    <li><a href="{{ route('home', 'lampung-selatan') }}">Lampung Selatan</a></li>
-                                                    <li><a href="{{ route('home', 'metro') }}">Metro</a></li>
-                                                    <li><a href="{{ route('home', 'lampung-tengah') }}">Lampung Tengah</a></li>
-                                                </ul>
-                                            </li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -207,9 +199,9 @@
             <div class="row">
                 <!-- Section 1 -->
                 <div class="col-md-3">
-                    <h6 class="text-uppercase text-white fw-bold">Company Name</h6>
+                    <h6 class="text-uppercase text-white fw-bold">{{ $pengaturan->nama_situs }}</h6>
                     <hr class="mb-4 mt-0" style="width: 60px; background-color: #7c4dff; height: 2px;">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <p>{{ $pengaturan->deskripsi_singkat }}</p>
                 </div>
 
                 <!-- Section 2 -->
@@ -240,9 +232,9 @@
                 <div class="col-md-3">
                     <h6 class="text-uppercase text-white fw-bold">Contact</h6>
                     <hr class="mb-4 mt-0" style="width: 60px; background-color: #7c4dff; height: 2px;">
-                    <p><i class="fas fa-home"></i></p>
-                    <p><i class="fas fa-envelope"></i></p>
-                    <p><i class="fas fa-phone"></i></p>
+                    <p><i class="fas fa-home ms-2"></i> - {{ $pengaturan->lokasi }}</p>
+                    <p><i class="fas fa-envelope ms-2"></i> - {{ $pengaturan->kontak_email }}</p>
+                    <p><i class="fas fa-phone ms-2"></i> - {{ $pengaturan->kontak_nomor }}</p>
                 </div>
             </div>
         </div>

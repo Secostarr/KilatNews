@@ -57,7 +57,7 @@
                                                     </div>
                                                     <div class="what-cap">
                                                         <span class="color1">{{ $artikel->kategori->nama_kategori }}</span>
-                                                        <h4><a href="#">{{ $artikel->judul }}</a></h4>
+                                                        <h4><a href="{{ route('berita.show', $artikel->slug) }}">{{ $artikel->judul }}</a></h4>
                                                     </div>
                                                 </div>
                                             </div>

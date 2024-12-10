@@ -66,7 +66,7 @@ class NotifikasiController extends Controller
         // Redirect ke halaman sebelumnya dengan pesan sukses
         return redirect()->back()->with('success', 'Pendaftaran telah ditolak dan datanya berhasil dihapus.');
     }
-
+    
 
     public function penyetor()
     {

@@ -10,70 +10,57 @@ class PengaturanController extends Controller
 {
     public function pengaturan()
     {
-        return view('admin.pengaturan');
+        $pengaturan = pengaturan::first();
+        return view('admin.pengaturan', compact('pengaturan'));
     }
 
-    public function update(Request $request, $id_pengaturan)
+    public function save(Request $request)
     {
-        $pengaturan = pengaturan::find($id_pengaturan);
+        // Validasi input
+        $request->validate([
+            'nama_situs' => 'nullable|string|max:255',
+            'kontak_email' => 'nullable|email|max:255',
+            'kontak_nomor' => 'nullable|string|max:15',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'lokasi' => 'nullable|string|max:500',
+            'deskripsi_singkat' => 'nullable|string|max:1000',
+        ]);
 
-        // Mengetahui tombol mana yang diklik
-        $action = $request->input('action');
+        // Proses file logo jika ada
+        $logoPath = null;
+        // Ambil data pengaturan yang ada atau buat baru jika belum ada
+        $pengaturan = Pengaturan::firstOrCreate(['id_pengaturan' => 1]);
 
-        switch ($action) {
-            case 'update_app_name':
-                $request->validate([
-                    'app_name' => 'required|string|max:255',
-                ]);
-                $pengaturan->update(['app_name' => $request->app_name]);
-                return redirect()->back()->with('success', 'Nama Website berhasil diperbarui.');
-
-            case 'update_admin_email':
-                $request->validate([
-                    'admin_email' => 'required|email|max:255',
-                ]);
-                $pengaturan->update(['admin_email' => $request->admin_email]);
-                return redirect()->back()->with('success', 'Kontak Email berhasil diperbarui.');
-
-            case 'update_contact_number':
-                $request->validate([
-                    'contact_number' => 'required|string|max:15',
-                ]);
-                $pengaturan->update(['contact_number' => $request->contact_number]);
-                return redirect()->back()->with('success', 'Nomor Kontak berhasil diperbarui.');
-
-            case 'update_logo':
-                $request->validate([
-                    'logo_upload' => 'file|mimes:jpg,jpeg,png|max:2048',
-                ]);
-                if ($request->hasFile('logo_upload')) {
-                    // Hapus logo lama jika ada
-                    if ($pengaturan->logo) {
-                        Storage::disk('public')->delete($pengaturan->logo);
-                    }
-                    $file = $request->file('logo_upload');
-                    $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-                    $path = $file->storeAs('logos', $filename, 'public');
-                    $pengaturan->update(['logo' => $path]);
-                }
-                return redirect()->back()->with('success', 'Logo berhasil diperbarui.');
-
-            case 'update_address':
-                $request->validate([
-                    'address' => 'required|string|max:255',
-                ]);
-                $pengaturan->update(['address' => $request->address]);
-                return redirect()->back()->with('success', 'Lokasi berhasil diperbarui.');
-
-            case 'update_description':
-                $request->validate([
-                    'description' => 'required|string',
-                ]);
-                $pengaturan->update(['description' => $request->description]);
-                return redirect()->back()->with('success', 'Deskripsi berhasil diperbarui.');
-
-            default:
-                return redirect()->back()->with('error', 'Aksi tidak dikenali.');
+        // Update hanya data yang dikirimkan
+        if ($request->has('nama_situs')) {
+            $pengaturan->nama_situs = $request->input('nama_situs');
         }
+        if ($request->has('kontak_email')) {
+            $pengaturan->kontak_email = $request->input('kontak_email');
+        }
+        if ($request->has('kontak_nomor')) {
+            $pengaturan->kontak_nomor = $request->input('kontak_nomor');
+        }
+        if ($request->hasFile('logo')) {
+            // Hapus logo lama jika ada
+            if ($pengaturan->logo) {
+                Storage::disk('public')->delete($pengaturan->logo);
+            }
+            // Simpan logo baru
+            $logoPath = $request->file('logo')->store('logos', 'public');
+            $pengaturan->logo = $logoPath;
+        }
+        if ($request->has('lokasi')) {
+            $pengaturan->lokasi = $request->input('lokasi');
+        }
+        if ($request->has('deskripsi_singkat')) {
+            $pengaturan->deskripsi_singkat = $request->input('deskripsi_singkat');
+        }
+
+        // Simpan perubahan
+        $pengaturan->save();
+
+        // Redirect dengan pesan sukses
+        return redirect()->back()->with('success', 'Pengaturan berhasil disimpan!');
     }
 }

@@ -11,6 +11,13 @@
             </div>
         </div>
     </div>
+    <br>
+
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
 
     <div class="row mt-4">
         <!-- Form untuk Nama Website -->
@@ -18,10 +25,10 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h5 class="card-title">Nama Website</h5>
-                    <form action="#" method="post">
+                    <form action="{{ Route('admin.pengaturan.save') }}" method="post">
                         @csrf
                         <div class="input-group">
-                            <input type="text" class="form-control" id="app_name" name="app_name" placeholder="Masukkan nama website">
+                            <input type="text" class="form-control" id="nama_situs" name="nama_situs" value="{{ $pengaturan->nama_situs ?? 'Data belum dimasukkan' }}">
                             <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-save"></i> Simpan
                             </button>
@@ -36,10 +43,10 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h5 class="card-title">Kontak Email</h5>
-                    <form action="#" method="post">
+                    <form action="{{ Route('admin.pengaturan.save') }}" method="post">
                         @csrf
                         <div class="input-group">
-                            <input type="email" class="form-control" id="admin_email" name="admin_email" placeholder="Masukkan kontak email">
+                            <input type="email" class="form-control" id="kontak_email" name="kontak_email" value="{{ $pengaturan->kontak_email ?? 'Data belum dimasukkan' }}">
                             <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-save"></i> Simpan
                             </button>
@@ -54,10 +61,10 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h5 class="card-title">Nomor Kontak</h5>
-                    <form action="#" method="post">
+                    <form action="{{ Route('admin.pengaturan.save') }}" method="post">
                         @csrf
                         <div class="input-group">
-                            <input type="text" class="form-control" id="contact_number" name="contact_number" placeholder="Masukkan nomor kontak">
+                            <input type="text" class="form-control" id="kontak_nomor" name="kontak_nomor" value="{{ $pengaturan->kontak_nomor ?? 'Data belum dimasukkan' }}">
                             <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-save"></i> Simpan
                             </button>
@@ -72,15 +79,18 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h5 class="card-title">Upload Logo</h5>
-                    <form action="#" method="post" enctype="multipart/form-data">
+                    <form action="{{ Route('admin.pengaturan.save') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="input-group">
-                            <input type="file" class="form-control" id="logo_upload" name="logo_upload">
+                            <input type="file" class="form-control" id="logo" name="logo">
                             <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-save"></i> Simpan
                             </button>
                         </div>
                     </form>
+                    <div class="mb-2">
+                        <img src="{{ $pengaturan && $pengaturan->logo ? asset('storage/' . $pengaturan->logo) : asset('default-logo.png') }}" alt="Logo" height="80">
+                    </div>
                 </div>
             </div>
         </div>
@@ -90,10 +100,10 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h5 class="card-title">Lokasi</h5>
-                    <form action="#" method="post">
+                    <form action="{{ Route('admin.pengaturan.save') }}" method="post">
                         @csrf
                         <div class="input-group">
-                            <textarea class="form-control" id="address" name="address" rows="2" placeholder="Masukkan lokasi"></textarea>
+                            <textarea class="form-control" id="lokasi" name="lokasi" rows="2">{{ $pengaturan->lokasi ?? 'Data belum dimasukkan' }}</textarea>
                             <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-save"></i> Simpan
                             </button>
@@ -108,10 +118,10 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h5 class="card-title">Deskripsi</h5>
-                    <form action="#" method="post">
+                    <form action="{{ Route('admin.pengaturan.save') }}" method="post">
                         @csrf
                         <div class="input-group">
-                            <textarea class="form-control" id="description" name="description" rows="2" placeholder="Masukkan deskripsi singkat"></textarea>
+                            <textarea class="form-control" id="deskripsi_singkat" name="deskripsi_singkat" rows="2">{{ $pengaturan->deskripsi_singkat ?? 'Data belum dimasukkan' }}</textarea>
                             <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-save"></i> Simpan
                             </button>

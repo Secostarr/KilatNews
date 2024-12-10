@@ -8,6 +8,7 @@ use App\Http\Controllers\ContributorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KomentarController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\PenggunaController;
@@ -73,6 +74,12 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/admin/tag/edit/{id_tag}', [TagController::class, 'edit'])->name('admin.artikel.tag.edit');
     Route::put('/admin/tag/update/{id_tag}', [TagController::class, 'update'])->name('admin.artikel.tag.update');
 
+
+    Route::get('/admin/menu', [MenuController::class, 'menu'])->name('admin.artikel.menu');
+    Route::get('/admin/menu/create', [MenuController::class, 'create'])->name('admin.artikel.menu.create');
+    Route::post('/admin/menu/store', [MenuController::class, 'storeMenu'])->name('admin.artikel.menu.store');
+    Route::post('/admin/menu/substore', [MenuController::class, 'storeSubMenu'])->name('admin.artikel.submenu.store');
+
     // Pengguna
     Route::get('/admin/pengguna', [PenggunaController::class, 'pengguna'])->name('admin.pengguna.user');
     Route::get('/admin/pengguna/tambah', [PenggunaController::class, 'create'])->name('admin.pengguna.user.create');
@@ -88,24 +95,7 @@ Route::middleware(['role:admin'])->group(function () {
 
     // Pengaturan
     Route::get('/admin/pengaturan', [PengaturanController::class, 'pengaturan'])->name('admin.pengaturan');
-
-    // Route untuk menyimpan perubahan nama website
-    Route::post('/pengaturan/nama-website', [PengaturanController::class, 'updateNamaWebsite'])->name('pengaturan.updateNamaWebsite');
-
-    // Route untuk menyimpan perubahan kontak email
-    Route::post('/pengaturan/kontak-email', [PengaturanController::class, 'updateKontakEmail'])->name('pengaturan.updateKontakEmail');
-
-    // Route untuk menyimpan perubahan nomor kontak
-    Route::post('/pengaturan/nomor-kontak', [PengaturanController::class, 'updateNomorKontak'])->name('pengaturan.updateNomorKontak');
-
-    // Route untuk menyimpan logo yang diupload
-    Route::post('/pengaturan/upload-logo', [PengaturanController::class, 'uploadLogo'])->name('pengaturan.uploadLogo');
-
-    // Route untuk menyimpan lokasi
-    Route::post('/pengaturan/lokasi', [PengaturanController::class, 'updateLokasi'])->name('pengaturan.updateLokasi');
-
-    // Route untuk menyimpan deskripsi
-    Route::post('/pengaturan/deskripsi', [PengaturanController::class, 'updateDeskripsi'])->name('pengaturan.updateDeskripsi');
+    Route::post('/admin/pengaturan/save', [PengaturanController::class, 'save'])->name('admin.pengaturan.save');
 });
 
 Route::middleware(['role:user,contributor'])->group(function () {
