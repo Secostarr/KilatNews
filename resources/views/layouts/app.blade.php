@@ -74,7 +74,7 @@
                                                     {{ Auth::user()->nama }}
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded m-0">
-                                                    @if(Auth::user()->role === 'admin')
+                                                    @if(Au-th::user()->role === 'admin')
                                                     <li><a href="{{ Route('admin.profile') }}" class="dropdown-item text-dark custom-hover">My Profile</a></li>
                                                     @elseif(Auth::user()->role === 'user' || 'contributor')
                                                     <li><a href="{{ Route('user.profile') }}" class="dropdown-item text-dark custom-hover">My Profile</a></li>
@@ -234,9 +234,9 @@
                 <div class="col-md-3">
                     <h6 class="text-uppercase text-white fw-bold">Contact</h6>
                     <hr class="mb-4 mt-0" style="width: 60px; background-color: #7c4dff; height: 2px;">
-                    <p><i class="fas fa-home"></i>{{ $pengaturan->lokasi }}</p>
-                    <p><i class="fas fa-envelope"></i>{{ $pengaturan->kontak_email }}</p>
-                    <p><i class="fas fa-phone"></i>{{ $pengaturan->kontak_nomor }}</p>
+                    <p><i class="fas fa-home"></i></p>
+                    <p><i class="fas fa-envelope"></i></p>
+                    <p><i class="fas fa-phone"></i></p>
                 </div>
             </div>
         </div>
