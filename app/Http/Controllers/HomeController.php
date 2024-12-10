@@ -40,12 +40,26 @@ class HomeController extends Controller
         return view('contact');
     }
 
-    public function categori()
+    public function categori($slug = null)
     {
         $artikels = Artikel::where('status_publikasi', 'published')->get();
         $artikelstwo = Artikel::where('status_publikasi', 'published')->get();
         $categoris = kategori::all();
-        return view('categori', compact('artikels', 'artikelstwo', 'categoris'));
+        if ($slug) {
+            // Cari kategori berdasarkan slug
+            $kategori = Kategori::where('slug', $slug)->firstOrFail();
+
+            // Ambil artikel berdasarkan kategori
+            $artikels = Artikel::with('kategori')
+                ->where('id_kategori', $kategori->id_kategori)
+                ->latest()
+                ->get();
+        } else {
+            // Jika slug tidak ada, tampilkan semua artikel
+            $artikels = Artikel::with('kategori')->latest()->get();
+        }
+
+        return view('categori', compact('categoris', 'artikelstwo', 'artikels'));
     }
 
     public function about()
@@ -101,4 +115,6 @@ class HomeController extends Controller
             return response()->json(['lokasi' => null, 'error' => 'Gagal mengambil lokasi dari database'], 500);
         }
     }
+
+    
 }

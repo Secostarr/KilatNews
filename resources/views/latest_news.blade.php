@@ -23,7 +23,7 @@
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="single-news">
                                 <div class="news-img">
-                                    <img src="{{ asset('storage/' . $news->media_utama) }}" alt="{{ $news->judul }}" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
+                                    <img src="{{ asset('storage/' . $news->media_utama) }}" alt="{{ $news->judul }}" class="img-fluid" style="width: 200px; height: 200px; object-fit: cover;">
                                 </div>
                                 <div class="news-content">
                                     <h4><a href="{{ route('berita.show', $news->slug) }}">{{ $news->judul }}</a></h4>

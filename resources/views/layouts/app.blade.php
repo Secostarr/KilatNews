@@ -138,11 +138,6 @@
                                     <p></p>
                                 </div>
                             </div>
-                            <div class="col-xl-9 col-lg-9 col-md-9">
-                                <div class="header-banner f-right ">
-
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
