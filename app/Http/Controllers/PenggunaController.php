@@ -110,7 +110,7 @@ class PenggunaController extends Controller
         if ($role === 'admin') {
             return redirect()->route('admin.profile.edit')->with('success', 'Profil berhasil diperbarui.');
         } else {
-            return redirect()->route('user.profile.edit')->with('success', 'Profil berhasil diperbarui.');
+            return redirect()->route('pengguna.profile.edit')->with('success', 'Profil berhasil diperbarui.');
         }
     }
 

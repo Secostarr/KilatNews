@@ -89,13 +89,39 @@
                 <img src="https://via.placeholder.com/150" alt="Default Foto Profil" class="profile-picture">
                 @endif
                 <div class="social-icons mt-3">
-                    <input type="text" name="username_facebook" class="form-control" value="{{ Auth::user()->username_facebook }}" placeholder="Username Facebook">
+                    <!-- Input untuk Facebook -->
+                    <input type="text" name="username_facebook" class="form-control"
+                        value="{{ Auth::user()->socialMedia->username_facebook ?? '' }}" placeholder="Username Facebook">
+                    @error('username_facebook')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
                     <br>
-                    <input type="text" name="username_instagram" class="form-control" placeholder="Username Instagram">
+
+                    <!-- Input untuk Instagram -->
+                    <input type="text" name="username_instagram" class="form-control"
+                        value="{{ Auth::user()->socialMedia->username_instagram ?? '' }}" placeholder="Username Instagram">
+                    @error('username_instagram')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
                     <br>
-                    <div class="d-flex gap-2">
-                        <input type="text" name="facebook_url" class="form-control" placeholder="URL Facebook">
-                        <input type="text" name="instagram_url" class="form-control" placeholder="URL Instagram">
+                    <div class="d-flex gap-2 align-items-start">
+                        <!-- Input URL Facebook -->
+                        <div class="w-100">
+                            <input type="text" name="url_facebook" class="form-control" placeholder="URL Facebook"
+                                value="{{ Auth::user()->socialMedia->url_facebook ?? '' }}">
+                            @error('url_facebook')
+                            <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Input URL Instagram -->
+                        <div class="w-100">
+                            <input type="text" name="url_instagram" class="form-control" placeholder="URL Instagram"
+                                value="{{ Auth::user()->socialMedia->url_instagram ?? '' }}">
+                            @error('url_instagram')
+                            <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
                 </div>
         </div>
@@ -107,6 +133,9 @@
                 <div class="col-sm-9">
                     <input type="text" id="nama" name="nama" class="form-control" value="{{ Auth::user()->nama }}">
                 </div>
+                @error('nama')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="mb-3 row">
@@ -114,6 +143,9 @@
                 <div class="col-sm-9">
                     <input type="text" id="username" name="username" class="form-control" value="{{ Auth::user()->username }}">
                 </div>
+                @error('username')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="mb-3 row">
@@ -121,6 +153,9 @@
                 <div class="col-sm-9">
                     <input type="file" id="foto" name="foto" class="form-control" placeholder="Masukkan Foto Anda">
                 </div>
+                @error('foto')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="mb-3 row">
@@ -128,6 +163,9 @@
                 <div class="col-sm-9">
                     <input type="email" id="email" name="email" class="form-control" value="{{ Auth::user()->email }}">
                 </div>
+                @error('email')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="mb-3 row">
@@ -135,6 +173,9 @@
                 <div class="col-sm-9">
                     <input type="password" id="password" name="password" placeholder="(Opsional)" class="form-control">
                 </div>
+                @error('password')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="mb-3 row">
@@ -147,8 +188,11 @@
             <div class="mb-3 row">
                 <label for="bio" class="col-sm-3 col-form-label"><b>Bio:</b></label>
                 <div class="col-sm-9">
-                    <textarea id="bio" name="bio" class="form-control" rows="4">{{ Auth::user()->bio ?? 'Anda belum menambah bio'}}</textarea>
+                    <textarea id="bio" name="bio" class="form-control" rows="4">{{ Auth::user()->bio ?? 'Anda belum menambah bio' }}</textarea>
                 </div>
+                @error('bio')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <!-- Tombol Aksi -->

@@ -82,8 +82,27 @@
             <img src="https://via.placeholder.com/150" alt="Default Foto Profil" class="profile-picture">
             @endif
             <div class="social-icons mt-3">
-                <a href="https://www.facebook.com/yourprofile" target="_blank" title="Facebook" data-bs-toggle="tooltip"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.instagram.com/yourprofile" target="_blank" title="Instagram" data-bs-toggle="tooltip"><i class="fab fa-instagram"></i></a>
+                <!-- Facebook -->
+                @if(!empty(Auth::user()->socialMedia->url_facebook))
+                <a href="{{ Auth::user()->socialMedia->url_facebook }}" target="_blank" title="FB : {{ Auth::user()->socialMedia->username_facebook ?? 'Tidak tersedia' }}" data-bs-toggle="tooltip">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                @else
+                <a title="URL Facebook tidak ditemukan" data-bs-toggle="tooltip">
+                    <i class="text-primary fab fa-facebook"></i>
+                </a>
+                @endif
+
+                <!-- Instagram -->
+                @if(!empty(Auth::user()->socialMedia->url_instagram))
+                <a href="{{ Auth::user()->socialMedia->url_instagram }}" target="_blank" title="IG : {{ Auth::user()->socialMedia->username_instagram ?? 'Tidak tersedia' }}" data-bs-toggle="tooltip">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                @else
+                <a title="URL Instagram tidak ditemukan" data-bs-toggle="tooltip">
+                    <i class="text-primary fab fa-instagram"></i>
+                </a>
+                @endif
             </div>
         </div>
 

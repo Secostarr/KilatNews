@@ -102,7 +102,7 @@ Route::middleware(['role:user,contributor'])->group(function () {
     Route::get('/user/profile', [UserLoginController::class, 'profileUser'])->name('user.profile');
     Route::get('/user/logout', [PenggunaController::class, 'logout'])->name('pengguna.logout');
     Route::get('/user/profile/edit', [PenggunaController::class, 'edit'])->name('pengguna.profile.edit');
-    Route::put('/user/profile/edit', [PenggunaController::class, 'update'])->name('pengguna.profile.update');
+    Route::put('/user/profile/update', [PenggunaController::class, 'update'])->name('pengguna.profile.update');
 
     Route::get('/home/pedaftaran', [PenggunaController::class, 'pendaftaran'])->name('pendaftaran');
     Route::post('/home/pedaftaran/berhasil', [PenggunaController::class, 'store'])->name('pendaftaran.store');

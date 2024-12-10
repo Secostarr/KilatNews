@@ -80,7 +80,7 @@
     <div class="profile-container">
         <!-- Foto Profil dan Media Sosial -->
         <div class="profile-picture-container">
-            <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('pengguna.profile.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 @if (Auth::user()->foto)
@@ -89,13 +89,39 @@
                 <img src="https://via.placeholder.com/150" alt="Default Foto Profil" class="profile-picture">
                 @endif
                 <div class="social-icons mt-3">
-                    <input type="text" name="username_facebook" class="form-control" value="{{ Auth::user()->username_facebook }}" placeholder="Username Facebook">
+                    <!-- Input untuk Facebook -->
+                    <input type="text" name="username_facebook" class="form-control"
+                        value="{{ Auth::user()->socialMedia->username_facebook ?? '' }}" placeholder="Username Facebook">
+                    @error('username_facebook')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
                     <br>
-                    <input type="text" name="username_instagram" class="form-control" placeholder="Username Instagram">
+
+                    <!-- Input untuk Instagram -->
+                    <input type="text" name="username_instagram" class="form-control"
+                        value="{{ Auth::user()->socialMedia->username_instagram ?? '' }}" placeholder="Username Instagram">
+                    @error('username_instagram')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
                     <br>
-                    <div class="d-flex gap-2">
-                        <input type="text" name="facebook_url" class="form-control" placeholder="URL Facebook">
-                        <input type="text" name="instagram_url" class="form-control" placeholder="URL Instagram">
+                    <div class="d-flex gap-2 align-items-start">
+                        <!-- Input URL Facebook -->
+                        <div class="w-100">
+                            <input type="text" name="url_facebook" class="form-control" placeholder="URL Facebook"
+                                value="{{ Auth::user()->socialMedia->url_facebook ?? '' }}">
+                            @error('url_facebook')
+                            <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Input URL Instagram -->
+                        <div class="w-100">
+                            <input type="text" name="url_instagram" class="form-control" placeholder="URL Instagram"
+                                value="{{ Auth::user()->socialMedia->url_instagram ?? '' }}">
+                            @error('url_instagram')
+                            <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
                 </div>
         </div>
@@ -155,7 +181,7 @@
             <div class="d-flex justify-content-between mt-4">
                 <div class="text-center">
                     <button type="submit" class="btn btn-success me-2">Simpan</button>
-                    <a href="{{ route('admin.profile') }}" class="btn btn-warning me-2">Kembali</a>
+                    <a href="{{ route('user.profile') }}" class="btn btn-warning me-2">Kembali</a>
                 </div>
             </div>
             </form>
@@ -166,4 +192,4 @@
 
 </body>
 
-</html> 
+</html>
