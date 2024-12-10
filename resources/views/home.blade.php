@@ -63,11 +63,12 @@
                         @foreach($artikelsHighlight as $artikel)
                         <div class="trand-right-single d-flex">
                             <div class="trand-right-img">
-                                <img src="{{ asset('storage/'. $artikel->media_utama) }}" alt="" style="width: 150px; height: 150px; object-fit: cover;">
+                                <img src="{{ asset('storage/'. $artikel->media_utama) }}" alt="" style="width: 100px; height: 100px; object-fit: cover;">
                             </div>
                             <div class="trand-right-cap">
                                 <span class="color1">{{ $artikel->kategori->nama_kategori }}</span>
                                 <h4><a href="{{ route('berita.show', $artikel->slug) }}">{{ $artikel->judul }}</a></h4>
+                                <p>{{ Str::limit(strip_tags($artikel->konten), 30) }}</p>
                             </div>
                         </div>
                         @endforeach
@@ -140,11 +141,12 @@
                             // Jika jumlah postingan kurang dari 5, ulangi dari awal
                             if ($currentPosts < $minimumPosts) { $index=0; while (count($allArticles) < $minimumPosts) { $allArticles[]=$highlightLatestAll[$index]; $index=($index + 1) % $currentPosts; } } @endphp @foreach($allArticles as $t) <div class="weekly2-single">
                                 <div class="weekly2-img">
-                                <img src="{{ asset('storage/' . $t->media_utama) }}" alt=""         >
+                                <img src="{{ asset('storage/' . $t->media_utama) }}" alt="" style="width: 200px; height: 200px; object-fit: cover;">
                                 </div>
                                 <div class="weekly2-caption">
                                     <span class="color1">{{ $t->kategori->nama_kategori }}</span>
                                     <h4><a href="{{ route('berita.show', $artikel->slug) }}">{{ $t->judul }}</a></h4>
+                                    <p>{{ Str::limit(strip_tags($t->konten), 50) }}</p>
                                 </div>
                         </div>
                         @endforeach
