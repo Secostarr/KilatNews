@@ -34,16 +34,6 @@
                             @enderror
                         </div>
 
-                        <div class="form-group mb-3">
-                            <label for="urutan" class="form-label">Urutan Kategori</label>
-                            <div class="col-2">
-                                <input type="number" class="form-control" id="urutan" name="urutan">
-                            </div>
-                            @error('urutan')
-                            <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-
                         <div class="mt-3">
                             <button type="submit" class="btn btn-success">Simpan</button>
                         </div>

@@ -149,7 +149,6 @@
                 <!-- Tombol Aksi -->
                 <div class="d-flex justify-content-between mt-4">
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success me-2">Simpan</button>
                         <a href="{{ route('admin.dashboard') }}" class="btn btn-warning me-2">Kembali</a>
                         <a href="{{ route('admin.profile.edit') }}" class="btn btn-primary">Edit Profil</a>
                     </div>

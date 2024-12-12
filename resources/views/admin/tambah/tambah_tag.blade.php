@@ -14,7 +14,7 @@
                     <form action="{{ route('admin.artikel.tag.store') }}" method="post">
                         @csrf
                         <div class="form-group mb-3">
-                            <label for="nama_tag" class="form-label">Tambah Urutan Tag</label>
+                            <label for="nama_tag" class="form-label">Tambah Nama Tag</label>
                             <div class="col-4">
                                 <input type="text" class="form-control" id="nama_tag" name="nama_tag">
                             </div>

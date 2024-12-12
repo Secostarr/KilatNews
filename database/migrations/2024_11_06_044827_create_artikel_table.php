@@ -42,7 +42,7 @@ return new class extends Migration
             $table->string('media_utama', 255);
             $table->enum('status_publikasi', ['published', 'draft', 'archived']);
             $table->boolean('highlight')->default(false);
-            $table->string('lokasi', 100)->nullable();
+            $table->text('lokasi')->nullable();
             $table->integer('viewer_count')->default(0);
             $table->integer('like_count')->default(0);
             $table->integer('comment_count')->default(0);

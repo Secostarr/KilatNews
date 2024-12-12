@@ -70,7 +70,7 @@ Route::middleware(['role:admin'])->group(function () {
     Route::post('/admin/tag/tambah', [TagController::class, 'store'])->name('admin.artikel.tag.store');
     Route::get('/admin/tag/kelola', [TagController::class, 'kelola'])->name('admin.artikel.kelola.tag');
     Route::post('/admin/tag/tambah/artikel', [TagController::class, 'storeArtikel'])->name('admin.artikel.artikel_tag.store');
-    Route::post('/admin/tag/hapus/{id_tag}', [TagController::class, 'delete'])->name('admin.artikel.tag.delete');
+    Route::delete('/admin/tag/hapus/{id_tag}', [TagController::class, 'delete'])->name('admin.artikel.tag.delete');
     Route::get('/admin/tag/edit/{id_tag}', [TagController::class, 'edit'])->name('admin.artikel.tag.edit');
     Route::put('/admin/tag/update/{id_tag}', [TagController::class, 'update'])->name('admin.artikel.tag.update');
 
@@ -99,14 +99,18 @@ Route::middleware(['role:admin'])->group(function () {
 });
 
 Route::middleware(['role:user,contributor'])->group(function () {
+    // Route yang dapat diakses oleh user dan contributor
     Route::get('/user/profile', [UserLoginController::class, 'profileUser'])->name('user.profile');
     Route::get('/user/logout', [PenggunaController::class, 'logout'])->name('pengguna.logout');
     Route::get('/user/profile/edit', [PenggunaController::class, 'edit'])->name('pengguna.profile.edit');
     Route::put('/user/profile/update', [PenggunaController::class, 'update'])->name('pengguna.profile.update');
 
-    Route::get('/home/pedaftaran', [PenggunaController::class, 'pendaftaran'])->name('pendaftaran');
+    Route::get('/home/pendaftaran', [PenggunaController::class, 'pendaftaran'])->name('pendaftaran');
     Route::post('/home/pedaftaran/berhasil', [PenggunaController::class, 'store'])->name('pendaftaran.store');
+});
 
+Route::middleware(['role:contributor'])->group(function () {
+    // Route yang hanya dapat diakses oleh contributor
     Route::get('/home/dashboard/contributor', [ContributorController::class, 'dashboard'])->name('contributor.dashboard');
     Route::get('/home/dashboard/contributor/create', [ContributorController::class, 'create'])->name('contributor.dashboard.create');
     Route::post('/home/dashboard/contributor/store', [ContributorController::class, 'store'])->name('contributor.dashboard.store');

@@ -53,7 +53,7 @@ class NotifikasiController extends Controller
     public function rejected($id)
     {
         // Cari data pendaftaran berdasarkan ID
-        $pendaftaran = Pendaftaran::find($id);
+        $pendaftaran = Pendaftaran::where('id_user', $id);
 
         // Periksa apakah data pendaftaran ditemukan
         if (!$pendaftaran) {

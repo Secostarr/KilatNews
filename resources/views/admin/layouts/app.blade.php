@@ -66,9 +66,9 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Konten</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="{{ Route('admin.artikel.berita') }}" class="dropdown-item {{ request()->routeIs('admin.artikel.berita*') ? 'active' : '' }}"><i class="bi bi-book-fill me-2"></i>Artikel</a>
-                            <a href="{{ Route('admin.artikel.kategori') }}" class="dropdown-item {{ request()->routeIs('admin.artikel.kategori*') ? 'active' : '' }}"><i class="bi bi-bookmark-fill me-2"></i>kategori</a>
+                            <a href="{{ Route('admin.artikel.kategori') }}" class="dropdown-item {{ request()->routeIs('admin.artikel.kategori*') ? 'active' : '' }}"><i class="bi bi-bookmark-fill me-2"></i>Kategori</a>
                             <a href="{{ Route('admin.artikel.tag') }}" class="dropdown-item {{ request()->routeIs('admin.artikel.tag*') ? 'active' : '' }}"><i class="bi bi-tag-fill me-2"></i>Tag</a>
+                            <a href="{{ Route('admin.artikel.berita') }}" class="dropdown-item {{ request()->routeIs('admin.artikel.berita*') ? 'active' : '' }}"><i class="bi bi-book-fill me-2"></i>Artikel</a>
                             <a href="{{ Route('admin.artikel.menu') }}" class="dropdown-item {{ request()->routeIs('admin.artikel.menu*') ? 'active' : '' }}"><i class="bi bi-grid-fill me-2"></i>Menu</a>
                         </div>
                     </div>

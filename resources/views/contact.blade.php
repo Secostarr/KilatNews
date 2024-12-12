@@ -19,7 +19,6 @@
                         </div>
                         <h5 class="card-title">Our Office</h5>
                         <p>{{ $pengaturan->lokasi }}</p>
-                        <span>Rosemead, CA 91770</span>
                     </div>
                 </div>
             </div>
@@ -31,7 +30,6 @@
                         </div>
                         <h5 class="card-title">Call Us</h5>
                         <p>{{ $pengaturan->kontak_nomor }}</p>
-                        <span>Mon to Fri, 9 AM - 6 PM</span>
                     </div>
                 </div>
             </div>
@@ -43,7 +41,6 @@
                         </div>
                         <h5 class="card-title">Email Us</h5>
                         <p>{{ $pengaturan->kontak_email }}</p>
-                        <span>We respond within 24 hours</span>
                     </div>
                 </div>
             </div>

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('nama_kategori', 100);
             $table->text('deskripsi');
             $table->string('slug', 100)->unique();
-            $table->integer('urutan');
             $table->timestamps();
         });        
     }

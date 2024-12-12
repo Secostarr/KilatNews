@@ -49,22 +49,6 @@
         <div class="row justify-content-center">
             <div class="col-sm-9 mt-5">
 
-                @if(session('success'))
-                <script>
-                    Swal.fire({
-                        title: 'Pendaftaran Berhasil!',
-                        text: 'Anda akan diarahkan ke halaman utama dalam beberapa detik.',
-                        icon: 'success',
-                        timer: 5000, // Waktu dalam milidetik (5 detik)
-                        timerProgressBar: true,
-                        showConfirmButton: false, // Sembunyikan tombol OK
-                    }).then(() => {
-                        // Redirect setelah timer selesai
-                        window.location.href = "{{ route('home') }}";
-                    });
-                </script>
-                @endif
-
                 <div class="card shadow-sm">
                     <div class="card-header text-white text-center">
                         <h3 class="mb-0">Form Pendaftaran Contributor</h3>
@@ -111,21 +95,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        // Hitung mundur dan redirect
-        let timer = 5; // Waktu hitung mundur dalam detik
-        const timerElement = document.getElementById('timer');
-        const countdown = setInterval(() => {
-            timer--;
-            timerElement.textContent = timer;
-            if (timer <= 0) {
-                clearInterval(countdown);
-                window.location.href = "{{ route('home') }}"; // Ganti dengan route tujuan
-            }
-        }, 1000);
-    </script>
-
 
 </body>
 

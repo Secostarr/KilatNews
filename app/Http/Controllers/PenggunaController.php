@@ -157,7 +157,13 @@ class PenggunaController extends Controller
         $sudahMendaftar = \App\Models\Pendaftaran::where('id_user', $user)->exists();
 
         if ($sudahMendaftar) {
-            return redirect()->back()->with('error', 'Anda sudah terdaftar sebagai contributor.');
+            $pendaftaran = \App\Models\Pendaftaran::where('id_user', $user)->first();
+
+            if ($pendaftaran->status == 'approved') {
+                return redirect()->route('contributor.dashboard')->with('error', 'Anda sudah terdaftar dan disetujui sebagai contributor.');
+            } elseif ($pendaftaran->status == 'pending') {
+                return redirect()->route('home');
+            }
         }
 
         return view('pendaftaran', compact('user'));
@@ -184,7 +190,7 @@ class PenggunaController extends Controller
         ]);
 
         // Redirect atau response
-        return redirect()->back()->with('success', 'Pendaftaran berhasil!');
+        return redirect()->route('home')->with('successPendaftaran', 'Pendaftaran berhasil!');
     }
 
     public function delete($id)
@@ -199,5 +205,5 @@ class PenggunaController extends Controller
         $user->delete();
 
         return redirect()->back()->with('success', 'User berhasil dihapus.');
-    }   
+    }
 }

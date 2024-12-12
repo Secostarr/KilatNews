@@ -1,7 +1,22 @@
 @extends('layouts.app')
 @section('title', 'Home')
 @section('konten')
-
+<style>
+    .nice-select.swal2-select {
+        display: none !important;
+        /* Sembunyikan nice-select */
+    }
+</style>
+@if(session('successPendaftaran'))
+<script>
+    Swal.fire({
+        title: 'Pendaftaran Berhasil!',
+        text: 'Selamat Pendaftaran Anda Berhasil.',
+        icon: 'success',
+        showConfirmButton: true, // Sembunyikan tombol OK
+    });
+</script>
+@endif
 <main>
     <!-- Trending Area Start -->
     <div class="trending-area fix">
@@ -15,9 +30,9 @@
                             <!-- <p>Rem ipsum dolor sit amet, consectetur adipisicing elit.</p> -->
                             <div class="trending-animated">
                                 <ul id="js-news" class="js-hidden">
-                                    <li class="news-item">Bangladesh dolor sit amet, consectetur adipisicing elit.</li>
-                                    <li class="news-item">Spondon IT sit amet, consectetur.......</li>
-                                    <li class="news-item">Rem ipsum dolor sit amet, consectetur adipisicing elit.</li>
+                                    @foreach($artikelsTrending as $artikel)
+                                    <li class="news-item">{{ $artikel->judul }}</li>
+                                    @endforeach
                                 </ul>
                             </div>
 
@@ -101,7 +116,7 @@
                             // Jika jumlah postingan kurang dari 4, ulangi dari awal
                             if ($currentPosts < $minimumPosts) { $index=0; while (count($trendingLatestAll) < $minimumPosts) { $trendingLatestAll[]=$trendingLatestAll[$index]; $index=($index + 1) % $currentPosts; } } @endphp @foreach($trendingLatestAll as $artikel) <div class="weekly-single">
                                 <div class="weekly-img">
-                                <img src="{{ asset('storage/' . $artikel->media_utama) }}" alt="" style="width: 250px; height: 250px; object-fit: cover;">
+                                    <img src="{{ asset('storage/' . $artikel->media_utama) }}" alt="" style="width: 250px; height: 250px; object-fit: cover;">
                                 </div>
                                 <div class="weekly-caption">
                                     <span class="color1">{{ $artikel->kategori->nama_kategori }}</span>
@@ -141,7 +156,7 @@
                             // Jika jumlah postingan kurang dari 5, ulangi dari awal
                             if ($currentPosts < $minimumPosts) { $index=0; while (count($allArticles) < $minimumPosts) { $allArticles[]=$highlightLatestAll[$index]; $index=($index + 1) % $currentPosts; } } @endphp @foreach($allArticles as $t) <div class="weekly2-single">
                                 <div class="weekly2-img">
-                                <img src="{{ asset('storage/' . $t->media_utama) }}" alt="" style="width: 200px; height: 200px; object-fit: cover;">
+                                    <img src="{{ asset('storage/' . $t->media_utama) }}" alt="" style="width: 200px; height: 200px; object-fit: cover;">
                                 </div>
                                 <div class="weekly2-caption">
                                     <span class="color1">{{ $t->kategori->nama_kategori }}</span>
@@ -155,14 +170,6 @@
             </div>
         </div>
     </div>
-    </div>
-
-    <div class="container my-3">
-        <a href="{{ route('home') }}" class="btn btn-primary">Kembali ke Semua Artikel</a>
-        @if(isset($namaDaerah) && $namaDaerah)
-        <h2>Artikel Daerah: {{ ucfirst($namaDaerah) }}</h2>
-        @else
-        @endif
     </div>
 
 </main>

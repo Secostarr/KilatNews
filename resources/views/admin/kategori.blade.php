@@ -89,7 +89,6 @@
                                 <th>No</th>
                                 <th>Nama Kategori</th>
                                 <th>Deskripsi</th>
-                                <th>Urutan</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -99,7 +98,6 @@
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $kategori->nama_kategori }}</td>
                                 <td>{{ $kategori->deskripsi }}</td>
-                                <td>{{ $kategori->urutan }}</td>
                                 <td class="d-flex">
                                     <a href="{{ Route('admin.artikel.kategori.edit', $kategori->id_kategori) }}" class="btn btn-outline-warning btn-sm me-1 shadow-sm">
                                         <i class="fas fa-edit"></i> Edit

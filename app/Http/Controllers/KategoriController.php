@@ -37,7 +37,6 @@ class KategoriController extends Controller
         $validated = $request->validate([
             'nama_kategori' => 'required|string|max:255',
             'konten' => 'nullable|string',
-            'urutan' => 'nullable|integer',
         ]);
 
         // Buat slug dari nama_kategori
@@ -48,7 +47,6 @@ class KategoriController extends Controller
             'nama_kategori' => $validated['nama_kategori'],
             'slug' => $slug, // Tambahkan slug ke database
             'deskripsi' => $validated['konten'],
-            'urutan' => $validated['urutan'] ?? null,
         ]);
 
         // Redirect ke halaman kategori dengan pesan sukses
@@ -62,7 +60,6 @@ class KategoriController extends Controller
         $validated = $request->validate([
             'nama_kategori' => 'nullable|string|max:255',
             'konten' => 'nullable|string',
-            'urutan' => 'nullable|integer',
         ]);
 
         // Buat slug dari nama_kategori
@@ -73,7 +70,6 @@ class KategoriController extends Controller
             'nama_kategori' => $validated['nama_kategori'],
             'slug' => $slug, // Tambahkan slug ke database
             'deskripsi' => $validated['konten'],
-            'urutan' => $validated['urutan'] ?? null,
         ]);
 
         // Redirect ke halaman kategori dengan pesan sukses

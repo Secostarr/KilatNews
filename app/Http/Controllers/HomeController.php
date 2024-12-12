@@ -70,9 +70,7 @@ class HomeController extends Controller
     public function showBerita($slug)
     {
         // Cari artikel berdasarkan slug
-        $artikel = Artikel::where('slug', $slug)
-            ->with('komentars.user')
-            ->firstOrFail();
+        $artikel = Artikel::where('slug', $slug)->firstOrFail();
 
         // Periksa session untuk menghindari penambahan view count terus-menerus
         $viewedKey = 'viewed_artikel_' . $artikel->id_artikel;
@@ -90,8 +88,6 @@ class HomeController extends Controller
             ->take(5)
             ->get();
 
-        // Komentar
-        $komentars = komentar::where('id_artikel', $artikel->id_artikel)->get();
 
         // Ambil artikel terkait berdasarkan kategori
         $relatedArtikelsten = Artikel::where('id_kategori', $artikel->id_kategori)
@@ -99,7 +95,7 @@ class HomeController extends Controller
             ->take(5) // Batas maksimal artikel terkait
             ->get();
 
-        return view('detail', compact('artikel', 'relatedArtikels', 'komentars', 'relatedArtikelsten'));
+        return view('detail', compact('artikel', 'relatedArtikels', 'relatedArtikelsten'));
     }
 
     public function getLokasi()

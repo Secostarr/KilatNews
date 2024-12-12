@@ -23,7 +23,7 @@
                             <input type="text" class="form-control" id="judul" name="judul">
                             @error('judul')
                             <div class="text-danger">{{ $message }}</div>
-                            @enderror   
+                            @enderror
                         </div>
 
                         <div class="form-group mb-3">
@@ -77,6 +77,9 @@
                                     <label class="form-check-label" for="{{ $status }}">{{ ucfirst($status) }}</label>
                                 </div>
                                 @endforeach
+                                @error('status_publikasi')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
 
@@ -87,25 +90,22 @@
                                 <div class="form-group form-check mb-3">
                                     <input type="checkbox" class="form-check-input" id="highlightTrue" name="highlight" value="true" onclick="onlyOne(this)">
                                     <label class="form-check-label" for="highlightTrue">Iya</label>
-                                    @error('highlight')
-                                    <div class="text-danger">{{ $message }}</div>
-                                    @enderror
                                 </div>
                                 <!-- Opsi "Tidak" -->
                                 <div class="form-group form-check mb-3">
                                     <input type="checkbox" class="form-check-input" id="highlightFalse" name="highlight" value="false" onclick="onlyOne(this)">
                                     <label class="form-check-label" for="highlightFalse">Tidak</label>
-                                    @error('highlight')
-                                    <div class="text-danger">{{ $message }}</div>
-                                    @enderror
                                 </div>
+                                @error('highlight')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="trending" class="form-label">Status Trending</label>
                             <select class="form-select" id="trending" name="trending">
-                            <option value="" selected disabled>Pilih Trending</option>
+                                <option value="" selected disabled>Pilih Trending</option>
                                 <option value="true">Trending</option>
                                 <option value="false">Tidak Trending</option>
                             </select>

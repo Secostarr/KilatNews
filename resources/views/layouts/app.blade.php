@@ -10,10 +10,11 @@
     <link rel="manifest" href="{{ asset('site.webmanifest')}}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- jQuery -->
     <script src="{{ asset('assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
     <!-- CSS here -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css')}}">
@@ -32,6 +33,28 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+    <style>
+        .logo img {
+            width: 150px;
+            /* Logo akan menyesuaikan lebar parent */
+            height: 80px;
+            /* Menjaga rasio aspek gambar */
+            display: block;
+            /* Menghilangkan spasi di bawah gambar */
+            object-fit: cover;
+        }
+
+        .sticky-logo img {
+            width: 50px;
+            /* Menyesuaikan lebar parent */
+            height: 50px;
+            /* Menjaga rasio aspek gambar */
+            display: block;
+            /* Menghilangkan spasi di bawah gambar */
+            object-fit: cover;
+        }
+    </style>
 
 </head>
 
@@ -60,7 +83,6 @@
                             <div class="row d-flex justify-content-between align-items-center">
                                 <div class="header-info-left">
                                     <ul>
-                                        <li><img src="assets/img/icon/header_icon1.png" alt="" id="weather-icon"> <span id="weather-info"></span></li>
                                         <li><img src="assets/img/icon/header_icon1.png" alt=""> <span id="date-info"></span></li>
                                     </ul>
                                 </div>
@@ -86,10 +108,11 @@
                                                     @if (Auth::user()->role === 'contributor')
                                                     <!-- Jika role adalah contributor -->
                                                     <li><a href="{{ Route('contributor.dashboard') }}" class="dropdown-item text-dark custom-hover">Dashboard Saya</a></li>
-                                                    @elseif (!$sudahMendaftar)
-                                                    <!-- Jika pengguna belum mendaftar -->
+                                                    @endif
+                                                    @if (Auth::user()->role == 'user' && !$sudahMendaftar)
+                                                    <!-- Jika pengguna belum mendaftar sebagai contributor dan memiliki role "user" -->
                                                     <li><a href="{{ Route('pendaftaran') }}" class="dropdown-item text-dark custom-hover">Daftar Contributor</a></li>
-                                                    @else
+                                                    @elseif (Auth::user()->role == 'user' && $sudahMendaftar)
                                                     <!-- Jika pengguna sudah mendaftar tetapi belum menjadi contributor -->
                                                     <li><a href="#" class="dropdown-item text-dark custom-hover">Sudah Mendaftar</a></li>
                                                     @endif
@@ -134,8 +157,9 @@
                             <!-- Logo -->
                             <div class="col-xl-3 col-lg-3 col-md-3 pt-0 pb-0">
                                 <div class="logo d-flex align-items-center">
-                                    <a href="index.html"><img src="{{ asset('img/logokilat.jpg') }}" width="200" alt=""></a>
-                                    <p></p>
+                                    <a href="{{ route('home') }}">
+                                        <img src="{{ asset('storage/' . $pengaturan->logo) }}" alt="">
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -147,7 +171,7 @@
                             <div class="col-xl-10 col-lg-10 col-md-12 header-flex">
                                 <!-- sticky -->
                                 <div class="sticky-logo">
-                                    <a href="index.html"><img src="{{ asset('img/logokilat.jpg') }}" width="200" alt=""></a>
+                                    <a href="{{ route('home') }}"><img src="{{ asset('storage/' . $pengaturan->logo) }}" alt=""></a>
                                 </div>
                                 <!-- Main-menu -->
                                 <div class="main-menu d-none d-md-block">
@@ -160,21 +184,6 @@
                                         </ul>
                                     </nav>
                                 </div>
-                            </div>
-                            <div class="col-xl-2 col-lg-2 col-md-4">
-                                <div class="header-right-btn f-right d-none d-lg-block">
-                                    <i class="fas fa-search special-tag"></i>
-                                    <div class="search-box">
-                                        <form action="#">
-                                            <input type="text" placeholder="Search">
-
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Mobile Menu -->
-                            <div class="col-12">
-                                <div class="mobile_menu d-block d-md-none"></div>
                             </div>
                         </div>
                     </div>
@@ -191,7 +200,7 @@
 
     <footer class="bg-dark text-white pt-4">
         <div class="container">
-            <div class="row">
+            <div class="row justify-content-between">
                 <!-- Section 1 -->
                 <div class="col-md-3">
                     <h6 class="text-uppercase text-white fw-bold">{{ $pengaturan->nama_situs }}</h6>
@@ -199,27 +208,14 @@
                     <p>{{ $pengaturan->deskripsi_singkat }}</p>
                 </div>
 
-                <!-- Section 2 -->
-                <div class="col-md-3">
-                    <h6 class="text-uppercase text-white fw-bold">Products</h6>
-                    <hr class="mb-4 mt-0" style="width: 60px; background-color: #7c4dff; height: 2px;">
-                    <ul class="list-unstyled">
-                        <li><a href="#!" class="text-white">MDBootstrap</a></li>
-                        <li><a href="#!" class="text-white">MDWordPress</a></li>
-                        <li><a href="#!" class="text-white">BrandFlow</a></li>
-                        <li><a href="#!" class="text-white">Bootstrap Angular</a></li>
-                    </ul>
-                </div>
-
                 <!-- Section 3 -->
                 <div class="col-md-3">
                     <h6 class="text-uppercase text-white fw-bold">Useful Links</h6>
                     <hr class="mb-4 mt-0" style="width: 60px; background-color: #7c4dff; height: 2px;">
                     <ul class="list-unstyled">
-                        <li><a href="#!" class="text-white">Your Account</a></li>
-                        <li><a href="#!" class="text-white">Affiliate</a></li>
-                        <li><a href="#!" class="text-white">Shipping Rates</a></li>
-                        <li><a href="#!" class="text-white">Help</a></li>
+                        <li><a href="{{ route('home') }}" class="text-white">Home</a></li>
+                        <li><a href="{{ route('categori') }}" class="text-white">Category</a></li>
+                        <li><a href="{{ route('latest_news') }}" class="text-white">Latest News</a></li>
                     </ul>
                 </div>
 
@@ -227,9 +223,9 @@
                 <div class="col-md-3">
                     <h6 class="text-uppercase text-white fw-bold">Contact</h6>
                     <hr class="mb-4 mt-0" style="width: 60px; background-color: #7c4dff; height: 2px;">
-                    <p><i class="fas fa-home ms-2"></i> - {{ $pengaturan->lokasi }}</p>
-                    <p><i class="fas fa-envelope ms-2"></i> - {{ $pengaturan->kontak_email }}</p>
-                    <p><i class="fas fa-phone ms-2"></i> - {{ $pengaturan->kontak_nomor }}</p>
+                    <p><i class="fas fa-home">&nbsp;</i>{{ $pengaturan->lokasi }}</p>
+                    <p><i class="fas fa-envelope">&nbsp;</i>{{ $pengaturan->kontak_email }}</p>
+                    <p><i class="fas fa-phone">&nbsp;</i>{{ $pengaturan->kontak_nomor }}</p>
                 </div>
             </div>
         </div>
@@ -284,16 +280,6 @@
 </body>
 
 <script>
-    // Fungsi untuk mendapatkan cuaca saat ini
-    function getWeather() {
-        // Misalkan kita hanya menggunakan suhu contoh dan cuaca cerah
-        const temperature = "34ºC";
-        const weatherCondition = "Sunny";
-        document.getElementById("weather-info").innerText = `${temperature}, ${weatherCondition}`;
-        // Anda bisa mengupdate gambar berdasarkan kondisi cuaca
-        // document.getElementById("weather-icon").src = "path/to/weather_icon.png";
-    }
-
     // Fungsi untuk mendapatkan tanggal hari ini
     function getCurrentDate() {
         const options = {
@@ -308,7 +294,6 @@
 
     // Memanggil fungsi saat halaman dimuat
     window.onload = function() {
-        getWeather();
         getCurrentDate();
     };
 </script>

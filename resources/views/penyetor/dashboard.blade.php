@@ -5,8 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halaman</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
 </head>
 
 <body>
@@ -36,9 +40,6 @@
                 <div class="mb-2">
                     <label for="description" class="form-label">Bio Contributor</label>
                     <textarea id="description" class="form-control" rows="3" disabled>{{ Auth::user()->bio ? Auth::user()->bio : 'Anda belum menambahkan bio' }}</textarea>
-                </div>
-                <div class="mb-2">
-                    <a href="{{ Route('user.profile') }}" class="btn btn-primary">Info Profile Saya</a>
                 </div>
             </div>
         </div>
@@ -73,10 +74,15 @@
                 <h3>Konten Artikel {{ Auth::user()->nama }}</h3>
                 <a href="{{ Route('contributor.dashboard.create') }}" class="btn btn-secondary">+ Tambah Artikel</a>
             </div>
-            @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
+            @if(session('error'))
+            <script>
+                Swal.fire({
+                    title: 'Anda Sudah Terdaftar!',
+                    text: 'Anda sudah terdaftar dan disetujui sebagai contributor.',
+                    icon: 'error',
+                    showConfirmButton: true, // Sembunyikan tombol OK
+                });
+            </script>
             @endif
             <!-- Isi dari konten yang contributor tambahkan -->
             <div class="container-fluid">

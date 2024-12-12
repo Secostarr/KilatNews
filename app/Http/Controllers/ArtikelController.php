@@ -108,13 +108,16 @@ class ArtikelController extends Controller
             'lokasi' => 'nullable|string|max:255',
         ]);
 
-        // Generate slug dari judul
-        $slug = Str::slug($validated['judul'], '-');
-        $originalSlug = $slug;
-        $counter = 1;
-        while (Artikel::where('slug', $slug)->exists()) {
-            $slug = "$originalSlug-$counter";
-            $counter++;
+        // Generate slug jika judul diubah
+        $slug = $artikel->slug;
+        if ($request->judul !== $artikel->judul) {
+            $slug = Str::slug($validated['judul'], '-');
+            $originalSlug = $slug;
+            $counter = 1;
+            while (Artikel::where('slug', $slug)->exists()) {
+                $slug = "$originalSlug-$counter";
+                $counter++;
+            }
         }
 
         // Proses upload media utama
@@ -152,8 +155,6 @@ class ArtikelController extends Controller
         return redirect()->route('admin.artikel.berita.edit', $id_artikel)->with('success', 'Artikel berhasil diupdate.');
     }
 
-
-
     public function delete($id_artikel)
     {
         $artikel = artikel::find($id_artikel);
@@ -178,5 +179,4 @@ class ArtikelController extends Controller
         $artikel = artikel::find($id_artikel);
         return view('admin.detail_artikel', compact('artikel'));
     }
-
 }
